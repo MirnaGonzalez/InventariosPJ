@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B23C5025-5E78-4E56-AF54-4DA49298B869}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InventariosPJEH</RootNamespace>
+    <AssemblyName>InventariosPJEH</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="frmAsignarResguardo.aspx" />
+    <Content Include="frmBajaBien.aspx" />
+    <Content Include="frmBajaBienAdmin.aspx" />
+    <Content Include="frmCalcularDepreciacion.aspx" />
+    <Content Include="frmCatCONAC.aspx" />
+    <Content Include="frmCatEdNiSec.aspx" />
+    <Content Include="frmCatINCP.aspx" />
+    <Content Include="frmCatMarca.aspx" />
+    <Content Include="frmCatPropiedades.aspx" />
+    <Content Include="frmCatProveedores.aspx" />
+    <Content Include="frmCatSubClasesPartidas.aspx" />
+    <Content Include="frmCatTipoAdquisicion.aspx" />
+    <Content Include="frmCatTipoDocumento.aspx" />
+    <Content Include="frmCatUniAdmin.aspx" />
+    <Content Include="frmConsultaBienes.aspx" />
+    <Content Include="frmHistoricoBien.aspx" />
+    <Content Include="frmModificacionDeUnBien.aspx" />
+    <Content Include="frmModificarFactura.aspx" />
+    <Content Include="frmRecibirBien.aspx" />
+    <Content Include="frmRegistroBien.aspx" />
+    <Content Include="frmReparaBien.aspx" />
+    <Content Include="frmReporteCONAC.aspx" />
+    <Content Include="Imagenes\Generales\agregar.png" />
+    <Content Include="Imagenes\Generales\Calendario.png" />
+    <Content Include="Imagenes\Generales\consultar.png" />
+    <Content Include="Imagenes\Generales\definitiva.png" />
+    <Content Include="Imagenes\Generales\editar.png" />
+    <Content Include="Imagenes\Generales\Eliminar.png" />
+    <Content Include="Imagenes\Generales\guardar.png" />
+    <Content Include="Imagenes\Generales\Temporal.png" />
+    <Content Include="MostrarOrdenServicio.aspx" />
+    <Content Include="MostrarResguardo.aspx" />
+    <Content Include="Scripts\Controles.js" />
+    <Content Include="frmCatPersonal.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="Inventarios0.Master" />
+    <Content Include="Inventarios1.Master" />
+    <Content Include="frmBajaBienSoporte.aspx" />
+    <Content Include="MostrarTarjeta.aspx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ADInicio.aspx" />
+    <Content Include="ADLogin.aspx" />
+    <Content Include="Imagenes\Generales\BannerHeader.png" />
+    <Content Include="Imagenes\Generales\BarraLema.png" />
+    <Content Include="Imagenes\Generales\BarraLema2.png" />
+    <Content Include="Imagenes\Generales\Login.png" />
+    <Content Include="Scripts\JQuery\jquery-ui.js" />
+    <Content Include="Scripts\JQuery\jquery.min.js" />
+    <Content Include="Scripts\JQuery\sweetalert2.min.js" />
+    <Content Include="Scripts\Menu\jquery.mnmenu.js" />
+    <Content Include="Scripts\Menu\JSMenuValidado.js" />
+    <Content Include="Scripts\Notificacion\JSMsjNotificacion.js" />
+    <Content Include="Scripts\Notificacion\pnotify.custom.min.js" />
+    <Content Include="Scripts\validaciones.js" />
+    <Content Include="Styles\Generales\Controles.css" />
+    <Content Include="Styles\Generales\Master.css" />
+    <Content Include="Styles\JQuery\jquery-ui.theme.min.css" />
+    <Content Include="Styles\JQuery\sweetalert2.min.css" />
+    <Content Include="Styles\Menu\Menu.css" />
+    <Content Include="Styles\Notificacion\pnotify.custom.min.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CAccesoDatos\BdAsignarResguardo.cs" />
+    <Compile Include="CAccesoDatos\BdBajaBienAdmin.cs" />
+    <Compile Include="CAccesoDatos\BdCalcularDepreciacion.cs" />
+    <Compile Include="CAccesoDatos\BdHistoricoBien.cs" />
+    <Compile Include="CAccesoDatos\BdMantenimiento1.cs" />
+    <Compile Include="CAccesoDatos\BdReparaBien.cs" />
+    <Compile Include="CNegocios\CAsignarResguardos.cs" />
+    <Compile Include="CNegocios\CBajaBienAdmin.cs" />
+    <Compile Include="CNegocios\CCalculoDepreciacion.cs" />
+    <Compile Include="CNegocios\CHistoricoBien.cs" />
+    <Compile Include="CNegocios\CMantenimiento1.cs" />
+    <Compile Include="CNegocios\CReparaBien.cs" />
+    <Compile Include="frmCalcularDepreciacion.aspx.cs">
+      <DependentUpon>frmCalcularDepreciacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCalcularDepreciacion.aspx.designer.cs">
+      <DependentUpon>frmCalcularDepreciacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmHistoricoBien.aspx.cs">
+      <DependentUpon>frmHistoricoBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmHistoricoBien.aspx.designer.cs">
+      <DependentUpon>frmHistoricoBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmReporteCONAC.aspx.cs">
+      <DependentUpon>frmReporteCONAC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmReporteCONAC.aspx.designer.cs">
+      <DependentUpon>frmReporteCONAC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarOrdenServicio.aspx.cs">
+      <DependentUpon>MostrarOrdenServicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MostrarOrdenServicio.aspx.designer.cs">
+      <DependentUpon>MostrarOrdenServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarResguardo.aspx.cs">
+      <DependentUpon>MostrarResguardo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MostrarResguardo.aspx.designer.cs">
+      <DependentUpon>MostrarResguardo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CNegocios\CUbicacion.cs" />
+    <Compile Include="frmAsignarResguardo.aspx.cs">
+      <DependentUpon>frmAsignarResguardo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmAsignarResguardo.aspx.designer.cs">
+      <DependentUpon>frmAsignarResguardo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CAccesoDatos\BdRecibirBien.cs" />
+    <Compile Include="CNegocios\CRecibirBien.cs" />
+    <Compile Include="frmBajaBien.aspx.cs">
+      <DependentUpon>frmBajaBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBajaBien.aspx.designer.cs">
+      <DependentUpon>frmBajaBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CAccesoDatos\BdBajaBien.cs" />
+    <Compile Include="CAccesoDatos\BdCatCONAC.cs" />
+    <Compile Include="CAccesoDatos\BdCatEdificios_Niveles_Secciones.cs" />
+    <Compile Include="CAccesoDatos\BdCatINCP.cs" />
+    <Compile Include="CAccesoDatos\BdCatMarca.cs" />
+    <Compile Include="CAccesoDatos\BdCatPropiedades.cs" />
+    <Compile Include="CAccesoDatos\BdCatProveedores.cs" />
+    <Compile Include="CAccesoDatos\BdCatSubClase_Partidas.cs" />
+    <Compile Include="CAccesoDatos\BdCatTipoAdqisicion.cs" />
+    <Compile Include="CAccesoDatos\BdCatTipoDocumento.cs" />
+    <Compile Include="CAccesoDatos\BdCat_Personal.cs" />
+    <Compile Include="CAccesoDatos\BdConsultaBienes.cs" />
+    <Compile Include="CAccesoDatos\BdModificacionBien.cs" />
+    <Compile Include="CAccesoDatos\BdModificarFactura.cs" />
+    <Compile Include="CAccesoDatos\BdRegistroBien.cs" />
+    <Compile Include="CAccesoDatos\CDatos.cs" />
+    <Compile Include="CNegocios\CBajaBien.cs" />
+    <Compile Include="CNegocios\CCONAC.cs" />
+    <Compile Include="CNegocios\CConsultaBienes.cs" />
+    <Compile Include="CNegocios\CEdificios_Niveles_Secciones.cs" />
+    <Compile Include="CNegocios\CINCP.cs" />
+    <Compile Include="CNegocios\CMarca.cs" />
+    <Compile Include="CNegocios\CModificacionBien.cs" />
+    <Compile Include="CNegocios\CModificarFactura.cs" />
+    <Compile Include="CNegocios\CPersonal.cs" />
+    <Compile Include="CNegocios\CPropiedades.cs" />
+    <Compile Include="CNegocios\CProveedores.cs" />
+    <Compile Include="CNegocios\CRegistroBien.cs" />
+    <Compile Include="CNegocios\CSubClase_Partida.cs" />
+    <Compile Include="CNegocios\CTipoAdquisicion.cs" />
+    <Compile Include="CNegocios\CTipoDocumento.cs" />
+    <Compile Include="frmBajaBienAdmin.aspx.cs">
+      <DependentUpon>frmBajaBienAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBajaBienAdmin.aspx.designer.cs">
+      <DependentUpon>frmBajaBienAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatCONAC.aspx.cs">
+      <DependentUpon>frmCatCONAC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatCONAC.aspx.designer.cs">
+      <DependentUpon>frmCatCONAC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatEdNiSec.aspx.cs">
+      <DependentUpon>frmCatEdNiSec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatEdNiSec.aspx.designer.cs">
+      <DependentUpon>frmCatEdNiSec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatINCP.aspx.cs">
+      <DependentUpon>frmCatINCP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatINCP.aspx.designer.cs">
+      <DependentUpon>frmCatINCP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatMarca.aspx.cs">
+      <DependentUpon>frmCatMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatMarca.aspx.designer.cs">
+      <DependentUpon>frmCatMarca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatPropiedades.aspx.cs">
+      <DependentUpon>frmCatPropiedades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatPropiedades.aspx.designer.cs">
+      <DependentUpon>frmCatPropiedades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatProveedores.aspx.cs">
+      <DependentUpon>frmCatProveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatProveedores.aspx.designer.cs">
+      <DependentUpon>frmCatProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatSubClasesPartidas.aspx.cs">
+      <DependentUpon>frmCatSubClasesPartidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatSubClasesPartidas.aspx.designer.cs">
+      <DependentUpon>frmCatSubClasesPartidas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatTipoAdquisicion.aspx.cs">
+      <DependentUpon>frmCatTipoAdquisicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatTipoAdquisicion.aspx.designer.cs">
+      <DependentUpon>frmCatTipoAdquisicion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatTipoDocumento.aspx.cs">
+      <DependentUpon>frmCatTipoDocumento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatTipoDocumento.aspx.designer.cs">
+      <DependentUpon>frmCatTipoDocumento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatUniAdmin.aspx.cs">
+      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatUniAdmin.aspx.designer.cs">
+      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatPersonal.aspx.cs">
+      <DependentUpon>frmCatPersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmCatPersonal.aspx.designer.cs">
+      <DependentUpon>frmCatPersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CAccesoDatos\BdUsuario.cs" />
+    <Compile Include="CAccesoDatos\CGenerales.cs" />
+    <Compile Include="CNegocios\CNegocios.cs" />
+    <Compile Include="CNegocios\CUsuario.cs" />
+    <Compile Include="ADInicio.aspx.cs">
+      <DependentUpon>ADInicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADInicio.aspx.designer.cs">
+      <DependentUpon>ADInicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ADLogin.aspx.cs">
+      <DependentUpon>ADLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADLogin.aspx.designer.cs">
+      <DependentUpon>ADLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CVista\CVista.cs" />
+    <Compile Include="frmConsultaBienes.aspx.cs">
+      <DependentUpon>frmConsultaBienes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmConsultaBienes.aspx.designer.cs">
+      <DependentUpon>frmConsultaBienes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmModificacionDeUnBien.aspx.cs">
+      <DependentUpon>frmModificacionDeUnBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmModificacionDeUnBien.aspx.designer.cs">
+      <DependentUpon>frmModificacionDeUnBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmModificarFactura.aspx.cs">
+      <DependentUpon>frmModificarFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmModificarFactura.aspx.designer.cs">
+      <DependentUpon>frmModificarFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecibirBien.aspx.cs">
+      <DependentUpon>frmRecibirBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmRecibirBien.aspx.designer.cs">
+      <DependentUpon>frmRecibirBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistroBien.aspx.cs">
+      <DependentUpon>frmRegistroBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmRegistroBien.aspx.designer.cs">
+      <DependentUpon>frmRegistroBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmReparaBien.aspx.cs">
+      <DependentUpon>frmReparaBien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmReparaBien.aspx.designer.cs">
+      <DependentUpon>frmReparaBien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Inventarios0.Master.cs">
+      <DependentUpon>Inventarios0.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventarios0.Master.designer.cs">
+      <DependentUpon>Inventarios0.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarios1.Master.cs">
+      <DependentUpon>Inventarios1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inventarios1.Master.designer.cs">
+      <DependentUpon>Inventarios1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="frmBajaBienSoporte.aspx.cs">
+      <DependentUpon>frmBajaBienSoporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmBajaBienSoporte.aspx.designer.cs">
+      <DependentUpon>frmBajaBienSoporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarTarjeta.aspx.cs">
+      <DependentUpon>MostrarTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MostrarTarjeta.aspx.designer.cs">
+      <DependentUpon>MostrarTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RptReparaBien.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptReparaBien.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RptResguardo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptResguardo.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RptTarjeta_Inf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptTarjeta_Inf.rpt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\RptReparaBien.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptReparaBien.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RptResguardo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptResguardo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RptTarjeta_Inf.resx">
+      <DependentUpon>RptTarjeta_Inf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RptTarjeta_Inf.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptTarjeta_Inf.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53893</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53893/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

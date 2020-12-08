@@ -1,0 +1,293 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+body {
+    background: #305480; /*#305480;*/
+    font-size: .80em;
+    font-family: Verdana;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page {
+    width: 960px;
+    background-color: #d8d8d8; /*BLANCO*/
+    margin: 20px auto 0px auto;
+    border: 1px solid #496077; /*AZUL GRIS*/
+}
+
+.header {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: #4e667d ; /*AZUL BAJO //// #9D3E22;  CAFE-VINO */
+    width:auto;
+    height: auto;
+}
+
+.header h1
+{
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #F9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+.main
+{
+    padding: 0px 12px;
+    min-height: 420px;
+    background: #D8D8D8; /*GRIS*/
+    height:auto;
+    padding-bottom: 10px;
+}
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766; /*GRIS OBSCURO*/
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink {
+    background-color: #4e667d; /*#88836B;*/
+    width: 100%;
+}
+
+div.menu
+{
+    padding: 10px 0px 10px 8px;
+}
+
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+    div.menu ul li a, div.menu ul li a:visited {
+        background-color: #E2E1C1;
+        border: 1px #4e667d solid;
+        font-weight: bold;
+        color: #008080; /*#008080;*/
+        display: block;
+        line-height: 1.35em;
+        padding: 4px 10px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    div.menu ul li a:hover {
+        background-color: #4e667d;
+        color: White;
+        text-decoration: none;
+    }
+
+    div.menu ul li a:active {
+        background-color: #4e667d;
+        font-weight: bold;
+        color: White;
+        text-decoration: none;
+    }
+
+.menu a.static.selected
+{
+    background-color: #C6B57C;
+    font-weight:bold;
+    color: White;
+    text-decoration: none;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #Ccc;
+    height: auto;
+}
+
+input.textEntry 
+{
+    width: 160px;
+    margin-top:10px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+    width: 160px;
+    margin-top:10px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    display: block;
+    float: left;
+    text-align: left;
+    width: 100%;
+}
+
+.loginDisplay
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: White;
+}
+
+.loginDisplay a:link
+{
+    color: white;
+}
+
+.loginDisplay a:visited
+{
+    color: white;
+}
+
+.loginDisplay a:hover
+{
+    color: white;
+}
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}
+
+.LblLoginUsuario
+{
+    color:White;
+    padding:20px;
+}
+
+#DivSesion {
+    width: 960px;
+    height: 55px;
+    border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    background: #305480;
+    background: -moz-linear-gradient(top, #4e667d 0%, #50493C 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4e5766), color-stop(100%, #4e5766));
+    background: -webkit-linear-gradient(top, #4e667d 0%, #305480 100%);
+    background: -o-linear-gradient(top, #4e667d 0%, #305480 100%);
+    background: -moz-linear-gradient(top, #4e667d 0%, #305480 100%);
+    background: linear-gradient(to bottom, #4e667d 0%, #008080 100%); /* Color de relleno de menú principal */
+    border-bottom: 2px solid #305480; /* Color de borde inferior del menú principal */
+}
+
+.LblSesion
+{
+    color:White;
+    font-size:8pt;
+}
