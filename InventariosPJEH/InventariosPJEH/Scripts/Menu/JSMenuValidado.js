@@ -84,7 +84,7 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmImpresionEtiquetas.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +
@@ -152,8 +152,8 @@
             '	                "Nombre": "Reemplazos",' +
             '	                "SubMenus": [' +
             '			            {' +
-            '			                "Nombre": "Reemplazo de Bienes",' +
-            '			                "URL": ""' +
+            '			                "Nombre": "Acta Administrativa",' +
+            '			                "URL": "frmActaAdministrativa.aspx"' +
             '			            }' +
             '		            ]' +
             '	            }' +
