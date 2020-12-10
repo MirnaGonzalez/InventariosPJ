@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Inventarios1.Master" AutoEventWireup="true" CodeBehind="frmAsignarResguardo.aspx.cs" Inherits="InventariosPJEH.frmAsignarResguardo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Inventarios0.Master" AutoEventWireup="true" CodeBehind="frmAsignarResguardo.aspx.cs" Inherits="InventariosPJEH.frmAsignarResguardo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -262,11 +262,13 @@
                                                 <asp:TemplateField ItemStyle-Height="10px" ItemStyle-Width="50px" HeaderText="Estatus">
                                                     <ItemTemplate>
                                                         <asp:DropDownList ID="DdlTipoActividad" runat="server" CssClass="Drop" Width="150px" SelectedValue='<%# Bind("IdActividad") %>' >
+                                                            <asp:ListItem Value="1">Asignado a Administración</asp:ListItem>                                                            
                                                             <asp:ListItem Value="2">Asignado a Resguardo</asp:ListItem>
                                                             <asp:ListItem Value="3">Enviado a Reparación</asp:ListItem>
                                                             <asp:ListItem Value="4">Devuelto de Reparación</asp:ListItem>
                                                             <asp:ListItem Value="5">Perdido - No Localizado</asp:ListItem>
                                                             <asp:ListItem Value="6">Baja Temporal</asp:ListItem>
+                                                            <asp:ListItem Value="7">Baja Definitiva</asp:ListItem>
                                                             <asp:ListItem Value="8">Bienes sin Reparación</asp:ListItem>
                                                             <asp:ListItem Value="9">Enviados para Baja</asp:ListItem>
                                                         </asp:DropDownList>
