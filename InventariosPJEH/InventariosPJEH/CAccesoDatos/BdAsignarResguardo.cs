@@ -92,6 +92,25 @@ namespace InventariosPJEH.CAccesoDatos
             return Tabla;
         }
 
+        public static DataTable ObtenerUnidAdminXClasificacion(string Clasificacion)
+        {
+            SqlCommand cmd = new SqlCommand();
+            DataTable Tabla = new DataTable("Resultado");
+            SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+            SqlDataAdapter adp = new SqlDataAdapter();
+            cmd.CommandText = "SELECT IdUniAdmin, UniAdmin ";
+            cmd.CommandText += "FROM dbo.Cat_UniAdmin ";
+            cmd.CommandText += "WHERE Clasificacion = @Clasificacion ";
+            cmd.Parameters.Add("@Clasificacion", SqlDbType.VarChar, 2).Value = Clasificacion;
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+            adp.SelectCommand = cmd;
+            cnn.Open();
+            adp.Fill(Tabla);
+            cnn.Close();
+            return Tabla;
+        }
+
         public static DataTable ObtenerPersonalXUnidAdmin(int IdUniAdmin)
         {
             SqlCommand cmd = new SqlCommand();

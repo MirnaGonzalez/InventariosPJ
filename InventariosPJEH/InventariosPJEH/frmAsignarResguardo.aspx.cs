@@ -21,6 +21,7 @@ namespace InventariosPJEH
                 //LlenarSeccion();
                 HFIdUsuario.Value = "1"; // Page.Session["IdUsuario"].ToString();
                 HFPerfil.Value = "Admin";
+
                 LblFechRes.Text = DateTime.Now.ToShortTimeString();
             }
 
@@ -77,7 +78,7 @@ namespace InventariosPJEH
         //    DdlSeccion.DataBind();
         //    DdlSeccion.Items.Insert(0, new ListItem("-- Seleccionar sección --", "0"));
         //}
-
+        
         //protected void LlenarAreaResguardo()
         //{
         //    List<CConsultaBienes> LAreaResguardo = new List<CConsultaBienes>();
@@ -92,25 +93,30 @@ namespace InventariosPJEH
 
         protected void DdlTipUnAdm_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             string IdTipo = (sender as DropDownList).SelectedValue;
-
-            DataTable Distritos = new DataTable();
-            Distritos = BdAsignarResguardo.ObtenerDistritosXTipoUnidad(IdTipo);
-            DdlDist.DataSource = Distritos;
-            DdlDist.DataTextField = "Distrito";
-            DdlDist.DataValueField = "IdDistrito";
-            DdlDist.DataBind();
-            DdlDist.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
-            if (DdlTipUnAdm.SelectedValue == "UA")
+            if (IdTipo == "1I")
             {
-                DdlDist.SelectedIndex = 1;
-
-                int IdDistrito = Convert.ToInt32(DdlDist.SelectedValue);
-                string Clasificacion = DdlTipUnAdm.SelectedValue;
-
+                DataTable Distritos = new DataTable();
+                DdlDist.Visible = true;
+                LblDist.Visible = true;
+                Distritos = BdAsignarResguardo.ObtenerDistritosXTipoUnidad(IdTipo);
+                DdlDist.DataSource = Distritos;
+                DdlDist.DataTextField = "Distrito";
+                DdlDist.DataValueField = "IdDistrito";
+                DdlDist.DataBind();
+                DdlDist.Items.Insert(0, new ListItem("Seleccionar", "0"));
+            }
+            else
+            {
+                //int IdDistrito = Convert.ToInt32(DdlDist.SelectedValue);
+                //string Clasificacion = DdlTipUnAdm.SelectedValue;
+                string Clasificacion = IdTipo;
+                DdlDist.Visible = false;
+                LblDist.Visible = false;
                 DataTable UnidadesAdmin = new DataTable();
-                UnidadesAdmin = BdAsignarResguardo.ObtenerUnidAdminXDistritoXClasificacion(IdDistrito, Clasificacion);
+                //UnidadesAdmin = BdAsignarResguardo.ObtenerUnidAdminXDistritoXClasificacion(IdDistrito, Clasificacion);
+                UnidadesAdmin = BdAsignarResguardo.ObtenerUnidAdminXClasificacion(Clasificacion);
                 DdlUniAdmin.DataSource = UnidadesAdmin;
                 DdlUniAdmin.DataTextField = "UniAdmin";
                 DdlUniAdmin.DataValueField = "IdUniAdmin";
@@ -136,7 +142,7 @@ namespace InventariosPJEH
         protected void DdlUniAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
             int IdUnidadAdmin = Convert.ToInt32((sender as DropDownList).SelectedValue);
-
+            
 
             if (IdUnidadAdmin != 0)
             {
@@ -169,7 +175,7 @@ namespace InventariosPJEH
             DdlSubclase.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
         }
-
+        
         protected void BtnBuscarInv_Click(object sender, EventArgs e)
         {
             if (TxtNumInv.Text != "")
@@ -184,7 +190,7 @@ namespace InventariosPJEH
 
             if (Int64.TryParse(TxtNumInv.Text, out NumInventario))
             {
-
+                
                 DataTable TEdificios = new DataTable();
 
                 TResultado Resultado = new TResultado();
@@ -277,7 +283,7 @@ namespace InventariosPJEH
             if (DdlSubclase.SelectedValue != "0")
             {
 
-
+              
                 List<CFichaBien> LFichaBien = new List<CFichaBien>();
                 LFichaBien = BdAsignarResguardo.ObtenerFichaBienXSubClase(Convert.ToInt32(DdlSubclase.SelectedValue));
 
@@ -311,7 +317,7 @@ namespace InventariosPJEH
             TResultado Resultado = new TResultado();
             List<CFichaBien> LFichaBien = new List<CFichaBien>();
             List<CFichaBien> LFichaBienSelect = new List<CFichaBien>();
-            LFichaBien = BdAsignarResguardo.ObtenerFichaBienXIdEmpleado(IdEmpleado, ref Resultado);
+            LFichaBien = BdAsignarResguardo.ObtenerFichaBienXIdEmpleado(IdEmpleado,ref Resultado);
             if (!Resultado.Exito)
                 MostrarMensaje(Resultado.Mensaje.FirstOrDefault(), "error", "Normal", "NotExitoso");
 
@@ -370,7 +376,7 @@ namespace InventariosPJEH
                 else if (FilaFichaBien.IdActividad == 5)
                     e.Row.BackColor = System.Drawing.Color.Red;
 
-
+           
 
             }
         }
@@ -457,7 +463,7 @@ namespace InventariosPJEH
                 LblENSU.Text = GrupoBienR.Edificio + " - " + GrupoBienR.Nivel + " - " + GrupoBienR.Seccion;
 
                 LlenarGridAsignados(Convert.ToInt32(DdlNomPers.SelectedValue));
-
+                
                 //HOLA!!!
                 //LblGNombreEdificio.Text = GrupoBienR.Edificio;
                 //LblGNombreNivel.Text = GrupoBienR.Nivel;
@@ -494,8 +500,8 @@ namespace InventariosPJEH
                         List<CFichaBien> LFichaBien = Page.Session["LFichaBienAsignados"] as List<CFichaBien>;
                         List<CFichaBien> LFichaBienNoLocalizado = new List<CFichaBien>();
                         LFichaBienNoLocalizado = (from FBNoLoc in LFichaBien
-                                                  where FBNoLoc.IdActividad == 5
-                                                  select FBNoLoc).ToList();
+                                               where FBNoLoc.IdActividad == 5
+                                               select FBNoLoc).ToList();
 
                         if (LFichaBienNoLocalizado.Count() == 0)
                         {
@@ -543,7 +549,7 @@ namespace InventariosPJEH
                     else if (RdPartida.Checked)
                         BusquedaXInventario();
                 }
-
+                
             }
         }
 
@@ -587,8 +593,7 @@ namespace InventariosPJEH
                 Parametros.NombreTitular = BdAsignarResguardo.NombreTitularArea(Convert.ToInt32(HFIdUniAdmin.Value));
 
                 Page.Session["Parametros"] = Parametros;
-
-
+                
                 string _open = "window.open('MostrarResguardo.aspx', '_blank');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
             }
