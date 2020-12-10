@@ -53,7 +53,7 @@
                     <legend style="text-align: center; color: darkblue;" runat="server" id="Legend4" visible="true">Edificios</legend>
 
                     <asp:GridView ID="GridEdificios" CssClass="StyleGridV" runat="server" Height="100px" Width="100%"
-                        AutoGenerateColumns="False" 
+                        AutoGenerateColumns="False" OnRowDeleting="GridBuscarEdificios_RowDeleting"
                         DataKeyNames="IdEdificio, Edificio,Calle,Colonia, CP, IdMunicipio"
                         OnRowCommand="GridBuscarEdificios_RowCommand" HorizontalAlign="Center"
                         OnSelectedIndexChanging="GridBuscar_SelectedIndexChanging">
@@ -81,7 +81,7 @@
                             </asp:ButtonField>
 
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Eliminar" Text="Eliminar"
-                                  CommandName="Eliminar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
@@ -104,14 +104,16 @@
                         </Columns>
                     </asp:GridView>
                     
-                </fieldset>
-                <table style="width: 100%;">
+                   <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarEdificios" runat="server" CssClass="Boton" OnClick="OcultarEdificios_Click" Text="Ocultar edificios" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarEdificios" runat="server" CssClass="Boton" OnClick="OcultarEdificios_Click" Text="Ocultar edificios" Width="162px" />
                         </td>
                     </tr>
                </table>
+
+                </fieldset>
+
                       
 
             </div>
@@ -182,24 +184,29 @@
                        
                     </table>
 
+                              <table style="width: 100%; margin-top: 10px; text-align: center;">
+                <tr>
+                    <td>
+                        <asp:Button ID="BtnGuardar" runat="server" CssClass="Boton" OnClick="Guardar_Click" Text="Guardar" Visible="false" />
+
+                        <asp:Button ID="BtnActualizar" runat="server" CssClass="Boton" OnClick="BtnActualizar_Click" Text="Actualizar" Visible="false" />
+
+                    </td>
+                    <td>
+                        <asp:Button ID="BtnCancelarEdif" runat="server" CssClass="Boton" OnClick="BtnCancelarNivel_Click" Text="Cancelar" />
+                    </td>
+                  
+                </tr>
+            </table>
+
+
                 </fieldset>
 
                 <br />
             
 
       
-            <table style="width: 100%; margin-top: 10px; text-align: center;">
-                <tr>
-                    <td>
-                        <asp:Button ID="BtnGuardar" runat="server" CssClass="Boton" OnClick="Guardar_Click" Text="Guardar" Visible="false" />
-
-                    </td>
-                    <td>
-                        <asp:Button ID="BtnActualizar" runat="server" CssClass="Boton" OnClick="BtnActualizar_Click" Text="Actualizar" Visible="false" />
-                    </td>
-                  
-                </tr>
-            </table>
+  
 
           </div>
 
@@ -253,7 +260,7 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarNiveles" runat="server" CssClass="Boton" OnClick="OcultarNiveles_Click" Text="Ocultar niveles" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarNiveles" runat="server" CssClass="Boton" OnClick="OcultarNiveles_Click" Text="Ocultar niveles" Width="162px" />
                         </td>
                     </tr>
 
@@ -316,10 +323,12 @@
                 <tr>
                     <td>
                         <asp:Button ID="btnGuardarNivel" runat="server" CssClass="Boton" OnClick="GuardarNivel_Click" Text="Guardar" Visible="false" />
-
+                        <asp:Button ID="BtnActualizar2" runat="server" CssClass="Boton" OnClick="BtnActualizarNivel_Click" Text="Actualizar" Visible="false" />
                     </td>
                     <td>
-                        <asp:Button ID="BtnActualizar2" runat="server" CssClass="Boton" OnClick="BtnActualizarNivel_Click" Text="Actualizar" Visible="false" />
+                        
+                        <asp:Button ID="BtnCancelarNivel" runat="server" CssClass="Boton" OnClick="BtnCancelarNivel_Click" Text="Cancelar" />
+                        
                     </td>
                  
                     
@@ -374,14 +383,17 @@
                             
                         </Columns>
                     </asp:GridView>
-                </fieldset>
 
-                  <table style="width: 100%;">
+                    <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarSecciones" runat="server" CssClass="Boton" OnClick="OcultarSecciones_Click" Text="Ocultar secciones" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarSecciones" runat="server" CssClass="Boton" OnClick="OcultarSecciones_Click" Text="Ocultar secciones" Width="188px" />
                         </td>
                     </tr>
+
+                </fieldset>
+
+
 
                 </table>
 
@@ -436,11 +448,7 @@
                        
                     </table>
 
-                </fieldset>
-
-                <br />
-           
-            <table style="width: 100%; margin-top: 10px; text-align: center;">
+                    <table style="width: 100%; margin-top: 10px; text-align: center;">
                 <tr>
                     <td>
                         <asp:Button ID="btnGuadarSeccion" runat="server" CssClass="Boton" OnClick="GuardarSecciones_Click" Text="Guardar" Visible="false" />
@@ -451,10 +459,16 @@
                     </td>
 
                     <td>
-                            <asp:Button ID="BtnCancelar" runat="server" CssClass="Boton" OnClick="BtnCancelar_Click" Text="Cancelar" Visible="false" />
+                            <asp:Button ID="BtnCancelarSeccion" runat="server" CssClass="Boton" OnClick="BtnCancelarSeccion_Click" Text="Cancelar" Visible="false" />
                     </td>
                 </tr>
             </table>
+
+                </fieldset>
+
+                <br />
+           
+            
 
       </div>
               <table style="width: 100%; margin-top: 10px;">

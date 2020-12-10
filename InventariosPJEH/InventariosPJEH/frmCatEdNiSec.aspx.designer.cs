@@ -303,6 +303,15 @@ namespace InventariosPJEH
         protected global::System.Web.UI.WebControls.Button BtnActualizar;
 
         /// <summary>
+        /// Control BtnCancelarEdif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancelarEdif;
+
+        /// <summary>
         /// Control DivNiveles.
         /// </summary>
         /// <remarks>
@@ -454,6 +463,15 @@ namespace InventariosPJEH
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnActualizar2;
+
+        /// <summary>
+        /// Control BtnCancelarNivel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancelarNivel;
 
         /// <summary>
         /// Control DivSecciones.
@@ -609,13 +627,13 @@ namespace InventariosPJEH
         protected global::System.Web.UI.WebControls.Button BtnActualizar3;
 
         /// <summary>
-        /// Control BtnCancelar.
+        /// Control BtnCancelarSeccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancelar;
+        protected global::System.Web.UI.WebControls.Button BtnCancelarSeccion;
 
         /// <summary>
         /// Control LblLema.
