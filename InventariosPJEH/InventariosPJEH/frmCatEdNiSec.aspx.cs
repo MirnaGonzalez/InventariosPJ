@@ -19,10 +19,10 @@ namespace InventariosPJEH
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Request.Form["__EVENTTARGET"] == "AccionEliminarr")
+            if (Request.Form["__EVENTTARGET"] == "AccionEliminarEdificio")
             {
 
-              //  GridBuscarEdificios_RowDeleting(this, new GridViewDeleteEventArgs(Int32.Parse(Rowindex.Value)));
+              GridBuscarEdificios_RowDeleting(this, new GridViewDeleteEventArgs(Int32.Parse(Rowindex.Value)));
             }
 
             else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
@@ -178,7 +178,7 @@ namespace InventariosPJEH
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {
             BuscarPorFiltros();
-            DivEdificios.Visible = true;
+          
         }
 
         public void BuscarPorFiltros()
@@ -215,9 +215,10 @@ namespace InventariosPJEH
                 {
                     DivEdificios.Visible = false;
                     DivNuevoEdificio.Visible = false;
+                    Legend4.Visible = false;
                     BtnActualizar.Visible = false;
-                    //BtnLimpiar.Visible = false;
-                    BtnCancelar.Visible = false;
+                    BtnCancelarSeccion.Visible = false;
+                    btnOcultarEdificios.Visible = false;
                     MostrarMensaje("No existen datos con la búsqueda solicitada", "error", "Normal", "Incorrecto");
                 }
 
@@ -236,7 +237,7 @@ namespace InventariosPJEH
             DivNuevoEdificio.Visible = false;
             BtnGuardar.Visible = false;
             BtnActualizar.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
          //  BtnLimpiar.Visible = false;
             LgEdiNivel.Visible = true;
           
@@ -309,30 +310,27 @@ namespace InventariosPJEH
             string idEdificio = GridEdificios.DataKeys[index].Values["IdEdificio"].ToString();
             Page.Session["idEdificio"] = idEdificio;
 
-           
+            string edificio = Page.Server.HtmlDecode(RowSelecionada.Cells[1].Text);
+            string calle = Page.Server.HtmlDecode(RowSelecionada.Cells[2].Text);
+            string colonia = Page.Server.HtmlDecode(RowSelecionada.Cells[3].Text);
+            string cp = RowSelecionada.Cells[4].Text;
+            string idMunicipio = RowSelecionada.Cells[5].Text;
+            string municipio = Page.Server.HtmlDecode(RowSelecionada.Cells[6].Text);
+
+
             switch (e.CommandName)
 
 
             {
-                case "Editar":
+                case "ModificarEdificio":
 
                     ////////////////////////////////////7
                     DivNuevoEdificio.Visible = true;
                     BtnActualizar.Visible = true;
                     BtnGuardar.Visible = false;
-                    BtnCancelar.Visible = true;
-                    //BtnLimpiar.Visible = true;
+                    BtnCancelarSeccion.Visible = true;
                     lgNuevoRegistro.Visible = false;
                     lgModificarRegistro.Visible = true;
-
-
-                    string edificio = Page.Server.HtmlDecode(RowSelecionada.Cells[1].Text);
-
-                    string calle = Page.Server.HtmlDecode(RowSelecionada.Cells[2].Text);
-                    string colonia = Page.Server.HtmlDecode(RowSelecionada.Cells[3].Text);
-                    string cp = RowSelecionada.Cells[4].Text;
-                    string idMunicipio = RowSelecionada.Cells[5].Text;
-                    string municipio = Page.Server.HtmlDecode(RowSelecionada.Cells[6].Text);
 
                     lbIdEdificios.Text = idEdificio;
                     TxtEdificioNuevo.Text = edificio;
@@ -348,7 +346,10 @@ namespace InventariosPJEH
                     {
                         if (DropMunicipioNuevo.Items[a].Text == municipio)
                         {
-                            DropMunicipioNuevo.SelectedIndex = a;
+                            
+                          DropMunicipioNuevo.SelectedIndex = a;
+               
+
                             encontrado = false;
                         }
                         else if (DropMunicipioNuevo.Items[a].Text != municipio)
@@ -359,80 +360,93 @@ namespace InventariosPJEH
                     ///////////////////////////////////////7
                     break;
 
-                case "Eliminar":
+                //case "Eliminar":
 
-                    if (Request.Form["__EVENTTARGET"] == "AccionEliminarr")
-                    {
+                //    if (Request.Form["__EVENTTARGET"] == "AccionEliminarEdificio")
+                //    {
 
-                        BorrarEdificio(idEdificio);
-                    }
-                    else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
-                    {
-                        Rowindex.Value = string.Empty;
-                    }
-
-
-                     break;
+                //        BorrarEdificio(idEdificio);
+                //    }
+                //    else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
+                //    {
+                //        Rowindex.Value = string.Empty;
+                //    }
+                  // break;
 
 
 
-                case "Agregar":
+                case "AgregarNivel":
+
                     DivNuevoNivel.Visible = true;
 
-                    //////// BtnMostraOcultar2
-                    if (lgModificarRegistro2.Visible == true)
-                    {
-                        if (DivNuevoNivel.Visible == true)
-                        {
-                            DivNuevoNivel.Visible = true;
-                            btnGuardarNivel.Visible = true;
-                            lgNuevoRegistro2.Visible = true;
-                            BtnCancelar.Visible = true;
-                            //BtnLimpiar.Visible = true;
+                    IniciarLlenadoDropEdificioNuevo();
 
-                            DivNuevoEdificio.Visible = false;
-                            BtnGuardar.Visible = false;
-                            BtnActualizar.Visible = false;
-                            BtnActualizar2.Visible = false;
-                            lgModificarRegistro2.Visible = false;
+                    DropEdificiosNuevo.SelectedValue = idEdificio.ToString();
 
-                            LimpiarRegistro2();
+                    DivNuevoNivel.Visible = true;
+                    btnGuardarNivel.Visible = true;
+                    BtnActualizar.Visible = false;
+                    lgNuevoRegistro.Visible = true;
+                    lgModificarRegistro2.Visible = false;
 
-                        }
-                    }
-                    else if (lgModificarRegistro2.Visible == false)
-                    {
-                        DivNuevoNivel.Visible = false;
-                        DivNuevoEdificio.Visible = false;
-                        btnGuardarNivel.Visible = false;
-                        //BtnLimpiar.Visible = false;
-                        BtnCancelar.Visible = false;
-                        BtnGuardar.Visible = false;
-                        BtnActualizar.Visible = false;
-                    }
-                    if (DivNuevoNivel.Visible == false)
-                    {
-                        DivNuevoNivel.Visible = true;
-                        btnGuardarNivel.Visible = true;
-                        lgNuevoRegistro2.Visible = true;
-                        BtnCancelar.Visible = true;
-                      //  BtnLimpiar.Visible = true;
 
-                        DivNuevoEdificio.Visible = false;
-                        BtnActualizar2.Visible = false;
-                        lgModificarRegistro2.Visible = false;
-                        BtnGuardar.Visible = false;
-                        BtnActualizar.Visible = false;
 
-                        LimpiarRegistro2();
+                    //DivNuevoEdificio.Visible = false;
 
-                    }
-                    //////////
+
+                    //if (lgModificarRegistro2.Visible == true)  // Modificar sección
+                    //{
+                    //    if (DivNuevoNivel.Visible == true)
+                    //    {
+                    //        DivNuevoNivel.Visible = true;
+                    //        //btnGuardarNivel.Visible = true;
+                    //        //lgNuevoRegistro2.Visible = true;
+                    //        //BtnCancelarSeccion.Visible = true;
+
+                    //        DivNuevoEdificio.Visible = false;
+                    //        //BtnGuardar.Visible = false;
+                    //        //BtnActualizar.Visible = false;
+                    //        //BtnActualizar2.Visible = false;
+                    //        //lgModificarRegistro2.Visible = false;
+
+
+                    //    }
+                    //}
+
+
+                    //else if (lgModificarRegistro2.Visible == false) // Agregar sección
+                    //{
+                    //    DivNuevoNivel.Visible = true;
+                    //    DivNuevoEdificio.Visible = false;
+                    //    //btnGuardarNivel.Visible = false;
+
+                    //    //BtnCancelarSeccion.Visible = false;
+                    //    //BtnGuardar.Visible = false;
+                    //    //BtnActualizar.Visible = false;
+                    //}
+
+
+                    //if (DivNuevoNivel.Visible == false)
+                    //{
+                    //    DivNuevoNivel.Visible = true;
+                    //    btnGuardarNivel.Visible = true;
+                    //    lgNuevoRegistro2.Visible = true;
+                    //    BtnCancelarSeccion.Visible = true;
+
+
+                    //    DivNuevoEdificio.Visible = false;
+                    //    BtnActualizar2.Visible = false;
+                    //    lgModificarRegistro2.Visible = false;
+                    //    BtnGuardar.Visible = false;
+                    //    BtnActualizar.Visible = false;
+
+                    //}
+
 
 
                     break;
 
-                case "Consultar":
+                case "ConsultarNivel":
                     BuscarNiveles(idEdificio);
                     break;
 
@@ -441,13 +455,72 @@ namespace InventariosPJEH
             }
         }
 
-        //protected void GridBuscarEdificios_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void GridBuscarEdificios_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+
+            string idEdificio;
+            idEdificio = Page.Session["idEdificio"].ToString();
+
+            if (String.IsNullOrEmpty(Rowindex2.Value))
+            {
+                Rowindex2.Value = e.RowIndex.ToString();
+                MostrarMensaje("Prueba", "info", "NotificacionEliminar", "Inicio");
+            }
+            else
+            {
+
+                Boolean encontrado = true;
+                try
+                {
+                    if (encontrado == true)
+                    {
+
+                        BorrarEdificio(idEdificio);
+                    }
+
+                }
+                catch (Exception)
+                {
+                    Rowindex2.Value = "";
+                    MostrarMensaje("** Error al eliminar registro **", "error", "Normal", "Incorrecto");
+                }
+            }
+
+
+
+
+           
+
+            //if (String.IsNullOrEmpty(Rowindex2.Value))
+            //{
+            //    Rowindex2.Value = e.RowIndex.ToString();
+            //    MostrarMensaje("Prueba", "info", "NotificacionEliminar", "Inicio");
+            //}
+
+
+            //else
+            //{
+            //    if (Request.Form["__EVENTTARGET"] == "AccionEliminarEdificio")
+            //    {
+            //        idEdificio = Page.Session["idEdificio"].ToString();
+
+            //        BorrarEdificio(idEdificio);
+            //    }
+            //    else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
+            //    {
+            //        Rowindex.Value = string.Empty;
+            //    } 
+            //}
+
+        }
+
+
         public void BorrarEdificio(string idEdificio)
         {
                         DivNuevoEdificio.Visible = false;
                         BtnActualizar.Visible = false;
                         BtnGuardar.Visible = false;
-                        BtnCancelar.Visible = false;
+                        BtnCancelarSeccion.Visible = false;
 
                         bool success = false;
                         SqlConnection Conn = new SqlConnection(CConexion.Obtener());
@@ -522,7 +595,7 @@ namespace InventariosPJEH
                     BtnActualizar.Visible = false;
                     lgNuevoRegistro.Visible = true;
                     lgModificarRegistro.Visible = false;
-                    BtnCancelar.Visible = true;
+                    BtnCancelarSeccion.Visible = true;
                     //BtnLimpiar.Visible = true;
                     LimpiarRegistro();
 
@@ -537,7 +610,7 @@ namespace InventariosPJEH
                 DivNuevaSeccion.Visible = false;
                 BtnGuardar.Visible = false;
               //  BtnLimpiar.Visible = false;
-                BtnCancelar.Visible = false;
+                BtnCancelarSeccion.Visible = false;
                 btnGuardarNivel.Visible = false;
                 btnGuadarSeccion.Visible = false;
                 DivNiveles.Visible = false;
@@ -552,7 +625,7 @@ namespace InventariosPJEH
                 BtnActualizar.Visible = false;
                 lgNuevoRegistro.Visible = true;
                 lgModificarRegistro.Visible = false;
-                BtnCancelar.Visible = true;
+                BtnCancelarSeccion.Visible = true;
              //   BtnLimpiar.Visible = true;
                 btnGuardarNivel.Visible = false;
                 btnGuadarSeccion.Visible = false;
@@ -609,7 +682,7 @@ namespace InventariosPJEH
                                     MostrarMensaje("** Registro exitoso **", "error", "Normal", "Incorrecto");
                                             
                                         BuscarNuevoRegsitroEdificios(municipio, TxtEdificioNuevo.Text, TxtNivelNuevo.Text, TxtSeccionesNuevo.Text);
-                                        BtnCancelar.Visible = false;
+                                        BtnCancelarSeccion.Visible = false;
                                         DivNuevoEdificio.Visible = false;
                                         BtnGuardar.Visible = false;
                                         LimpiarRegistro();
@@ -694,7 +767,7 @@ namespace InventariosPJEH
                                         {
                                            string  Municipio = Convert.ToString(DropMunicipioNuevo.SelectedItem);
                                             BuscarNuevoRegsitroEdificios(municipio, TxtEdificioNuevo.Text, TxtNivelNuevo.Text, TxtSeccionesNuevo.Text);
-                                            BtnCancelar.Visible = false;
+                                            BtnCancelarSeccion.Visible = false;
                                             DivNuevoEdificio.Visible = false;
                                             BtnActualizar.Visible = false;
 
@@ -702,7 +775,7 @@ namespace InventariosPJEH
                                         else
                                         {
                                             BuscarPorFiltros();
-                                            BtnCancelar.Visible = false;
+                                            BtnCancelarSeccion.Visible = false;
                                             DivNuevoEdificio.Visible = false;
                                             BtnActualizar.Visible = false;
                                         }
@@ -767,13 +840,13 @@ namespace InventariosPJEH
             BtnActualizar2.Visible = false;
             BtnActualizar3.Visible = false;
             BtnGuardar.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
             ddlMunicipio.SelectedIndex = 0;
             ddlEdificio.SelectedIndex = 0;
-          //  ddlNivel.SelectedIndex = 0;
-        //    ddlSeccion.SelectedIndex = 0;
-        
-            LimpiarRegistro2();
+            //  ddlNivel.SelectedIndex = 0;
+            //    ddlSeccion.SelectedIndex = 0;
+
+            LimpiarNuevoNivel();
             LimpiarRegistro3();
             
         }
@@ -794,7 +867,7 @@ namespace InventariosPJEH
             DivNuevoNivel.Visible = false;
             BtnGuardar.Visible = false;
             btnGuardarNivel.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
         }
 
         /*********************************NIVELES********************************************/
@@ -867,7 +940,7 @@ namespace InventariosPJEH
             DivNuevoNivel.Visible = true;
             BtnActualizar2.Visible = true;
             btnGuardarNivel.Visible = false;
-            BtnCancelar.Visible = true;
+            BtnCancelarSeccion.Visible = true;
             //BtnLimpiar.Visible = true;
             lgNuevoRegistro2.Visible = false;
             lgModificarRegistro2.Visible = true;
@@ -882,7 +955,7 @@ namespace InventariosPJEH
 
 
             {
-                case "Editar":
+                case "ModificarNivel":
 
                         List<CEdificios_Niveles_Secciones> lstEdificio = Page.Session["lstEdificio"] as List<CEdificios_Niveles_Secciones>;
 
@@ -917,7 +990,7 @@ namespace InventariosPJEH
 
                     break;
 
-                case "Agregar":
+                case "AgregarSeccion":
 
                     if (lgModificarRegistro3.Visible == true)
                     {
@@ -928,19 +1001,23 @@ namespace InventariosPJEH
                             BtnActualizar3.Visible = false;
                             lgNuevaSeccion.Visible = true;
                             lgModificarRegistro3.Visible = false;
-                            BtnCancelar.Visible = true;
-                            //BtnLimpiar.Visible = true;
+                            BtnCancelarSeccion.Visible = true;
                             LimpiarRegistro3();
+                            DivNuevoNivel.Visible = false;
+                            DivEdificios.Visible = false;
 
                         }
                     }
+
                     else if (lgModificarRegistro3.Visible == false)
                     {
                         DivNuevaSeccion.Visible = false;
                         btnGuadarSeccion.Visible = false;
-                     //   BtnLimpiar.Visible = false;
-                        BtnCancelar.Visible = false;
+                        BtnCancelarSeccion.Visible = false;
+                        DivEdificios.Visible = false;
+                        DivNuevoNivel.Visible = false;
                     }
+
                     if (DivNuevaSeccion.Visible == false)
                     {
                         DivNuevaSeccion.Visible = true;
@@ -948,20 +1025,22 @@ namespace InventariosPJEH
                         BtnActualizar3.Visible = false;
                         lgNuevaSeccion.Visible = true;
                         lgModificarRegistro3.Visible = false;
-                        BtnCancelar.Visible = true;
-                      //  BtnLimpiar.Visible = true;
+                        BtnCancelarSeccion.Visible = true;
+                        //  BtnLimpiar.Visible = true;
+                        DivEdificios.Visible = false;
+                        DivNuevoNivel.Visible = false;
                         LimpiarRegistro3();
 
                     }
 
                     break;
 
-                case "Consultar":
+                case "ConsultarSeccion":
 
                     DivNuevoNivel.Visible = false;
                     btnGuardarNivel.Visible = false;
                     BtnActualizar2.Visible = false;
-                    BtnCancelar.Visible = false;
+                    BtnCancelarSeccion.Visible = false;
                     //BtnLimpiar.Visible = false;
                     DivNuevoNivel.Visible = false;
                     DivSecciones.Visible = true;
@@ -987,7 +1066,8 @@ namespace InventariosPJEH
             DivNuevoNivel.Visible = false;
             BtnActualizar2.Visible = false;
             btnGuardarNivel.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
+
             if (String.IsNullOrEmpty(Rowindex2.Value))
             {
                 Rowindex2.Value = e.RowIndex.ToString();
@@ -1030,12 +1110,14 @@ namespace InventariosPJEH
         }
 
         //Método para limpiar un nuevo registro de partidas
-        public void LimpiarRegistro2()
+        public void LimpiarNuevoNivel()
         {
             TxtNivelNuevo.Text = string.Empty;
             DropEdificiosNuevo.SelectedIndex = 0;
 
         }
+
+
 
         protected void GuardarNivel_Click(object sender, EventArgs e)
         {
@@ -1045,12 +1127,9 @@ namespace InventariosPJEH
                 {
                     string edificio = Convert.ToString(HiddenEdificio.Value);
                     string edi = Convert.ToString(DropEdificiosNuevo.SelectedItem);
-                  
 
-                  
-               
-                    btnGuardarNivel.Visible = false;
-                    DivNiveles.Visible = true;
+//                    btnGuardarNivel.Visible = false;
+ //                   DivNiveles.Visible = true;
 
                     int seccion = Convert.ToInt32(DropEdificiosNuevo.SelectedValue);
 
@@ -1063,14 +1142,21 @@ namespace InventariosPJEH
                     {
                         cnn.Open();
                         insert.ExecuteNonQuery();
-                        MostrarMensaje("** Guardado correctamente **", "error", "Normal", "Incorrecto");
+                        MostrarMensaje("** Nivel guardado correctamente **", "error", "Normal", "Incorrecto");
                         BuscarNiveles(HiddenIdEdificio.Value);
-                        BtnCancelar.Visible = false;
-                        DivNuevoNivel.Visible = true;
-                        BtnActualizar2.Visible = false;
-                        DivNiveles.Visible = true;
-                        LimpiarRegistro2();
+                        //BtnCancelarSeccion.Visible = false;
+                        //BtnActualizar2.Visible = false;
+
+                        LimpiarNuevoNivel();
+
+                        DivNuevoNivel.Visible = false;
+                        DivNiveles.Visible = false;
+
+
+                        BuscarNiveles(edi);
+
                     }
+
                     catch (Exception )
                     {
                         MostrarMensaje("** Error al registrar una nivel **", "error", "Normal", "Incorrecto");
@@ -1086,7 +1172,7 @@ namespace InventariosPJEH
             }
             else
             {
-                MostrarMensaje("** El campo nombre del nivel es requerido **", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El nombre del nivel es requerido **", "error", "Normal", "Incorrecto");
             }
 
 
@@ -1110,9 +1196,9 @@ namespace InventariosPJEH
                 {
                     cnn.Open();
                     update.ExecuteNonQuery();
-                    MostrarMensaje("** Se actualizó correctamente **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** Se actualizó correctamente el nivel **", "error", "Normal", "Incorrecto");
                     BuscarNiveles(HiddenIdEdificio.Value);
-                        BtnCancelar.Visible = false;
+                        BtnCancelarSeccion.Visible = false;
                         DivNuevoNivel.Visible = false;
                         BtnActualizar2.Visible = false;
                     }
@@ -1130,20 +1216,20 @@ namespace InventariosPJEH
             }
             else
             {
-                MostrarMensaje("** El campo nombre del nivel es requerido **", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El nombre del nivel es requerido **", "error", "Normal", "Incorrecto");
             }
 
         }
 
         protected void BtnLimpiarNivel_Click(object sender, EventArgs e)
         {
-            LimpiarRegistro2();
+            LimpiarNuevoNivel();
             DivNuevoNivel.Visible = false;
             DivNiveles.Visible = false;
         
             BtnActualizar2.Visible = false;
             btnGuardarNivel.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
             DivEdificios.Visible = false;
             LimpiarRegistro();
           
@@ -1152,7 +1238,7 @@ namespace InventariosPJEH
             //BtnLimpiar.Visible = false;
             BtnActualizar.Visible = false;
             BtnGuardar.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
             ddlMunicipio.SelectedIndex = 0;
             ddlEdificio.SelectedIndex = 0;
           //  ddlNivel.SelectedIndex = 0;
@@ -1175,7 +1261,8 @@ namespace InventariosPJEH
             }
             DivNuevoNivel.Visible = false;
             btnGuardarNivel.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
+            DivNuevoEdificio.Visible = false;
         }
 
 
@@ -1186,7 +1273,7 @@ namespace InventariosPJEH
             DivNuevaSeccion.Visible = true;
             BtnActualizar3.Visible = true;
             btnGuadarSeccion.Visible = false;
-            BtnCancelar.Visible = true;
+            BtnCancelarSeccion.Visible = true;
          //   BtnLimpiar.Visible = true;
             lgNuevaSeccion.Visible = false;
             lgModificarRegistro3.Visible = true;
@@ -1202,8 +1289,8 @@ namespace InventariosPJEH
 
             
             SqlConnection Conn = new SqlConnection(Conexion.Obtener());
-            SqlCommand cmdsql = new SqlCommand("Select Nombre from VistaEdificiosNivelesSecciones where IdSeccion = @idNivel ", Conn);
-            cmdsql.Parameters.AddWithValue("@idNivel", HiddenIdNivel.Value);
+            SqlCommand cmdsql = new SqlCommand("Select Nombre from VistaEdificiosNivelesSecciones where IdSeccion = @IdSeccion ", Conn);
+            cmdsql.Parameters.AddWithValue("@IdSeccion", idSeccion);
             Conn.Open();
             SqlDataReader leer = cmdsql.ExecuteReader();
 
@@ -1251,7 +1338,7 @@ namespace InventariosPJEH
             DivNuevaSeccion.Visible = false;
             BtnActualizar3.Visible = false;
             btnGuadarSeccion.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
             if (String.IsNullOrEmpty(Rowindex3.Value))
             {
                 Rowindex3.Value = e.RowIndex.ToString();
@@ -1270,10 +1357,13 @@ namespace InventariosPJEH
                         int index = Convert.ToInt32(e.RowIndex);
                         GridViewRow RowSelecionada = GridSecciones.Rows[index];
                         string idENSU1 = GridSecciones.DataKeys[index].Values["IdENSU"].ToString();
+                        string idSeccion = GridSecciones.DataKeys[index].Values["IdSeccion"].ToString();
+                        // string xcod = GridSecciones.DataKeys[n].Value.ToString();
 
-                        string xcod = GridSecciones.DataKeys[n].Value.ToString();
-                        obJN.IdSeccion = xcod;
+
+                        obJN.IdSeccion = idSeccion;
                         obJN1.IdENSU = HiddenIdENSU.Value;
+
                         obJE.Eliminar_Secciones(obJN, obJN1);
                         GridSecciones.EditIndex = -1;
                         //BuscarSeccionNuevo(HiddenId2.Value);
@@ -1304,7 +1394,7 @@ namespace InventariosPJEH
                     BtnActualizar3.Visible = false;
                     lgNuevaSeccion.Visible = true;
                     lgModificarRegistro3.Visible = false;
-                    BtnCancelar.Visible = true;
+                    BtnCancelarSeccion.Visible = true;
                 //    BtnLimpiar.Visible = true;
                     LimpiarRegistro3();
 
@@ -1315,7 +1405,7 @@ namespace InventariosPJEH
                 DivNuevaSeccion.Visible = false;
                 btnGuadarSeccion.Visible = false;
              //   BtnLimpiar.Visible = false;
-                BtnCancelar.Visible = false;
+                BtnCancelarSeccion.Visible = false;
             }
             if (DivNuevaSeccion.Visible == false)
             {
@@ -1324,7 +1414,7 @@ namespace InventariosPJEH
                 BtnActualizar3.Visible = false;
                 lgNuevaSeccion.Visible = true;
                 lgModificarRegistro3.Visible = false;
-                BtnCancelar.Visible = true;
+                BtnCancelarSeccion.Visible = true;
              //   BtnLimpiar.Visible = true;
                 LimpiarRegistro3();
 
@@ -1445,17 +1535,22 @@ namespace InventariosPJEH
             {
                 cnn.Open();
                 insert.ExecuteNonQuery();
-                MostrarMensaje("** Guardado correctamente **", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** Sección guardada correctamente **", "error", "Normal", "Incorrecto");
 
                 //BuscarSeccionNuevo(HiddenId2.Value);
                 BuscarSecciones(HiddenIdNivel.Value, IdEdificio);
-
-                BtnCancelar.Visible = false;
                 DivNuevaSeccion.Visible = false;
-                btnGuadarSeccion.Visible = false;
                 DivSecciones.Visible = true;
-                btnGuardarNivel.Visible = false;
-                BtnCancelar.Visible = false;
+                GridSecciones.Visible = true;
+
+
+                //  BtnCancelarSeccion.Visible = false;
+                //   btnGuadarSeccion.Visible = false;
+
+
+
+                // btnGuardarNivel.Visible = false;
+                //   BtnCancelarSeccion.Visible = false;
             }
             catch (Exception )
             {
@@ -1467,7 +1562,7 @@ namespace InventariosPJEH
 
         protected void BtnActualizarSecciones_Click(object sender, EventArgs e)
         {
-            if (TxtNivelNuevo.Text != "")
+            if (TxtSeccionesNuevo.Text != "")
             {
                 if (DropTipoNuevo.SelectedIndex != 0)
                 {
@@ -1493,7 +1588,7 @@ namespace InventariosPJEH
                         update.ExecuteNonQuery();
                         MostrarMensaje("** Se actualizó correctamente **", "error", "Normal", "Incorrecto");
                         BuscarSecciones(HiddenIdNivel.Value, HiddenIdEdificio.Value);
-                        BtnCancelar.Visible = false;
+                        BtnCancelarSeccion.Visible = false;
                         DivNuevaSeccion.Visible = false;
                         BtnActualizar3.Visible = false;
 
@@ -1508,12 +1603,12 @@ namespace InventariosPJEH
                 }
                 else
                 {
-                    MostrarMensaje("** Selecciona un tipo **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** Selecciona un tipo de sección **", "error", "Normal", "Incorrecto");
                 }
             }
             else
             {
-                MostrarMensaje("** El campo nombre de sección es requerido **", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El nombre de sección es requerido **", "error", "Normal", "Incorrecto");
             }
         }
 
@@ -1524,7 +1619,7 @@ namespace InventariosPJEH
             DivSecciones.Visible = false;
             BtnActualizar3.Visible = false;
             btnGuadarSeccion.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
           
             LimpiarRegistro();
             DivNuevoEdificio.Visible = false;
@@ -1561,7 +1656,7 @@ namespace InventariosPJEH
             }
             DivNuevaSeccion.Visible = false;
             btnGuadarSeccion.Visible = false;
-            BtnCancelar.Visible = false;
+            BtnCancelarSeccion.Visible = false;
         }
 
           protected void GridEdificios_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -1595,6 +1690,11 @@ namespace InventariosPJEH
         protected void OcultarEdificios_Click(object sender, EventArgs e)
         {
             DivEdificios.Visible = false;
+        }
+
+        protected void BtnCancelarSeccion_Click(object sender, EventArgs e)
+        {
+            DivNuevaSeccion.Visible = false;
         }
     }
 }

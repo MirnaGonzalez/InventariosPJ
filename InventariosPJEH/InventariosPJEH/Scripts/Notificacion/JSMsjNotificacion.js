@@ -57,7 +57,7 @@ function confirm(event) {
         if (result.value == true) {
 
 
-            __doPostBack('AccionEliminarr', '');
+            __doPostBack('AccionEliminarEdificio', '');
          
         } else {
             

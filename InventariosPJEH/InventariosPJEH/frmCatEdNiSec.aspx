@@ -50,10 +50,10 @@
             <div runat="server" id="DivEdificios" visible="false" class="auto-style6">
 
                 <fieldset style="height: auto">
-                    <legend style="text-align: center; color: darkblue;" runat="server" id="Legend4" visible="true">Edificios</legend>
+                    <legend style="text-align: center; color: darkblue;" runat="server" id="Legend4" >Edificios</legend>
 
                     <asp:GridView ID="GridEdificios" CssClass="StyleGridV" runat="server" Height="100px" Width="100%"
-                        AutoGenerateColumns="False" 
+                        AutoGenerateColumns="False" OnRowDeleting="GridBuscarEdificios_RowDeleting"
                         DataKeyNames="IdEdificio, Edificio,Calle,Colonia, CP, IdMunicipio"
                         OnRowCommand="GridBuscarEdificios_RowCommand" HorizontalAlign="Center"
                         OnSelectedIndexChanging="GridBuscar_SelectedIndexChanging">
@@ -74,20 +74,20 @@
                             <asp:BoundField DataField="Municipio" HeaderText="Municipio" ItemStyle-Width="80px" >
                             <ItemStyle Width="60px" />  </asp:BoundField>
                             
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Editar" Text="Editar"
-                                CommandName="Editar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Modificar Edificio" Text="Editar"
+                                CommandName="ModificarEdificio" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Eliminar" Text="Eliminar"
-                                  CommandName="Eliminar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Eliminar Edificio" Text="Eliminar"
+                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/agregar.png" ControlStyle-Width="30px" HeaderText="Agregar" Text="Agregar"
-                                CommandName="Agregar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/agregar.png" ControlStyle-Width="30px" HeaderText="Agregar Nivel" Text="Agregar"
+                                CommandName="AgregarNivel" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
@@ -95,7 +95,7 @@
                           
 
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/consultar.png" ControlStyle-Width="30px" HeaderText="Consultar Niveles" Text="Consultar"
-                                CommandName="Consultar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                                CommandName="ConsultarNivel" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
@@ -104,14 +104,16 @@
                         </Columns>
                     </asp:GridView>
                     
-                </fieldset>
-                <table style="width: 100%;">
+                   <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarEdificios" runat="server" CssClass="Boton" OnClick="OcultarEdificios_Click" Text="Ocultar edificios" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarEdificios" runat="server" CssClass="Boton" OnClick="OcultarEdificios_Click" Text="Ocultar edificios" Width="162px" />
                         </td>
                     </tr>
                </table>
+
+                </fieldset>
+
                       
 
             </div>
@@ -182,24 +184,29 @@
                        
                     </table>
 
+                              <table style="width: 100%; margin-top: 10px; text-align: center;">
+                <tr>
+                    <td>
+                        <asp:Button ID="BtnGuardar" runat="server" CssClass="Boton" OnClick="Guardar_Click" Text="Guardar" Visible="false" />
+
+                        <asp:Button ID="BtnActualizar" runat="server" CssClass="Boton" OnClick="BtnActualizar_Click" Text="Actualizar" Visible="false" />
+
+                    </td>
+                    <td>
+                        <asp:Button ID="BtnCancelarEdif" runat="server" CssClass="Boton" OnClick="BtnCancelarNivel_Click" Text="Cancelar" />
+                    </td>
+                  
+                </tr>
+            </table>
+
+
                 </fieldset>
 
                 <br />
             
 
       
-            <table style="width: 100%; margin-top: 10px; text-align: center;">
-                <tr>
-                    <td>
-                        <asp:Button ID="BtnGuardar" runat="server" CssClass="Boton" OnClick="Guardar_Click" Text="Guardar" Visible="false" />
-
-                    </td>
-                    <td>
-                        <asp:Button ID="BtnActualizar" runat="server" CssClass="Boton" OnClick="BtnActualizar_Click" Text="Actualizar" Visible="false" />
-                    </td>
-                  
-                </tr>
-            </table>
+  
 
           </div>
 
@@ -225,25 +232,25 @@
                              <ItemStyle Width="30px" />   </asp:BoundField>              
                             
 
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Editar" Text="Editar"
-                                CommandName="Prueba" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Modificar Nivel" Text="Editar"
+                                CommandName="ModificarNivel" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
-                            <asp:CommandField ButtonType="Image" HeaderText="Eliminar" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" >
+                            <asp:CommandField ButtonType="Image" HeaderText="Eliminar Nivel" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" >
                                 <ControlStyle Width="30px" />
                                 <ItemStyle Width="30px" HorizontalAlign="Center" />
                             </asp:CommandField>
 
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/agregar.png" ControlStyle-Width="30px" HeaderText="Agregar sección" Text="Agregar"
-                                CommandName="Agregar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                                CommandName="AgregarSeccion" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/consultar.png" ControlStyle-Width="30px" HeaderText="Consultar secciones " Text="Consultar"
-                                CommandName="Consultar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
+                                CommandName="ConsultarSeccion" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
@@ -253,7 +260,7 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarNiveles" runat="server" CssClass="Boton" OnClick="OcultarNiveles_Click" Text="Ocultar niveles" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarNiveles" runat="server" CssClass="Boton" OnClick="OcultarNiveles_Click" Text="Ocultar niveles" Width="162px" />
                         </td>
                     </tr>
 
@@ -266,7 +273,7 @@
                 <asp:HiddenField ID="HiddenIdNivel" runat="server" />
                 <asp:HiddenField ID="HiddenEdificio" runat="server" />
                 <fieldset style="height: auto; border-color: #6D252B;">
-                    <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro2" visible="false">Nuevo nivel</legend>
+                    <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro2" visible="True">Nuevo nivel</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro2" visible="false">Modificar nivel</legend>
 
 
@@ -303,6 +310,19 @@
 
                     </table>
 
+                     <table style="width: 100%; margin-top: 10px; text-align: center;">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnGuardarNivel" runat="server" CssClass="Boton" OnClick="GuardarNivel_Click" Text="Guardar" Visible="false" />
+                        <asp:Button ID="BtnActualizar2" runat="server" CssClass="Boton" OnClick="BtnActualizarNivel_Click" Text="Actualizar" Visible="false" />
+                    </td>
+                    <td>
+                        <asp:Button ID="BtnCancelarNivel" runat="server" CssClass="Boton" OnClick="BtnCancelarNivel_Click" Text="Cancelar" />
+                    </td>
+                    
+                </tr>
+            </table>
+
                 </fieldset>
 
                 <br />
@@ -312,19 +332,7 @@
 
             
 
-            <table style="width: 100%; margin-top: 10px; text-align: center;">
-                <tr>
-                    <td>
-                        <asp:Button ID="btnGuardarNivel" runat="server" CssClass="Boton" OnClick="GuardarNivel_Click" Text="Guardar" Visible="false" />
-
-                    </td>
-                    <td>
-                        <asp:Button ID="BtnActualizar2" runat="server" CssClass="Boton" OnClick="BtnActualizarNivel_Click" Text="Actualizar" Visible="false" />
-                    </td>
-                 
-                    
-                </tr>
-            </table>
+           
 
  </div>
             
@@ -360,13 +368,13 @@
 
                             <asp:BoundField DataField="IdENSU" HeaderText="Clave Ubicación" ItemStyle-Width="40px">
                                  <ItemStyle Width="60px" />   </asp:BoundField>
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Editar" Text="Editar"
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Modificar Sección" Text="Editar"
                                 CommandName="Prueba" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
-                            <asp:CommandField ButtonType="Image" HeaderText="Eliminar" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" >
+                            <asp:CommandField ButtonType="Image" HeaderText="Eliminar Sección" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" >
                                 <ControlStyle Width="30px" />
                                 <ItemStyle Width="30px" HorizontalAlign="Center" />
                             </asp:CommandField>
@@ -374,20 +382,23 @@
                             
                         </Columns>
                     </asp:GridView>
-                </fieldset>
 
-                  <table style="width: 100%;">
+                    <table style="width: 100%;">
                     <tr>
                         <td style="text-align: center;">
-                             <asp:Button ID="btnOcultarSecciones" runat="server" CssClass="Boton" OnClick="OcultarSecciones_Click" Text="Ocultar secciones" Visible="false" Width="162px" />
+                             <asp:Button ID="btnOcultarSecciones" runat="server" CssClass="Boton" OnClick="OcultarSecciones_Click" Text="Ocultar secciones" Width="188px" />
                         </td>
                     </tr>
+
+                </fieldset>
+
+
 
                 </table>
 
             </div>
 
-            <div runat="server" id="DivNuevaSeccion" style="width: 100%; height: auto;" visible="false">
+            <div runat="server" id="DivNuevaSeccion" visible="false" class="auto-style10">
 
                 <asp:HiddenField ID="Rowindex3" runat="server" />
                 <asp:HiddenField ID="HiddenIdENSU" runat="server" />
@@ -436,11 +447,7 @@
                        
                     </table>
 
-                </fieldset>
-
-                <br />
-           
-            <table style="width: 100%; margin-top: 10px; text-align: center;">
+                    <table style="width: 100%; margin-top: 10px; text-align: center;">
                 <tr>
                     <td>
                         <asp:Button ID="btnGuadarSeccion" runat="server" CssClass="Boton" OnClick="GuardarSecciones_Click" Text="Guardar" Visible="false" />
@@ -451,10 +458,16 @@
                     </td>
 
                     <td>
-                            <asp:Button ID="BtnCancelar" runat="server" CssClass="Boton" OnClick="BtnCancelar_Click" Text="Cancelar" Visible="false" />
+                            <asp:Button ID="BtnCancelarSeccion" runat="server" CssClass="Boton" OnClick="BtnCancelarSeccion_Click" Text="Cancelar" Visible="false" />
                     </td>
                 </tr>
             </table>
+
+                </fieldset>
+
+                <br />
+           
+            
 
       </div>
               <table style="width: 100%; margin-top: 10px;">
@@ -463,7 +476,7 @@
 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </input>
 
-                                    <input onclick="window.location.reload()" type="button" value="Limpiar" class="Boton" dir="ltr"></input></td>
+                                 <!--   <input onclick="window.location.reload()" type="button" value="Limpiar" class="Boton" dir="ltr"></input></td> -->
                             </tr>
                  </table>
 
@@ -508,6 +521,10 @@
         }
         .auto-style9 {
             height: 20px;
+        }
+        .auto-style10 {
+            width: 100%;
+            height: 308px;
         }
     </style>
 </asp:Content>
