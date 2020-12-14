@@ -80,8 +80,8 @@
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
 
-                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Eliminar Edificio" Text="Eliminar"
-                                ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
+                            <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Eliminar Edificio" 
+                                CommandName="EliminarEdificio" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px" >
                                 <ControlStyle Width="30px" />
                                 <ItemStyle HorizontalAlign="Center" Width="30px" />
                             </asp:ButtonField>
