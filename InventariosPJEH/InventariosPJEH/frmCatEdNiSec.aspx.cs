@@ -417,7 +417,7 @@ namespace InventariosPJEH
                 }
 
 
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Rowindex.Value = "";
                     MostrarMensaje("** Error al eliminar el edificio **", "error", "Normal", "Incorrecto");
@@ -599,8 +599,10 @@ namespace InventariosPJEH
                                         DivNuevoEdificio.Visible = false;
                                         BtnGuardar.Visible = false;
                                         LimpiarRegistro();
-                                }
-                                catch (Exception )
+                                        BuscarPorFiltros();
+
+                                    }
+                                    catch (Exception )
                                 {
                                     MostrarMensaje("** Error al registrar un edificio **", "error", "Normal", "Incorrecto");
                                     cnn.Close();
@@ -683,6 +685,8 @@ namespace InventariosPJEH
                                             BtnCancelarSeccion.Visible = false;
                                             DivNuevoEdificio.Visible = false;
                                             BtnActualizar.Visible = false;
+                                            BuscarPorFiltros();
+
 
                                         }
                                         else
