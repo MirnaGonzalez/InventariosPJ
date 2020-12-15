@@ -49,16 +49,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>..\..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Shared">
-      <HintPath>..\..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.Web">
-      <HintPath>..\..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -131,6 +131,7 @@
     <Content Include="frmCatUniAdmin.aspx" />
     <Content Include="frmConsultaBienes.aspx" />
     <Content Include="frmHistoricoBien.aspx" />
+    <Content Include="frmImpresionEtiquetas.aspx" />
     <Content Include="frmModificacionDeUnBien.aspx" />
     <Content Include="frmModificarFactura.aspx" />
     <Content Include="frmRecibirBien.aspx" />
@@ -145,6 +146,7 @@
     <Content Include="Imagenes\Generales\Eliminar.png" />
     <Content Include="Imagenes\Generales\guardar.png" />
     <Content Include="Imagenes\Generales\Temporal.png" />
+    <Content Include="MostrarEtiqueta.aspx" />
     <Content Include="MostrarOrdenServicio.aspx" />
     <Content Include="MostrarResguardo.aspx" />
     <Content Include="Scripts\Controles.js" />
@@ -202,6 +204,7 @@
     <Compile Include="CNegocios\CHistoricoBien.cs" />
     <Compile Include="CNegocios\CMantenimiento1.cs" />
     <Compile Include="CNegocios\CReparaBien.cs" />
+    <Compile Include="CNegocios\EtiquetaInventario.cs" />
     <Compile Include="frmCalcularDepreciacion.aspx.cs">
       <DependentUpon>frmCalcularDepreciacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,12 +219,26 @@
     <Compile Include="frmHistoricoBien.aspx.designer.cs">
       <DependentUpon>frmHistoricoBien.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmImpresionEtiquetas.aspx.cs">
+      <DependentUpon>frmImpresionEtiquetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmImpresionEtiquetas.aspx.designer.cs">
+      <DependentUpon>frmImpresionEtiquetas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="frmReporteCONAC.aspx.cs">
       <DependentUpon>frmReporteCONAC.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="frmReporteCONAC.aspx.designer.cs">
       <DependentUpon>frmReporteCONAC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarEtiqueta.aspx.cs">
+      <DependentUpon>MostrarEtiqueta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MostrarEtiqueta.aspx.designer.cs">
+      <DependentUpon>MostrarEtiqueta.aspx</DependentUpon>
     </Compile>
     <Compile Include="MostrarOrdenServicio.aspx.cs">
       <DependentUpon>MostrarOrdenServicio.aspx</DependentUpon>
@@ -459,6 +476,12 @@
     <Compile Include="MostrarTarjeta.aspx.designer.cs">
       <DependentUpon>MostrarTarjeta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RptEtiquetas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptEtiquetas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\RptReparaBien.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -514,6 +537,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\RptEtiquetas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptEtiquetas.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RptReparaBien.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptReparaBien.cs</LastGenOutput>
