@@ -197,61 +197,7 @@ namespace InventariosPJEH.CAccesoDatos
             return lista;
         }
 
-    //    //Método para eliminar una subclase
-    //    public void Eliminar_Edificios(CEdificios_Niveles_Secciones obJE)
-    //    {
-    //        bool success = false;
-    //        SqlConnection Conn = new SqlConnection(CConexion.Obtener());
-    //        SqlTransaction lTransaccion = null;
-    //        int Valor_Retornado = 0;
-    //        try
-    //        {
-                          
-
-    //            SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-    //            SqlCommand cmd = new SqlCommand("SP_Eliminar_Edificios", cnn);
-    //            cmd.CommandType = CommandType.StoredProcedure;
-    //            cmd.Parameters.AddWithValue("@idEdificio", obJE.IdEdificio);
-    //            SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
-    //            cnn.Open();
-
-    //            int retorno = cmd.ExecuteNonQuery();
-    //            cnn.Close();
-
-
-    //            ValorRetorno.Direction = ParameterDirection.Output;
-    //            cmd.Parameters.Add(ValorRetorno);
-    //            cmd.ExecuteNonQuery();
-    //            Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-
-
-    //            Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-    //            if (Valor_Retornado == 1)
-    //                success = true;
-
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            string script = ex.ToString();
-    //            MostrarMensaje("** Error al Eliminar Oficio **", "info", "Normal");
-    //        }
-    //        finally
-    //        {
-    //            if (success)
-    //            {
-    //                lTransaccion.Commit();
-    //                cnn.Close();
-    //            }
-    //            else
-    //            {
-    //                lTransaccion.Rollback();
-    //                cnn.Close();
-    //            }
-    //        }
-    //    }
-
-    //}
-
+  
         //Método para eliminar una subclase
         public void Eliminar_Niveles(CEdificios_Niveles_Secciones obJE)
         {
