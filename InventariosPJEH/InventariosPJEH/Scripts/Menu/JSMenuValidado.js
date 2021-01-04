@@ -84,8 +84,8 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": "frmImpresionEtiquetas.aspx"' +
-            '			            }' +
+            '			                "URL": ""' +
+            '			            }' +            
             '		            ]' +
             '	            },' +
             '	            {' +
@@ -151,8 +151,8 @@
             '	            {' +
             '	                "Nombre": "Reemplazos",' +
             '	                "SubMenus": [' +
-            '			            {' +
-            '			                "Nombre": "Acta Administrativa",' +
+            '                       {' +
+            '			                "Nombre": "Generación y Consulta de Actas",' +
             '			                "URL": "frmActaAdministrativa.aspx"' +
             '			            }' +
             '		            ]' +
