@@ -131,7 +131,7 @@
             '			            },' +
             '                       {' +
             '			                "Nombre": "Histórico Persona",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmHistoricoPersonal.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +
@@ -195,7 +195,7 @@
             '			            },' +
             '                       {' +
             '			                "Nombre": "Histórico Persona",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmHistoricoPersonal.aspx"' +
             '			            }' +
             '		            ]' +
             '	            }' +

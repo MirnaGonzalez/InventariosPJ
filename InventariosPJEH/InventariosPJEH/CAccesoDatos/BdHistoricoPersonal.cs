@@ -19,7 +19,7 @@ namespace InventariosPJEH.CAccesoDatos
                 cnn.Open();
 
                 
-                String query = "SELECT ClaveEmpleado, Nombre, APaterno, AMaterno, Cargo, UniAdmin, Fecha FROM Vta_HistoricoPersonal WHERE ";
+                String query = "SELECT ClaveEmpleado, Nombre, APaterno, AMaterno, Cargo, UniAdmin, CONVERT(varchar,Fecha,103) as Fecha FROM Vta_HistoricoPersonal WHERE ";
                 if (!String.IsNullOrWhiteSpace(Nombre))
                 {
                     query += " (Nombre LIKE @Nombre) OR";
@@ -57,7 +57,7 @@ namespace InventariosPJEH.CAccesoDatos
                                 rd["AMaterno"].ToString().Trim();
                         cHistorico.Cargo = rd["Cargo"].ToString();
                         cHistorico.UniAdmin = rd["UniAdmin"].ToString();
-                        cHistorico.Fecha = BdConverter.FieldToDate(rd["Fecha"]);
+                        cHistorico.Fecha = rd["Fecha"].ToString();
                         cHistorico.ClaveEmpleado = int.Parse(rd["ClaveEmpleado"].ToString());
                          /*cHistorico.NombreCompleto = Nombre + " " + APaterno + " " + AMaterno;*/
                          lista.Add(cHistorico);

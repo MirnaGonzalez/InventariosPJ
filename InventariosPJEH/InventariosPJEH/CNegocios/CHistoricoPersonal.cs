@@ -16,7 +16,7 @@ namespace InventariosPJEH.CNegocios
         public string AMaterno { get; set; }
         public string Cargo { get; set; }
         public string UniAdmin { get; set; }
-        public DateTime Fecha { get; set; }
+        public String Fecha { get; set; }
         
         public string NombreCompleto { get; set; }
 
