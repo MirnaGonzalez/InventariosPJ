@@ -53,7 +53,7 @@
                             <asp:BoundField DataField="Estado" HeaderText="Estado" />
                             <asp:BoundField DataField="Municipio" HeaderText="Municipio" DataFormatString="" />
                             <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
-                            <asp:BoundField DataField="email" HeaderText="Correo electronico" />
+                            <asp:BoundField DataField="email" HeaderText="Correo electrónico" />
                             <asp:BoundField DataField="CP" HeaderText="Código postal" Visible="false" />
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Editar" Text="Editar"
                                 CommandName="Prueba" ItemStyle-HorizontalAlign="Center" ItemStyle-Height="20px" ItemStyle-Width="30px" />

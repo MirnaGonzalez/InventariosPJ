@@ -158,6 +158,15 @@ fieldset
     font-weight: bold;
     color: #0C2261;
 }
+
+.LblLema {
+    background: linear-gradient(to bottom, #0C2261 0%, #0C2261 100%);
+    font-size: large;
+    font-family: Calibri;
+    font-weight: bold;
+    color: #0C2261;
+}
+
 .DivTitulo
 {
     height:20px;

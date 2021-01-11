@@ -8,9 +8,8 @@ namespace InventariosPJEH.CNegocios
 {
     public class CCONAC
     {
+        public string IdClaveCONAC { get; set; }
         public string IdCONAC { get; set; }
-        public string Id_CONAC { get; set; }
-        
         public string Grupo { get; set; }
         public string SubGrupo { get; set; }
         public string Clase { get; set; }

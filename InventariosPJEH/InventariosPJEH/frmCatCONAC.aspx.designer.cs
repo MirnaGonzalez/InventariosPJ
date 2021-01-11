@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace InventariosPJEH {
-    
-    
-    public partial class frmCatCONAC {
-        
+namespace InventariosPJEH
+{
+
+
+    public partial class frmCatCONAC
+    {
+
         /// <summary>
         /// Control ScriptManager1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control Rowindex.
         /// </summary>
@@ -38,7 +40,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField Rowindex;
-        
+
         /// <summary>
         /// Control LbDescripcionBuscar.
         /// </summary>
@@ -47,7 +49,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbDescripcionBuscar;
-        
+
         /// <summary>
         /// Control TxtDescripcionBuscar.
         /// </summary>
@@ -56,7 +58,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtDescripcionBuscar;
-        
+
         /// <summary>
         /// Control BtnTipoPartida.
         /// </summary>
@@ -65,7 +67,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnTipoPartida;
-        
+
         /// <summary>
         /// Control BtnMostrarNuevoR.
         /// </summary>
@@ -74,7 +76,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnMostrarNuevoR;
-        
+
         /// <summary>
         /// Control DivTabla.
         /// </summary>
@@ -83,7 +85,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTabla;
-        
+
         /// <summary>
         /// Control GridBuscar.
         /// </summary>
@@ -92,7 +94,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridBuscar;
-        
+
         /// <summary>
         /// Control DivMostrarNuevoR.
         /// </summary>
@@ -101,7 +103,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMostrarNuevoR;
-        
+
         /// <summary>
         /// Control HiddenId.
         /// </summary>
@@ -110,7 +112,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HiddenId;
-        
+
         /// <summary>
         /// Control lgNuevoRegistro.
         /// </summary>
@@ -119,7 +121,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgNuevoRegistro;
-        
+
         /// <summary>
         /// Control lgModificarRegistro.
         /// </summary>
@@ -128,25 +130,25 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgModificarRegistro;
-        
+
         /// <summary>
-        /// Control lbCONAC.
+        /// Control IdCONAC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCONAC;
-        
+        protected global::System.Web.UI.WebControls.Label IdCONAC;
+
         /// <summary>
-        /// Control ID_CONAC.
+        /// Control IdClaveCONAC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ID_CONAC;
-        
+        protected global::System.Web.UI.WebControls.Label IdClaveCONAC;
+
         /// <summary>
         /// Control LbGrupo.
         /// </summary>
@@ -155,7 +157,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbGrupo;
-        
+
         /// <summary>
         /// Control TxtGrupo.
         /// </summary>
@@ -164,7 +166,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtGrupo;
-        
+
         /// <summary>
         /// Control LbSubGrupo.
         /// </summary>
@@ -173,7 +175,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbSubGrupo;
-        
+
         /// <summary>
         /// Control TxtSubGrupo.
         /// </summary>
@@ -182,7 +184,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtSubGrupo;
-        
+
         /// <summary>
         /// Control LbClase.
         /// </summary>
@@ -191,7 +193,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbClase;
-        
+
         /// <summary>
         /// Control TxtClase.
         /// </summary>
@@ -200,7 +202,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtClase;
-        
+
         /// <summary>
         /// Control LbDescripcion.
         /// </summary>
@@ -209,7 +211,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbDescripcion;
-        
+
         /// <summary>
         /// Control TxtDescripcion.
         /// </summary>
@@ -218,7 +220,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtDescripcion;
-        
+
         /// <summary>
         /// Control LbTipoPartida.
         /// </summary>
@@ -227,7 +229,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LbTipoPartida;
-        
+
         /// <summary>
         /// Control DropTpoPartida.
         /// </summary>
@@ -236,7 +238,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropTpoPartida;
-        
+
         /// <summary>
         /// Control BtnGuardar.
         /// </summary>
@@ -245,7 +247,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnGuardar;
-        
+
         /// <summary>
         /// Control BtnActualizar.
         /// </summary>
@@ -254,7 +256,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnActualizar;
-        
+
         /// <summary>
         /// Control BtnLimpiar.
         /// </summary>
@@ -263,7 +265,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnLimpiar;
-        
+
         /// <summary>
         /// Control BtnCancelar.
         /// </summary>
@@ -272,7 +274,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCancelar;
-        
+
         /// <summary>
         /// Control LblLema.
         /// </summary>

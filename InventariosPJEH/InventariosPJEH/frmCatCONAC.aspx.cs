@@ -47,17 +47,8 @@ namespace InventariosPJEH
         //Evento para buscar un registro
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {
-            HiddenId.Value = lbCONAC.Text;
-            if (TxtDescripcionBuscar.Text != "")
-            {
-                BuscarCONACBuscar();
-            }
-            MostrarMensaje("** El campo descripción es requerido **", "error", "Normal", "Incorrecto");
+            HiddenId.Value = IdCONAC.Text;
 
-        }
-        //Método para buscar si el texto está vacío
-        public void BuscarCONACBuscar()
-        {
             DivTabla.Visible = true;
             GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONAC(TxtDescripcionBuscar.Text);
             GridBuscar.DataBind();
@@ -67,7 +58,8 @@ namespace InventariosPJEH
                 MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
             }
         }
-   
+
+               
 
         //Método para buscar el nuevo registro
         public void BuscarNuevoRegistro()
@@ -75,7 +67,7 @@ namespace InventariosPJEH
             string partida = Convert.ToString(DropTpoPartida.SelectedValue);
             DivTabla.Visible = true;
             DivMostrarNuevoR.Visible = false;
-            GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONACNuevoRegistro(lbCONAC.Text, TxtGrupo.Text, TxtSubGrupo.Text, TxtClase.Text);
+            GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONACNuevoRegistro(IdCONAC.Text, TxtGrupo.Text, TxtSubGrupo.Text, TxtClase.Text);
             GridBuscar.DataBind();
             if (GridBuscar.Rows.Count == 0)
             {
@@ -157,7 +149,7 @@ namespace InventariosPJEH
         //Evento para actualizar un registro
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            HiddenId.Value = lbCONAC.Text;
+            HiddenId.Value = IdCONAC.Text;
             if (TxtGrupo.Text != "")
             {
                 if (TxtSubGrupo.Text != "")
@@ -172,10 +164,10 @@ namespace InventariosPJEH
                                 DivTabla.Visible = true;
                                 string tipoPartida = Convert.ToString(DropTpoPartida.SelectedValue);
                                 SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-                                lbCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
-                                SqlCommand update = new SqlCommand("UPDATE Cat_CONAC SET IdCONAC=@idCONAC, Grupo=@grupo,SubGrupo=@subGrupo,Clase=@clase,Descripcion=@descripcion,TipoPartida=@tipoPartida WHERE Id_CONAC=@id_CONAC", cnn);
-                                update.Parameters.AddWithValue("@id_CONAC", ID_CONAC.Text);
-                                update.Parameters.AddWithValue("@idCONAC", lbCONAC.Text);
+                                IdCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
+                                SqlCommand update = new SqlCommand("UPDATE Cat_CONAC SET IdCONAC=@idCONAC, Grupo=@grupo,SubGrupo=@subGrupo,Clase=@clase,Descripcion=@descripcion,TipoPartida=@tipoPartida WHERE IdClaveCONAC=@IdClaveCONAC", cnn);
+                                update.Parameters.AddWithValue("@IdClaveCONAC", IdClaveCONAC.Text);
+                                update.Parameters.AddWithValue("@idCONAC", IdCONAC.Text);
                                 update.Parameters.AddWithValue("@grupo", TxtGrupo.Text);
                                 update.Parameters.AddWithValue("@subGrupo", TxtSubGrupo.Text);
                                 update.Parameters.AddWithValue("@clase", TxtClase.Text);
@@ -186,7 +178,7 @@ namespace InventariosPJEH
                                 {
                                     cnn.Open();
                                     update.ExecuteNonQuery();
-                                    MostrarMensaje("** Se actualizó correcamente **", "error", "Normal", "Incorrecto");
+                                    MostrarMensaje("** Se actualizó correctamente **", "error", "Normal", "Incorrecto");
                                     BuscarNuevoRegistro();
                                     DivMostrarNuevoR.Visible = false;
                                     BtnCancelar.Visible = false;
@@ -206,7 +198,7 @@ namespace InventariosPJEH
                         }
                         else
                         {
-                            MostrarMensaje("** El campo descrpción es reuqerido **", "error", "Normal", "Incorrecto");
+                            MostrarMensaje("** El campo descrpción es requerido **", "error", "Normal", "Incorrecto");
                         }
                     }
                     else
@@ -237,9 +229,8 @@ namespace InventariosPJEH
             lgModificarRegistro.Visible = true;
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow RowSelecionada = GridBuscar.Rows[index];
-            string id_conac = GridBuscar.DataKeys[index].Values["Id_CONAC"].ToString();
-            //string idMarca = GridBuscar.DataKeys[index].Values["IdMarca"].ToString();
-            string id = RowSelecionada.Cells[0].Text;
+  
+            string IdClaveCONAC = RowSelecionada.Cells[0].Text;
             string idCONAC = RowSelecionada.Cells[1].Text;
             string grupo = RowSelecionada.Cells[2].Text;
             string subGrupo = RowSelecionada.Cells[3].Text;
@@ -250,8 +241,8 @@ namespace InventariosPJEH
             TxtSubGrupo.Text = subGrupo;
             TxtClase.Text = clase;
             TxtDescripcion.Text = descripcion;
-            lbCONAC.Text = idCONAC;
-            ID_CONAC.Text = id_conac;
+            IdCONAC.Text = idCONAC;
+            this.IdClaveCONAC.Text = IdClaveCONAC;
 
             Boolean encontrado = true;
             int a = 0;
@@ -296,12 +287,16 @@ namespace InventariosPJEH
                         int index = Convert.ToInt32(e.RowIndex);
                         GridViewRow RowSelecionada = GridBuscar.Rows[index];
                         string xcod = GridBuscar.DataKeys[n].Value.ToString();
-                        obJN.IdCONAC = xcod;
+
+                        obJN.IdClaveCONAC = xcod;
                         obJE.Eliminar_CONAC(obJN);
                         GridBuscar.EditIndex = -1;
                         BuscarNuevoRegistro();
-                        MostrarMensaje("** Registro eliminado **", "error", "Aviso", "Incorrecto");
+                        MostrarMensaje("** Registro eliminado de forma correcta**", "error", "Aviso", "Incorrecto");
                         Rowindex.Value = "";
+
+
+                        //// REVISAR
 
                         if (GridBuscar.Rows.Count == 0)
                         {
@@ -310,7 +305,7 @@ namespace InventariosPJEH
                         }
                         else if (GridBuscar.Rows.Count != 0)
                         {
-                            MostrarMensaje("** No se puede eliminar existen campos relacionados a otras tablas **", "error", "Normal", "Incorrecto");
+                            MostrarMensaje("** No se puede eliminar, existen datos relacionados **", "error", "Normal", "Incorrecto");
 
                         }
 
@@ -346,9 +341,9 @@ namespace InventariosPJEH
                                 DivTabla.Visible = true;
                                 string tipoPartida = Convert.ToString(DropTpoPartida.SelectedValue);
                                 SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-                                lbCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
+                                IdCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
                                 SqlCommand insert = new SqlCommand("INSERT INTO Cat_CONAC(IdCONAC,Grupo,SubGrupo,Clase,Descripcion,TipoPartida) values(@idCONAC, @grupo,@subGrupo,@clase,@descripcion,@tipoPartida)", cnn);
-                                insert.Parameters.AddWithValue("@idCONAC", lbCONAC.Text);
+                                insert.Parameters.AddWithValue("@idCONAC", IdCONAC.Text);
                                 insert.Parameters.AddWithValue("@grupo", TxtGrupo.Text);
                                 insert.Parameters.AddWithValue("@subGrupo", TxtSubGrupo.Text);
                                 insert.Parameters.AddWithValue("@clase", TxtClase.Text);
@@ -404,7 +399,7 @@ namespace InventariosPJEH
         {
             GridBuscar.PageIndex = e.NewPageIndex;
 
-            HiddenId.Value = lbCONAC.Text;
+            HiddenId.Value = IdCONAC.Text;
             BuscarNuevoRegistro();
         }
     }

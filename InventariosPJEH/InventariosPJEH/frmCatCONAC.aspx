@@ -92,10 +92,10 @@
 
                     <asp:GridView ID="GridBuscar" CssClass="StyleGridV" runat="server" Height="100px" Width="100%"
                         AutoGenerateColumns="False" OnRowDeleting="GridBuscarCONAC_RowDeleting"
-                        DataKeyNames="Id_CONAC, IdCONAC, Grupo, SubGrupo, Clase, Descripcion, TipoPartida"
+                        DataKeyNames="IdClaveCONAC, IdCONAC, Grupo, SubGrupo, Clase, Descripcion, TipoPartida"
                         OnRowCommand="GridBuscarCONAC_RowCommand" PageSize="25" OnPageIndexChanging="GridBuscar_PageIndexChanging">
                         <Columns>
-                            <asp:BoundField DataField="Id_CONAC" HeaderText="CONAC1" ItemStyle-Width="10px" Visible="false">
+                            <asp:BoundField DataField="IdClaveCONAC" HeaderText="IdClaveCONAC" ItemStyle-Width="10px" Visible="true">
                                <ItemStyle Width="50px" />   </asp:BoundField>
                             <asp:BoundField DataField="IdCONAC" HeaderText="CONAC" ItemStyle-Width="10px" >
                                <ItemStyle Width="50px" />   </asp:BoundField>
@@ -145,10 +145,10 @@
                     <table style="margin-top: 15px; margin: 0 auto; width: 70%;">
                         <tr>
                             <td>
-                                <asp:Label id="lbCONAC" runat="server" Visible="false" > </asp:Label>
+                                <asp:Label id="IdCONAC" runat="server" Visible="false" > </asp:Label>
                             </td>
                              <td>
-                                <asp:Label id="ID_CONAC" runat="server" Visible="false"> </asp:Label>
+                                <asp:Label id="IdClaveCONAC" runat="server" Visible="False"></asp:Label>
                             </td>
                         </tr>
                         <tr style="text-align: center; margin-top: 15px;">
