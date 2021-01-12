@@ -28,5 +28,11 @@ namespace InventariosPJEH.CNegocios
         public String strNumResguardo { get; set; }
 
         public String strNombreResguardante { get; set; }
+
+        public String strStatus { get; set; }
+
+        public String strDescripcionActa { get; set; }
+
+        public String strFechaCancela { get; set; }
     }
 }
