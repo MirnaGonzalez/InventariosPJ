@@ -12,6 +12,9 @@
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
                         <legend style="width: auto; color: darkblue; font-size: 12px;">Buscar Nombre del personal</legend>
                         <div>
+                            <div style="height:30px; text-align:right;">
+                                <asp:Button ID="BtnNuevaBusqueda" CssClass="Boton" runat="server" Text="Buscar nuevo" OnClick="BtnNuevaBusqueda_Click" />
+                            </div>
                             <div style="height:30px;">
                                 <div style="width: 15%; float: right; height: auto;">
                                     <asp:Label ID="LblFechRes" runat="server" Text=""></asp:Label>
@@ -207,7 +210,7 @@
                                         <asp:GridView ID="GridDisponibles" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV">
                                             <Columns>
 
-                                                <asp:TemplateField ItemStyle-Height="10px" ItemStyle-Width="150px" HeaderText="Inventario">
+                                                <asp:TemplateField ItemStyle-Height="10px" ItemStyle-Width="150px" ItemStyle-ForeColor="Black" HeaderText="Inventario">
                                                     <ItemTemplate>
                                                         <asp:CheckBox ID="ChkSeleccionar" runat="server" Text='<%# Eval("NumInventario") %>' OnCheckedChanged="ChkSelNumInventario_CheckedChanged" Checked='<%# Eval("Seleccionado") %>' AutoPostBack="true" />
                                                     </ItemTemplate>
@@ -240,20 +243,27 @@
                                         
                                         
                                     </div>
-                                    <div style="float:left; width:75%; height:40px;">
-                                        <asp:Label ID="LblENSU" runat="server" Text=""></asp:Label>
+                                    <div style="float:left; width:75%; height:60px;">
+                                        <div style="float:left; width:100%; height:40px;">
+                                            <asp:Label ID="LblENSU" runat="server" Text=""></asp:Label>
+                                        </div>
+                                        <div style="float:left; width:100%; height:20px;">
+                                            <asp:Label ID="LblIdResguardo" runat="server" Text="Num de Resguardo"></asp:Label>
+                                            <asp:Label ID="LblResguardo" runat="server"></asp:Label>
+                                        </div>
+                                        
                                     </div>
                                     <div style="float: left; text-align:right; width:23%; height:40px;">
                                         <asp:Button ID="BtnQuitar" runat="server" Text="Quitar" CssClass="Boton" OnClick="BtnQuitar_Click" />
                                     </div>
                                     <div>
-                                        <asp:GridView ID="GridAsignados" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV" OnRowDataBound="GridAsignados_RowDataBound" OnRowCommand="GridAsignados_RowCommand">
+                                        <asp:GridView ID="GridAsignados" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV" OnRowDataBound="GridAsignados_RowDataBound" OnRowCommand="GridAsignados_RowCommand" OnSelectedIndexChanged="GridAsignados_SelectedIndexChanged">
                                             <Columns>
                                         
                                                 <%--<asp:BoundField DataField="NumInventario" HeaderText="Inventario" ItemStyle-Width="150" ItemStyle-ForeColor="Black" ItemStyle-Font-Bold="true"/>--%>
-                                                <asp:TemplateField ItemStyle-Height="10px" ItemStyle-Width="150px" HeaderText="Inventario">
+                                                <asp:TemplateField ItemStyle-Height="10px" ItemStyle-Width="250px" HeaderText="Inventario">
                                                     <ItemTemplate>
-                                                        <asp:CheckBox ID="ChkSeleccionar" runat="server" Text='<%# Eval("NumInventario") %>' OnCheckedChanged="ChkSelNumInventarioAsignado_CheckedChanged" Checked='<%# Eval("Seleccionado") %>' AutoPostBack="true" />
+                                                        <asp:CheckBox ID="ChkSeleccionar" runat="server" Text='<%# Eval("NumInventario") %>' OnCheckedChanged="ChkSelNumInventarioAsignado_CheckedChanged" Checked='<%# Eval("Seleccionado") %>' AutoPostBack="true" ForeColor="Black" Font-Bold="True" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
