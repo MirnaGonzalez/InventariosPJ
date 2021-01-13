@@ -92,12 +92,12 @@
 
                     <asp:GridView ID="GridBuscar" CssClass="StyleGridV" runat="server" Height="100px" Width="100%"
                         AutoGenerateColumns="False" OnRowDeleting="GridBuscarCONAC_RowDeleting"
-                        DataKeyNames="IdClaveCONAC, IdCONAC, Grupo, SubGrupo, Clase, Descripcion, TipoPartida"
+                        DataKeyNames="IdCONAC, IdClaveCONAC, Grupo, SubGrupo, Clase, Descripcion, TipoPartida"
                         OnRowCommand="GridBuscarCONAC_RowCommand" PageSize="25" OnPageIndexChanging="GridBuscar_PageIndexChanging">
                         <Columns>
-                            <asp:BoundField DataField="IdClaveCONAC" HeaderText="IdClaveCONAC" ItemStyle-Width="10px" Visible="true">
+                            <asp:BoundField DataField="IdCONAC" HeaderText="IdCONAC" ItemStyle-Width="10px" >
                                <ItemStyle Width="50px" />   </asp:BoundField>
-                            <asp:BoundField DataField="IdCONAC" HeaderText="CONAC" ItemStyle-Width="10px" >
+                            <asp:BoundField DataField="IdClaveCONAC" HeaderText="Clave CONAC" ItemStyle-Width="10px" >
                                <ItemStyle Width="50px" />   </asp:BoundField>
                             <asp:BoundField DataField="Grupo" HeaderText="Grupo" ItemStyle-Width="40px" >
                                  <ItemStyle Width="40px" />   </asp:BoundField>

@@ -67,7 +67,8 @@ namespace InventariosPJEH
             string partida = Convert.ToString(DropTpoPartida.SelectedValue);
             DivTabla.Visible = true;
             DivMostrarNuevoR.Visible = false;
-            GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONACNuevoRegistro(IdCONAC.Text, TxtGrupo.Text, TxtSubGrupo.Text, TxtClase.Text);
+            GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONAC(TxtDescripcionBuscar.Text);
+            // GridBuscar.DataSource = BdCatCONAC.ConsultarGbCONACNuevoRegistro(IdCONAC.Text, TxtGrupo.Text, TxtSubGrupo.Text, TxtClase.Text);
             GridBuscar.DataBind();
             if (GridBuscar.Rows.Count == 0)
             {
@@ -164,9 +165,9 @@ namespace InventariosPJEH
                                 DivTabla.Visible = true;
                                 string tipoPartida = Convert.ToString(DropTpoPartida.SelectedValue);
                                 SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-                                IdCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
-                                SqlCommand update = new SqlCommand("UPDATE Cat_CONAC SET IdCONAC=@idCONAC, Grupo=@grupo,SubGrupo=@subGrupo,Clase=@clase,Descripcion=@descripcion,TipoPartida=@tipoPartida WHERE IdClaveCONAC=@IdClaveCONAC", cnn);
-                                update.Parameters.AddWithValue("@IdClaveCONAC", IdClaveCONAC.Text);
+                                string NuevoidCONAC = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
+                                SqlCommand update = new SqlCommand("UPDATE Cat_CONAC SET IdClaveCONAC=@IdClaveCONAC, Grupo=@grupo,SubGrupo=@subGrupo,Clase=@clase,Descripcion=@descripcion,TipoPartida=@tipoPartida WHERE idCONAC=@idCONAC", cnn);
+                                update.Parameters.AddWithValue("@IdClaveCONAC", NuevoidCONAC);
                                 update.Parameters.AddWithValue("@idCONAC", IdCONAC.Text);
                                 update.Parameters.AddWithValue("@grupo", TxtGrupo.Text);
                                 update.Parameters.AddWithValue("@subGrupo", TxtSubGrupo.Text);
@@ -198,22 +199,22 @@ namespace InventariosPJEH
                         }
                         else
                         {
-                            MostrarMensaje("** El campo descrpción es requerido **", "error", "Normal", "Incorrecto");
+                            MostrarMensaje("** La descripción es requerida **", "error", "Normal", "Incorrecto");
                         }
                     }
                     else
                     {
-                        MostrarMensaje("** El campo clase es requerido **", "error", "Normal", "Incorrecto");
+                        MostrarMensaje("** La clase es requerida **", "error", "Normal", "Incorrecto");
                     }
                 }
                 else
                 {
-                    MostrarMensaje("** El campo subgrupo es requerido **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** El subgrupo es requerido **", "error", "Normal", "Incorrecto");
                 }
             }
             else
             {
-                MostrarMensaje("** El campo grupo es requerido *", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El grupo es requerido *", "error", "Normal", "Incorrecto");
             }
         }
 
@@ -230,13 +231,15 @@ namespace InventariosPJEH
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow RowSelecionada = GridBuscar.Rows[index];
   
-            string IdClaveCONAC = RowSelecionada.Cells[0].Text;
-            string idCONAC = RowSelecionada.Cells[1].Text;
+            string idCONAC = RowSelecionada.Cells[0].Text;
+            string IdClaveCONAC = RowSelecionada.Cells[1].Text;
             string grupo = RowSelecionada.Cells[2].Text;
             string subGrupo = RowSelecionada.Cells[3].Text;
             string clase = RowSelecionada.Cells[4].Text;
             string descripcion = Page.Server.HtmlDecode(Page.Server.HtmlDecode(RowSelecionada.Cells[5].Text));
             string tipoPartida = Page.Server.HtmlDecode((RowSelecionada.Cells[6].Controls[1] as Label).Text);
+
+
             TxtGrupo.Text = grupo;
             TxtSubGrupo.Text = subGrupo;
             TxtClase.Text = clase;
@@ -341,9 +344,9 @@ namespace InventariosPJEH
                                 DivTabla.Visible = true;
                                 string tipoPartida = Convert.ToString(DropTpoPartida.SelectedValue);
                                 SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-                                IdCONAC.Text = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
-                                SqlCommand insert = new SqlCommand("INSERT INTO Cat_CONAC(IdCONAC,Grupo,SubGrupo,Clase,Descripcion,TipoPartida) values(@idCONAC, @grupo,@subGrupo,@clase,@descripcion,@tipoPartida)", cnn);
-                                insert.Parameters.AddWithValue("@idCONAC", IdCONAC.Text);
+                                string IdCONACNuevo = TxtGrupo.Text + TxtSubGrupo.Text + TxtClase.Text;
+                                SqlCommand insert = new SqlCommand("INSERT INTO Cat_CONAC(IdClaveCONAC,Grupo,SubGrupo,Clase,Descripcion,TipoPartida) values(@IdClaveCONAC, @grupo,@subGrupo,@clase,@descripcion,@tipoPartida)", cnn);
+                                insert.Parameters.AddWithValue("@IdClaveCONAC", IdCONACNuevo);
                                 insert.Parameters.AddWithValue("@grupo", TxtGrupo.Text);
                                 insert.Parameters.AddWithValue("@subGrupo", TxtSubGrupo.Text);
                                 insert.Parameters.AddWithValue("@clase", TxtClase.Text);
@@ -376,22 +379,22 @@ namespace InventariosPJEH
                         }
                         else
                         {
-                            MostrarMensaje("** El campo descrpción es reuqerido **", "error", "Normal", "Incorrecto");
+                            MostrarMensaje("** La descripción es requerida **", "error", "Normal", "Incorrecto");
                         }
                     }
                     else
                     {
-                        MostrarMensaje("** El campo clase es requerido **", "error", "Normal", "Incorrecto");
+                        MostrarMensaje("** La clase es requerida **", "error", "Normal", "Incorrecto");
                     }
                 }
                 else
                 {
-                    MostrarMensaje("** El campo subgrupo es requerido **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** El subgrupo es requerido **", "error", "Normal", "Incorrecto");
                 }
             }
             else
             {
-                MostrarMensaje("** El campo grupo es requerido *", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El grupo es requerido *", "error", "Normal", "Incorrecto");
             }
         }
 
