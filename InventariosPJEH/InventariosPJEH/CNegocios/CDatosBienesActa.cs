@@ -3,8 +3,9 @@
 namespace InventariosPJEH.CNegocios
 {
     public class CDatosBienesActa
-    {        
+    {
 
+        public int idInventario { get; set; }
         public String txtOInventarioResguardo { get; set; }
 
         public String txtONombreBienResguardo { get; set; }
