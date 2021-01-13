@@ -40,10 +40,10 @@
                 <div id="divGeneracionActas" runat="server" visible="true">
                     <div id="FiltroB" style="width: 95%; margin-left: 0px;">
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Búsqueda</legend>
+                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Busqueda</legend>
                             <asp:Label ID="lblNoResguardo" runat="server" CssClass="LabelGeneral" Text="Número de Resguardo: "/>
                             <asp:TextBox ID="TxtFiltroB" runat="server" CssClass="TextBox" Height="22px" Width="183px"/>
-                            <asp:Button  ID="BtnFiltroB" runat="server" CssClass="Boton" Height="28px" Text="Búsqueda" Width="100px" OnClick="BtnFiltroB_Click"/>                            
+                            <asp:Button  ID="BtnFiltroB" runat="server" CssClass="Boton" Height="28px" Text="Busqueda" Width="100px" OnClientClick="BtnGenerarA_CheckedChanged"/>                            
                     </fieldset>
                     <fieldset id="sectionBienes" style="border-color: black; width: 95%; margin-left: 11px;" visible ="false" runat="server">
                            <legend style="width: auto; color: darkblue; font-size: 12px;">Bienes no Localizados</legend>
@@ -59,7 +59,7 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                          <asp:Label ID="lblCargoR" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Cargo del Resguadante:"/>
+                                          <asp:Label ID="lblCargoR" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Cargo del Resguadante"/>
                                       </td>
                                       <td>
                                           <asp:Label ID="lblCargoResul" runat="server" CssClass="LabelGeneral" Text=""/>                                          
@@ -67,7 +67,7 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                          <asp:Label ID="lblAreaAdri" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Area de Adcripción:"/>
+                                          <asp:Label ID="lblAreaAdri" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Area de Adcripción"/>
                                       </td>
                                       <td>
                                           <asp:Label ID="lblAreaResul"  runat="server" CssClass="LabelGeneral" Text=""/>
@@ -82,11 +82,10 @@
 
                             <fieldset style="height: auto">
 
-                                <asp:GridView ID="gridResultadosBienes" CssClass="StyleGridV" runat="server" Height="142px" Width="100%"
+                                <asp:GridView ID="gridResultados" CssClass="StyleGridV" runat="server" Height="142px" Width="100%"
                                     AutoGenerateColumns="False" HorizontalAlign="Center"
-                                    DataKeyNames="idInventario">
-                                    <Columns>                                                  
-                                        <asp:BoundField DataField="idInventario" Visible="false" />
+                                    DataKeyNames="txtOInventarioResguardo,txtONombreBienResguardo,txtOMarcaResguardo,txtOModeloResguardo,txtOSerieResguardo"                                    >
+                                    <Columns>                                        
                                         <asp:BoundField DataField="txtOInventarioResguardo" HeaderText="Inventario" />
                                         <asp:BoundField DataField="txtONombreBienResguardo" HeaderText="Nombre del Bien" />
                                         <asp:BoundField DataField="txtOMarcaResguardo" HeaderText="Marca" />
@@ -135,7 +134,7 @@
                 <div id="divConsultaActas" runat="server" visible="false">
                     <div id="FiltroBusquedaConsulta" style="width: 95%; margin-left: 0px;">
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Búsqueda</legend>
+                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Busqueda</legend>
                             <table style="margin-left: 100px" class="auto-style8">
                                 <tr>
                                     <td>
@@ -247,7 +246,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblEditConActasDescripcion" runat="server" CssClass="LabelGeneral" Text="Descripción: " Visible="false" />
+                                        <asp:Label ID="lblEditConActasDescripcion" runat="server" CssClass="LabelGeneral" Text="Descripcion: " Visible="false" />
                                     </td>
                                     <th colspan="3">
                                         <asp:TextBox ID="txtEditConActaDescripcion" runat="server" TextMode="MultiLine" Rows="2" AutoPostBack="true" CssClass="TextBox" Width="100%" Height="100%" Visible="false"/>
