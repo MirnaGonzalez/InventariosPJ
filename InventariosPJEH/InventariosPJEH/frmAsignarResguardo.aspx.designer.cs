@@ -33,6 +33,15 @@ namespace InventariosPJEH
         protected global::System.Web.UI.UpdatePanel UpdatePanel;
 
         /// <summary>
+        /// Control BtnNuevaBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnNuevaBusqueda;
+
+        /// <summary>
         /// Control LblFechRes.
         /// </summary>
         /// <remarks>
@@ -409,6 +418,24 @@ namespace InventariosPJEH
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblENSU;
+
+        /// <summary>
+        /// Control LblIdResguardo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblIdResguardo;
+
+        /// <summary>
+        /// Control LblResguardo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblResguardo;
 
         /// <summary>
         /// Control BtnQuitar.

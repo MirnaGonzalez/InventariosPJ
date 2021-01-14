@@ -47,8 +47,12 @@ namespace InventariosPJEH
 
         protected void LlenarPartidas()
         {
+
+            CUsuario Usuario = Page.Session["Usuario"] as CUsuario;
+            int TipoPartida = Convert.ToInt32(Usuario.TipoPartida);
+
             List<CConsultaBienes> LPartidas = new List<CConsultaBienes>();
-            LPartidas = BdAsignarResguardo.ObtenerPartida();
+            LPartidas = BdAsignarResguardo.ObtenerPartida(TipoPartida);
             DdlPartida.DataSource = LPartidas;
             DdlPartida.DataTextField = "Partida";
             DdlPartida.DataValueField = "idPartida";
@@ -197,7 +201,12 @@ namespace InventariosPJEH
                 List<CFichaBien> LFichaBien = new List<CFichaBien>();
                 LFichaBien = BdAsignarResguardo.ObtenerFichaBienXNumInventario(NumInventario, ref Resultado);
                 if (Resultado.Exito)
-                    MostrarMensaje("La informacion se obtuvo correctamente .", "info", "Normal", "NotExitoso");
+                {
+                    if(LFichaBien.Count == 0)
+                        MostrarMensaje("No se encontraron resultados para el número de inventario proporcionado. .", "error", "Normal", "NotExitoso");
+                    else
+                        MostrarMensaje("La informacion se obtuvo correctamente .", "info", "Normal", "NotExitoso");
+                }
                 else
                     MostrarMensaje(Resultado.Mensaje.FirstOrDefault(), "error", "Normal", "NotExitoso");
 
@@ -242,6 +251,8 @@ namespace InventariosPJEH
 
             if (RdBusqueda.ID == "RdPartida")
             {
+                DdlPartida.Items.Clear();
+                DdlSubclase.Items.Clear();
                 DivBuscarPartida.Visible = true;
                 //DivBuscarAreaResguardo.Visible = false;
                 DivBuscarNumInventario.Visible = false;
@@ -259,7 +270,10 @@ namespace InventariosPJEH
                 DivBuscarPartida.Visible = false;
                 //DivBuscarAreaResguardo.Visible = false;
                 DivBuscarNumInventario.Visible = true;
+                TxtNumInv.Text = "";
             }
+            GridDisponibles.DataSource = null;
+            GridDisponibles.DataBind();
         }
 
         protected void BtnBusquedaPartida_Click(object sender, EventArgs e)
@@ -287,10 +301,17 @@ namespace InventariosPJEH
                 List<CFichaBien> LFichaBien = new List<CFichaBien>();
                 LFichaBien = BdAsignarResguardo.ObtenerFichaBienXSubClase(Convert.ToInt32(DdlSubclase.SelectedValue));
 
-                GridDisponibles.DataSource = LFichaBien;
-                GridDisponibles.DataBind();
+                if (LFichaBien.Count > 0)
+                {
+                    GridDisponibles.DataSource = LFichaBien;
+                    GridDisponibles.DataBind();
 
-                Page.Session["LFichaBienDisponibles"] = LFichaBien;
+                    Page.Session["LFichaBienDisponibles"] = LFichaBien;
+                }
+                else
+                {
+                    MostrarMensaje("No se encontró inventario disponible", "info", "Normal", "ErrorInventarioNoDisponible");
+                }
             }
         }
 
@@ -303,7 +324,7 @@ namespace InventariosPJEH
         {
             if (DdlNomPers.SelectedValue != "0")
             {
-                LlenarGridAsignados(Convert.ToInt32(DdlNomPers.SelectedValue));
+                //LlenarGridAsignados(Convert.ToInt32(DdlNomPers.SelectedValue));
                 LlenarDdlGrupo(Convert.ToInt32(DdlNomPers.SelectedValue));
             }
 
@@ -329,14 +350,21 @@ namespace InventariosPJEH
             }
             else
                 LFichaBienSelect = LFichaBien;
+            if (LFichaBienSelect.Count > 0)
+            {
+                GridAsignados.DataSource = LFichaBienSelect;
 
-            GridAsignados.DataSource = LFichaBienSelect;
-            GridAsignados.DataBind();
+                GridAsignados.DataBind();
+                Page.Session["LFichaBienAsignados"] = LFichaBien;
+            }
+            else
+            {
+                MostrarMensaje("El personal seleccionado no cuenta con resguardo asignado.", "info", "Normal", "NotExitoso");
+                
+                GridAsignados.DataSource = null;
 
-
-            Page.Session["LFichaBienAsignados"] = LFichaBien;
-
-
+                GridAsignados.DataBind();
+            }
         }
 
         protected void LlenarDdlGrupo(int IdEmpleado)
@@ -351,14 +379,39 @@ namespace InventariosPJEH
             if (!Resultado.Exito)
                 MostrarMensaje(Resultado.Mensaje.FirstOrDefault(), "error", "Normal", "NotExitoso");
 
-            DdlGrupo.DataSource = LGrupoBienR;
+            if (LGrupoBienR.Count > 0)
+            {
+                DdlGrupo.DataSource = LGrupoBienR;
 
-            DdlGrupo.DataTextField = "Grupo";
-            DdlGrupo.DataValueField = "IdGrupo";
-            DdlGrupo.DataBind();
-            DdlGrupo.Items.Insert(0, new ListItem(" -- Seleccionar grupo -- ", "0"));
+                DdlGrupo.DataTextField = "Grupo";
+                DdlGrupo.DataValueField = "IdGrupo";
+                DdlGrupo.DataBind();
+                DdlGrupo.Items.Insert(0, new ListItem(" -- Seleccionar grupo -- ", "0"));
+                DdlGrupo.SelectedIndex = 1;
 
-            Page.Session["LGrupoBienR"] = LGrupoBienR;
+                Page.Session["LGrupoBienR"] = LGrupoBienR;
+
+                //List<CGrupoBienResguardo> LGrupoBienR = Page.Session["LGrupoBienR"] as List<CGrupoBienResguardo>;
+
+                CGrupoBienResguardo GrupoBienR = (from GBR in LGrupoBienR
+                                                  where GBR.IdGrupo == Convert.ToInt32(DdlGrupo.SelectedValue)
+                                                  select GBR).FirstOrDefault();
+
+                LblENSU.Text = GrupoBienR.Edificio + " - " + GrupoBienR.Nivel + " - " + GrupoBienR.Seccion;
+                LblResguardo.Text = GrupoBienR.IdResguardo.ToString();
+
+                LlenarGridAsignados(Convert.ToInt32(DdlNomPers.SelectedValue));
+            }
+            else
+            {
+                MostrarMensaje("El personal seleccionado no cuenta con resguardo asignado.", "info", "Normal", "NotExitoso");
+
+                DdlGrupo.Items.Clear();
+                LblResguardo.Text = "";
+                LblENSU.Text = "";
+                GridAsignados.DataSource = null;
+                GridAsignados.DataBind();
+            }
         }
 
         protected void GridAsignados_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -368,11 +421,11 @@ namespace InventariosPJEH
                 //System.Data.DataRow row = ((System.Data.DataRowView)e.Row.DataItem).Row;
                 CFichaBien FilaFichaBien = e.Row.DataItem as CFichaBien;
                 if (FilaFichaBien.IdActividad == 2)
-                    e.Row.BackColor = System.Drawing.Color.Green;
+                    e.Row.BackColor = System.Drawing.Color.FromArgb(255, 0, 204, 0); //System.Drawing.Color.Green;
                 else if (FilaFichaBien.IdActividad == 3 || FilaFichaBien.IdActividad == 8 || FilaFichaBien.IdActividad == 9)
                     e.Row.BackColor = System.Drawing.Color.Yellow;
                 else if (FilaFichaBien.IdActividad == 4)
-                    e.Row.BackColor = System.Drawing.Color.Blue;
+                    e.Row.BackColor = System.Drawing.Color.FromArgb(255, 0, 51, 204); //System.Drawing.Color.Blue;
                 else if (FilaFichaBien.IdActividad == 5)
                     e.Row.BackColor = System.Drawing.Color.Red;
 
@@ -385,19 +438,26 @@ namespace InventariosPJEH
         {
             if (DdlEdificio.SelectedValue != "0" && DdlNivel.SelectedValue != "0" && DdlSeccion.SelectedValue != "0")
             {
-                int IdEdificio = Convert.ToInt32(DdlEdificio.SelectedValue);
-                int IdNivel = Convert.ToInt32(DdlNivel.SelectedValue);
-                int IdSeccion = Convert.ToInt32(DdlSeccion.SelectedValue);
-                int IdEmpleado = Convert.ToInt32(DdlNomPers.SelectedValue);
-                int TipoPartida = 1;
+                if (DdlNomPers.SelectedValue != "" && DdlNomPers.SelectedValue != "0")
+                {
+                    int IdEdificio = Convert.ToInt32(DdlEdificio.SelectedValue);
+                    int IdNivel = Convert.ToInt32(DdlNivel.SelectedValue);
+                    int IdSeccion = Convert.ToInt32(DdlSeccion.SelectedValue);
+                    int IdEmpleado = Convert.ToInt32(DdlNomPers.SelectedValue);
+                    int TipoPartida = 1;
 
-                TResultado ResUbicacionENSU = new TResultado();
-                CGrupoBienResguardo GrupoBien = BdAsignarResguardo.AgregarUbicacionENSU(IdEdificio, IdNivel, IdSeccion, IdEmpleado, TipoPartida, ref ResUbicacionENSU);
+                    TResultado ResUbicacionENSU = new TResultado();
+                    CGrupoBienResguardo GrupoBien = BdAsignarResguardo.AgregarUbicacionENSU(IdEdificio, IdNivel, IdSeccion, IdEmpleado, TipoPartida, ref ResUbicacionENSU);
 
-                LlenarDdlGrupo(IdEmpleado);
+                    LlenarDdlGrupo(IdEmpleado);
 
-                HFIdENSU.Value = GrupoBien.IdENSU.ToString();
+                    HFIdENSU.Value = GrupoBien.IdENSU.ToString();
+                }
+                else
+                    MostrarMensaje("Debe seleccionar una persona antes de crear un grupo.", "error", "Normal", "PersonaNoSeleccionada");
             }
+            else
+                MostrarMensaje("Debe seleccionar Edificio-Nivel-Sección antes de crear un grupo.", "error", "Normal", "PersonaNoSeleccionada");
         }
 
         protected void DdlEdificio_SelectedIndexChanged(object sender, EventArgs e)
@@ -412,10 +472,10 @@ namespace InventariosPJEH
                 TResultado Resultado = new TResultado();
                 DataTable Personal = new DataTable();
                 Personal = BdAsignarResguardo.ObtenerNivelesXIdEdificio(IdEdificio, ref Resultado);
-                if (Resultado.Exito)
-                    MostrarMensaje("La informacion se obtuvo correctamente .", "info", "Normal", "NotExitoso");
-                else
+                
+                if (!Resultado.Exito)
                     MostrarMensaje(Resultado.Mensaje.FirstOrDefault(), "error", "Normal", "NotExitoso");
+                    
 
                 DdlNivel.DataSource = Personal;
                 DdlNivel.DataTextField = "Nivel";
@@ -438,10 +498,9 @@ namespace InventariosPJEH
                 TResultado Resultado = new TResultado();
 
                 TEdificios = BdAsignarResguardo.ObtenerSeccionesXENSUUbicacion(IdEdificio, IdNivel, ref Resultado);
-                if (Resultado.Exito)
-                    MostrarMensaje("La informacion se obtuvo correctamente .", "info", "Normal", "NotExitoso");
-                else
+                if (!Resultado.Exito)
                     MostrarMensaje(Resultado.Mensaje.FirstOrDefault(), "error", "Normal", "NotExitoso");
+
                 DdlSeccion.DataSource = TEdificios;
                 DdlSeccion.DataTextField = "Seccion";
                 DdlSeccion.DataValueField = "IdSeccion";
@@ -461,6 +520,7 @@ namespace InventariosPJEH
                                                   select GBR).FirstOrDefault();
 
                 LblENSU.Text = GrupoBienR.Edificio + " - " + GrupoBienR.Nivel + " - " + GrupoBienR.Seccion;
+                LblResguardo.Text = GrupoBienR.IdResguardo.ToString();
 
                 LlenarGridAsignados(Convert.ToInt32(DdlNomPers.SelectedValue));
                 
@@ -597,6 +657,16 @@ namespace InventariosPJEH
                 string _open = "window.open('MostrarResguardo.aspx', '_blank');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
             }
+        }
+
+        protected void GridAsignados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnNuevaBusqueda_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("frmAsignarResguardo.aspx");
         }
     }
 }

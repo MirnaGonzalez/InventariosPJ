@@ -10,13 +10,16 @@ namespace InventariosPJEH.CAccesoDatos
 {
     public class BdAsignarResguardo
     {
-        public static List<CConsultaBienes> ObtenerPartida()
+        public static List<CConsultaBienes> ObtenerPartida(int TipoPartida)
         {
             List<CConsultaBienes> listaPartida = new List<CConsultaBienes>();
 
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-            SqlCommand cmd = new SqlCommand("select Partida,idPartida from Cat_Partidas", cnn);
+            SqlCommand cmd = new SqlCommand("select Partida,idPartida from Cat_Partidas where TipoPartida = @TipoPartida", cnn);
+            cmd.Parameters.Add("@TipoPartida", SqlDbType.Int).Value = TipoPartida;
             cnn.Open();
+
+
 
             using (var rd = cmd.ExecuteReader())
             {
@@ -538,7 +541,7 @@ namespace InventariosPJEH.CAccesoDatos
             SqlCommand cmd = new SqlCommand();
             SqlDataReader rd;
             cmd.Connection = cnn;
-            cmd.CommandText = " SELECT     dbo.GrupoBienResguardo.IdGrupo, 'Grupo ' + dbo.GrupoBienResguardo.Grupo AS Grupo, dbo.Cat_Edificio.Edificio, dbo.Cat_Niveles.Nivel, dbo.Cat_Secciones.Nombre AS Seccion, dbo.GrupoBienResguardo.IdENSU ";
+            cmd.CommandText = " SELECT     dbo.GrupoBienResguardo.IdGrupo, 'Grupo ' + dbo.GrupoBienResguardo.Grupo AS Grupo, dbo.Cat_Edificio.Edificio, dbo.Cat_Niveles.Nivel, dbo.Cat_Secciones.Nombre AS Seccion, dbo.GrupoBienResguardo.IdENSU, dbo.Resguardo.IdResguardo";
             cmd.CommandText += " FROM         dbo.Cat_ENSUbicacion INNER JOIN ";
             cmd.CommandText += " dbo.GrupoBienResguardo ON dbo.Cat_ENSUbicacion.IdENSU = dbo.GrupoBienResguardo.IdENSU INNER JOIN ";
             cmd.CommandText += " dbo.Cat_Personal INNER JOIN ";
@@ -566,6 +569,7 @@ namespace InventariosPJEH.CAccesoDatos
                     GrupoBienR.Nivel = BdConverter.FieldToString(rd["Nivel"]);
                     GrupoBienR.Seccion = BdConverter.FieldToString(rd["Seccion"]);
                     GrupoBienR.IdENSU = BdConverter.FieldToInt(rd["IdENSU"]);
+                    GrupoBienR.IdResguardo = BdConverter.FieldToInt(rd["IdResguardo"]);
                     LGrupoBienR.Add(GrupoBienR);
                 }
                 cmd.Connection.Close();
