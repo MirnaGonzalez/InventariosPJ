@@ -85,7 +85,7 @@
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
             '			                "URL": ""' +
-            '			            }' +
+            '			            }' +            
             '		            ]' +
             '	            },' +
             '	            {' +
@@ -131,7 +131,7 @@
             '			            },' +
             '                       {' +
             '			                "Nombre": "Histórico Persona",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmHistoricoPersonal.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +
@@ -151,9 +151,9 @@
             '	            {' +
             '	                "Nombre": "Reemplazos",' +
             '	                "SubMenus": [' +
-            '			            {' +
-            '			                "Nombre": "Reemplazo de Bienes",' +
-            '			                "URL": ""' +
+            '                       {' +
+            '			                "Nombre": "Generación y Consulta de Actas",' +
+            '			                "URL": "frmActaAdministrativa.aspx"' +
             '			            }' +
             '		            ]' +
             '	            }' +
@@ -195,7 +195,7 @@
             '			            },' +
             '                       {' +
             '			                "Nombre": "Histórico Persona",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmHistoricoPersonal.aspx"' +
             '			            }' +
             '		            ]' +
             '	            }' +

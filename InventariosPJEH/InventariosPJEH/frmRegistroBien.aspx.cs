@@ -1122,7 +1122,7 @@ namespace InventariosPJEH
                                                 }
                                             }
                                             MostrarNumInventarioIndividual(sender, e);
-                                            LimpiarRegistro();
+                                           /// LimpiarRegistro();
 
                                         }
                                         else

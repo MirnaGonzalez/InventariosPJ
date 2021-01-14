@@ -25,7 +25,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="auto-style1">
         <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-            <legend style="width: auto; color: darkblue; font-size: 12px;">Intruducir parametros de busqueda</legend>
+            <legend style="width: auto; color: darkblue; font-size: 12px;">Introducir parametros de búsqueda</legend>
             <div>
                 <div class="auto-style6">
                     <asp:Label ID="LblTitTrimestre" align="right" runat="server" Text="Número de Inventario:" Width="151px" CssClass="auto-style6" Height="24px"></asp:Label>
@@ -33,7 +33,7 @@
 
                     <asp:Button ID="BtnBuscar" runat="server" Text="Buscar" Width="87px" CssClass="Boton Marginleft" Font-Size="12pt" OnClick="BtnBuscar_Click"  />
 
-                    <asp:Button ID="BtnNuevaBusqueda" runat="server" Text="Nueva Busqueda" Width="163px" CssClass="Boton Marginleft" Font-Size="12pt" OnClick="BtnNuevaBusqueda_Click"  />
+                    <asp:Button ID="BtnNuevaBusqueda" runat="server" Text="Nueva búsqueda" Width="163px" CssClass="Boton Marginleft" Font-Size="12pt" OnClick="BtnNuevaBusqueda_Click"  />
 
                 </div>
 
@@ -45,7 +45,7 @@
     <!-- mostrar datos tabla -->
     <div runat="server" id="DivMostrar" visible="false">
         <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-            <legend style="width: 329px; color: darkblue; font-size: 12px;">Movimientos realizados por número de Inventario</legend>
+            <legend style="width: 329px; color: darkblue; font-size: 12px;">Movimientos realizados por número de inventario</legend>
             <div>
 
                 <br />

@@ -11,17 +11,17 @@ namespace InventariosPJEH
 {
 
 
-    public partial class frmCatCONAC
+    public partial class frmImpresionEtiquetas
     {
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control LblLema.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.Label LblLema;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -33,85 +33,13 @@ namespace InventariosPJEH
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control Rowindex.
+        /// Control DivMostrarNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField Rowindex;
-
-        /// <summary>
-        /// Control LbDescripcionBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbDescripcionBuscar;
-
-        /// <summary>
-        /// Control TxtDescripcionBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDescripcionBuscar;
-
-        /// <summary>
-        /// Control BtnTipoPartida.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnTipoPartida;
-
-        /// <summary>
-        /// Control BtnMostrarNuevoR.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnMostrarNuevoR;
-
-        /// <summary>
-        /// Control DivTabla.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTabla;
-
-        /// <summary>
-        /// Control GridBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridBuscar;
-
-        /// <summary>
-        /// Control DivMostrarNuevoR.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMostrarNuevoR;
-
-        /// <summary>
-        /// Control HiddenId.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenId;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMostrarNuevo;
 
         /// <summary>
         /// Control lgNuevoRegistro.
@@ -123,139 +51,220 @@ namespace InventariosPJEH
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgNuevoRegistro;
 
         /// <summary>
-        /// Control lgModificarRegistro.
+        /// Control RbDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgModificarRegistro;
+        protected global::System.Web.UI.WebControls.RadioButton RbDocumento;
 
         /// <summary>
-        /// Control IdCONAC.
+        /// Control RbInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdCONAC;
+        protected global::System.Web.UI.WebControls.RadioButton RbInventario;
 
         /// <summary>
-        /// Control IdClaveCONAC.
+        /// Control RbResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdClaveCONAC;
+        protected global::System.Web.UI.WebControls.RadioButton RbResguardo;
 
         /// <summary>
-        /// Control LbGrupo.
+        /// Control RbArea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbGrupo;
+        protected global::System.Web.UI.WebControls.RadioButton RbArea;
 
         /// <summary>
-        /// Control TxtGrupo.
+        /// Control GrupoInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtGrupo;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoInventario;
 
         /// <summary>
-        /// Control LbSubGrupo.
+        /// Control LblNoInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbSubGrupo;
+        protected global::System.Web.UI.WebControls.Label LblNoInventario;
 
         /// <summary>
-        /// Control TxtSubGrupo.
+        /// Control TxtNoInventario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSubGrupo;
+        protected global::System.Web.UI.WebControls.TextBox TxtNoInventario;
 
         /// <summary>
-        /// Control LbClase.
+        /// Control GrupoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbClase;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoDocumento;
 
         /// <summary>
-        /// Control TxtClase.
+        /// Control LblNoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtClase;
+        protected global::System.Web.UI.WebControls.Label LblNoDocumento;
 
         /// <summary>
-        /// Control LbDescripcion.
+        /// Control TxtDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox TxtDocumento;
 
         /// <summary>
-        /// Control TxtDescripcion.
+        /// Control GrupoResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDescripcion;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoResguardo;
 
         /// <summary>
-        /// Control LbTipoPartida.
+        /// Control LblNoResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbTipoPartida;
+        protected global::System.Web.UI.WebControls.Label LblNoResguardo;
 
         /// <summary>
-        /// Control DropTpoPartida.
+        /// Control TxtNoResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropTpoPartida;
+        protected global::System.Web.UI.WebControls.TextBox TxtNoResguardo;
 
         /// <summary>
-        /// Control BtnGuardar.
+        /// Control GrupoArea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnGuardar;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoArea;
 
         /// <summary>
-        /// Control BtnActualizar.
+        /// Control LblTipoArea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnActualizar;
+        protected global::System.Web.UI.WebControls.Label LblTipoArea;
+
+        /// <summary>
+        /// Control DdlTipoArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlTipoArea;
+
+        /// <summary>
+        /// Control GrupoDistrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoDistrito;
+
+        /// <summary>
+        /// Control LblDistrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblDistrito;
+
+        /// <summary>
+        /// Control DdlDistrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlDistrito;
+
+        /// <summary>
+        /// Control GrupoUnidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoUnidad;
+
+        /// <summary>
+        /// Control LblUnidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblUnidad;
+
+        /// <summary>
+        /// Control DdlUnidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdlUnidad;
+
+        /// <summary>
+        /// Control GrupoBotones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow GrupoBotones;
+
+        /// <summary>
+        /// Control BtnGenerar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnGenerar;
 
         /// <summary>
         /// Control BtnLimpiar.
@@ -265,23 +274,5 @@ namespace InventariosPJEH
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnLimpiar;
-
-        /// <summary>
-        /// Control BtnCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancelar;
-
-        /// <summary>
-        /// Control LblLema.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblLema;
     }
 }

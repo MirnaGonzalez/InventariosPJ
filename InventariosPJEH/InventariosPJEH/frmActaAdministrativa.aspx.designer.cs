@@ -11,277 +11,250 @@ namespace InventariosPJEH
 {
 
 
-    public partial class frmCatCONAC
+    public partial class frmActaAdministrativa
     {
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control LblTituloActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.Label LblTituloActa;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control ScriptManagerGenerarActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.ScriptManager ScriptManagerGenerarActa;
 
         /// <summary>
-        /// Control Rowindex.
+        /// Control GAdministrativa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField Rowindex;
+        protected global::System.Web.UI.UpdatePanel GAdministrativa;
 
         /// <summary>
-        /// Control LbDescripcionBuscar.
+        /// Control DivGeneral.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbDescripcionBuscar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivGeneral;
 
         /// <summary>
-        /// Control TxtDescripcionBuscar.
+        /// Control lblNoResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDescripcionBuscar;
+        protected global::System.Web.UI.WebControls.Label lblNoResguardo;
 
         /// <summary>
-        /// Control BtnTipoPartida.
+        /// Control TxtFiltroB.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnTipoPartida;
+        protected global::System.Web.UI.WebControls.TextBox TxtFiltroB;
 
         /// <summary>
-        /// Control BtnMostrarNuevoR.
+        /// Control BtnFiltroB.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnMostrarNuevoR;
+        protected global::System.Web.UI.WebControls.Button BtnFiltroB;
 
         /// <summary>
-        /// Control DivTabla.
+        /// Control sectionBienes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTabla;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionBienes;
 
         /// <summary>
-        /// Control GridBuscar.
+        /// Control lblNombreR.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridBuscar;
+        protected global::System.Web.UI.WebControls.Label lblNombreR;
 
         /// <summary>
-        /// Control DivMostrarNuevoR.
+        /// Control lblNombreResul.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivMostrarNuevoR;
+        protected global::System.Web.UI.WebControls.Label lblNombreResul;
 
         /// <summary>
-        /// Control HiddenId.
+        /// Control lblCargoR.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenId;
+        protected global::System.Web.UI.WebControls.Label lblCargoR;
 
         /// <summary>
-        /// Control lgNuevoRegistro.
+        /// Control lblCargoResul.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgNuevoRegistro;
+        protected global::System.Web.UI.WebControls.Label lblCargoResul;
 
         /// <summary>
-        /// Control lgModificarRegistro.
+        /// Control lblAreaAdri.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lgModificarRegistro;
+        protected global::System.Web.UI.WebControls.Label lblAreaAdri;
 
         /// <summary>
-        /// Control IdCONAC.
+        /// Control lblAreaResul.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdCONAC;
+        protected global::System.Web.UI.WebControls.Label lblAreaResul;
 
         /// <summary>
-        /// Control IdClaveCONAC.
+        /// Control lblIdResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdClaveCONAC;
+        protected global::System.Web.UI.WebControls.Label lblIdResguardo;
 
         /// <summary>
-        /// Control LbGrupo.
+        /// Control lblIdUniAdmin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbGrupo;
+        protected global::System.Web.UI.WebControls.Label lblIdUniAdmin;
 
         /// <summary>
-        /// Control TxtGrupo.
+        /// Control DivTablaResultadosResguardo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtGrupo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTablaResultadosResguardo;
 
         /// <summary>
-        /// Control LbSubGrupo.
+        /// Control gridResultados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbSubGrupo;
+        protected global::System.Web.UI.WebControls.GridView gridResultados;
 
         /// <summary>
-        /// Control TxtSubGrupo.
+        /// Control sectionGuardarActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtSubGrupo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionGuardarActa;
 
         /// <summary>
-        /// Control LbClase.
+        /// Control lblNumActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbClase;
+        protected global::System.Web.UI.WebControls.Label lblNumActa;
 
         /// <summary>
-        /// Control TxtClase.
+        /// Control txtNumActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtClase;
+        protected global::System.Web.UI.WebControls.TextBox txtNumActa;
 
         /// <summary>
-        /// Control LbDescripcion.
+        /// Control LablFechaAdquisicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbDescripcion;
+        protected global::System.Web.UI.WebControls.Label LablFechaAdquisicion;
 
         /// <summary>
-        /// Control TxtDescripcion.
+        /// Control txtFechaAdquisicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaAdquisicion;
 
         /// <summary>
-        /// Control LbTipoPartida.
+        /// Control ImgFechaAdquisicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LbTipoPartida;
+        protected global::System.Web.UI.WebControls.Image ImgFechaAdquisicion;
 
         /// <summary>
-        /// Control DropTpoPartida.
+        /// Control FechaAdquisicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropTpoPartida;
+        protected global::AjaxControlToolkit.CalendarExtender FechaAdquisicion;
 
         /// <summary>
-        /// Control BtnGuardar.
+        /// Control BtnGuardarActa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnGuardar;
+        protected global::System.Web.UI.WebControls.Button BtnGuardarActa;
 
         /// <summary>
-        /// Control BtnActualizar.
+        /// Control BtnCancelarr.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnActualizar;
-
-        /// <summary>
-        /// Control BtnLimpiar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLimpiar;
-
-        /// <summary>
-        /// Control BtnCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnCancelar;
-
-        /// <summary>
-        /// Control LblLema.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblLema;
+        protected global::System.Web.UI.WebControls.Button BtnCancelarr;
     }
 }

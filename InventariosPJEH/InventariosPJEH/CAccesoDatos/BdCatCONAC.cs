@@ -12,7 +12,7 @@ namespace InventariosPJEH.CAccesoDatos
     {
     
 
-        //Lista para mostrar el grid si se hace una búsqueda con el IdCONAC y la Descripción
+        //Lista para mostrar el grid si se hace una búsqueda con Descripción
         /// <summary>
         /// 
         /// </summary>
@@ -23,10 +23,22 @@ namespace InventariosPJEH.CAccesoDatos
             
             List<CCONAC> lista = new List<CCONAC>();
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+            string cmdString = "";
             try
             {
-                SqlCommand cmd = new SqlCommand(string.Format("Select * from Cat_CONAC where Descripcion like '%{0}%' ORDER BY IdCONAC ASC", pDescripcion), cnn);
-                
+
+                if (pDescripcion == string.Empty)
+                {
+                    cmdString = "Select * from Cat_CONAC ORDER BY IdCONAC ASC";
+                }
+
+                else
+                {
+                    cmdString = "Select * from Cat_CONAC where Descripcion like '%{0}%' ORDER BY IdCONAC ASC";
+                }
+
+                SqlCommand cmd = new SqlCommand(string.Format(cmdString, pDescripcion), cnn);
+               
                 cnn.Open();
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -34,6 +46,7 @@ namespace InventariosPJEH.CAccesoDatos
                     {
                         CCONAC conac = new CCONAC();
                         conac.IdCONAC = (rd["IdCONAC"]).ToString();
+                        conac.IdClaveCONAC = (rd["IdClaveCONAC"]).ToString();
                         conac.Grupo = rd["Grupo"].ToString();
                         conac.SubGrupo = rd["SubGrupo"].ToString();
                         conac.Clase = rd["Clase"].ToString();
@@ -45,6 +58,7 @@ namespace InventariosPJEH.CAccesoDatos
                     }
                 }
             }
+
             catch (Exception )
             {
                 cnn.Close();
@@ -53,7 +67,15 @@ namespace InventariosPJEH.CAccesoDatos
         }
 
 
-        //Lista para mostrar el grid si la busqueda es un nuevo registro
+        //Lista para mostrar el grid si la busqueda es un nuevo registro 
+        /// <summary>
+        ///  NO SE UTILIZA
+        /// </summary>
+        /// <param name="idconac"></param>
+        /// <param name="pGrupo"></param>
+        /// <param name="pSubgrupo"></param>
+        /// <param name="pclase"></param>
+        /// <returns></returns>
         public static List<CCONAC> ConsultarGbCONACNuevoRegistro(string idconac,string pGrupo, string pSubgrupo, string pclase)
         {
 
@@ -62,8 +84,8 @@ namespace InventariosPJEH.CAccesoDatos
 
             try
             {
-
-                SqlCommand cmd = new SqlCommand(string.Format("Select Id_CONAC, IdCONAC, Grupo, SubGrupo, Clase, Descripcion, TipoPartida from Cat_CONAC where IdCONAC like '%{0}%' or Grupo like '%{1}%' or SubGrupo like '%{2}%' or Clase like '%{3}%' ORDER BY IdCONAC ASC", idconac, pGrupo, pSubgrupo, pclase), cnn);
+                // Debe ser igual el select del primer consulta
+                SqlCommand cmd = new SqlCommand(string.Format("Select IdCONAC, IdClaveCONAC,  Grupo, SubGrupo, Clase, Descripcion, TipoPartida from Cat_CONAC where IdCONAC like '%{0}%' or Grupo like '%{1}%' or SubGrupo like '%{2}%' or Clase like '%{3}%' ORDER BY IdCONAC ASC", idconac, pGrupo, pSubgrupo, pclase), cnn);
                 cnn.Open();
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -71,12 +93,13 @@ namespace InventariosPJEH.CAccesoDatos
                     {
                         CCONAC conac = new CCONAC();
                         conac.IdCONAC = (rd["IdCONAC"]).ToString();
+                        conac.IdClaveCONAC = (rd["IdClaveCONAC"]).ToString();
                         conac.Grupo = rd["Grupo"].ToString();
                         conac.SubGrupo = rd["SubGrupo"].ToString();
                         conac.Clase = rd["Clase"].ToString();
                         conac.Descripcion = rd["Descripcion"].ToString();
                         conac.TipoPartida = rd["TipoPartida"].ToString();
-                        conac.Id_CONAC = (rd["Id_CONAC"]).ToString();
+                        
 
                         lista.Add(conac);
                     }
@@ -104,7 +127,7 @@ namespace InventariosPJEH.CAccesoDatos
                 SqlCommand cmd = new SqlCommand("SP_Eliminar_CONAC", Conn, lTransaccion);
             cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@id_CONAC", obJE.IdCONAC);
+                cmd.Parameters.AddWithValue("@IdCONAC", obJE.IdClaveCONAC);
                 SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
                 ValorRetorno.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(ValorRetorno);
@@ -112,11 +135,15 @@ namespace InventariosPJEH.CAccesoDatos
                 Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
                 if (Valor_Retornado == 1)
                     success = true;
+
+
             }
-            catch (Exception )
+            catch (Exception ex )
             {
                 Conn.Close();
             }
+
+
             finally
             {
                 if (success)
