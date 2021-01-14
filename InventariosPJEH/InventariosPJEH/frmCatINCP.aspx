@@ -12,7 +12,7 @@
                 <asp:HiddenField id="Rowindex" runat="server"></asp:HiddenField>
 
                 <div style="width: auto;">
-                    <fieldset style="width: auto; height: auto; border-color: #6D252B;">
+                    <fieldset style="width: auto; height: auto; border-color: #0C2261;">
                         <legend style="text-align: left;  color:darkblue;">Buscar INCP</legend>
                         <table style="width: 100%;">
                             <tr>
@@ -24,7 +24,7 @@
                              
                                 </td>
                                 <td  style="text-align: left;" class="auto-style8">
-                                    <asp:Button ID="BtnINCP" runat="server" Text="Buscar" CssClass="Boton" OnClick="BtnBuscar_Click" Style=" align-content: space-around; height: 28px;" />
+                                    <asp:Button ID="BtnINCP" runat="server" Text="Buscar" CssClass="Boton" OnClick="BtnBuscar_Click" Style=" align-content: space-around; " Height="28px" />
                                 </td>
                                 <td style="text-align: right;" >
                                 <asp:Button ID="BtnMostrarNuevoR" runat="server" Text="Nuevo Registro" CssClass="Boton" OnClick="BtnMostraOcultar" Style=" align-content: space-around; " Height="28px" Width="168px" />
@@ -56,10 +56,10 @@
                             <asp:BoundField DataField="IVA" HeaderText="I. V. A." ItemStyle-Width="80px" DataFormatString="{0:N2}">
                             <ItemStyle Width="80px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NumUMAS" HeaderText="Número de umas" ItemStyle-Width="80px" >
+                            <asp:BoundField DataField="NumUMAS" HeaderText="Número de UMAS" ItemStyle-Width="80px" >
                             <ItemStyle Width="80px" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ValorUMA" HeaderText="Valor de uma" ItemStyle-Width="80px" >
+                            <asp:BoundField DataField="ValorUMA" HeaderText="Valor de UMA" ItemStyle-Width="80px" >
                             <ItemStyle Width="80px" />
                             </asp:BoundField>
                             <asp:BoundField DataField="INCP" HeaderText="INCP" ItemStyle-Width="80px" >
@@ -86,7 +86,7 @@
 
                 <asp:HiddenField ID="HiddenId" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color:darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Nuevo registro</legend>
                         <legend style="text-align: left;  color:darkblue;" runat="server" id="lgModificarRegistro" visible="false">Modificar Registro</legend>
 
@@ -108,26 +108,26 @@
                         </tr>
                         <tr>
                             <td style="text-align: right;" class="auto-style9">
-                                <asp:Label ID="LbIVA" runat="server" Text="I. V. A. :" Style="font-family: Verdana; font-size: small; font-weight: 400;"></asp:Label>
+                                <asp:Label ID="LbIVA" runat="server" Text="I. V. A. :" Style="font-family: Verdana; font-size: small; font-weight: 400;" ToolTip="Incluir un 0 antes del punto, ejemplo: 0.16"></asp:Label>
                             </td>
                             <td>
-                                <asp:TextBox ID="TxtIVA" runat="server" CssClass="TxtGeneral" Width="624px" Height="20px" onkeypress="return numerosDecimalesIva(event, this);"></asp:TextBox>
+                                <asp:TextBox ID="TxtIVA" runat="server" CssClass="TxtGeneral" Width="624px" Height="20px" onkeypress="return numerosDecimalesIva(event, this);" OnTextChanged="TxtIVA_TextChanged"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: right;" class="auto-style9">
-                                <asp:Label ID="LbNumUmas" runat="server" Text="Número de umas:" Style="font-family: Verdana; font-size: small; font-weight: 400;"></asp:Label>
+                                <asp:Label ID="LbNumUmas" runat="server" Text="Número de UMAS:" Style="font-family: Verdana; font-size: small; font-weight: 400;"></asp:Label>
                             </td>
                             <td>
                                 <asp:TextBox ID="TxtNumUmas" runat="server" AutoPostBack="true" CssClass="TxtGeneral" Width="624px" Height="20px" onkeypress="return soloNumeros(event)" MaxLength="3" OnTextChanged="TxtNumUmas_TextChanged"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right;" class="auto-style9">
-                                <asp:Label ID="LbValorUmas" runat="server" Text="Valor de uma:" Style="font-family: Verdana; font-size: small; font-weight: 400;"></asp:Label>
+                            <td style="text-align: right;" class="auto-style11">
+                                <asp:Label ID="LbValorUmas" runat="server" Text="Valor de UMA:" Style="font-family: Verdana; font-size: small; font-weight: 400;"></asp:Label>
                             </td>
-                            <td>
-                                <asp:TextBox ID="TxtValorUma" runat="server" AutoPostBack="true" CssClass="auto-style10" Width="624px" Height="20px" onkeypress="return numerosDecimales(event, this);" OnTextChanged="TxtValorUma_TextChanged"></asp:TextBox>
+                            <td class="auto-style12">
+                                <asp:TextBox ID="TxtValorUma" runat="server" AutoPostBack="true" CssClass="TxtGeneral" Width="624px" Height="20px" onkeypress="return numerosDecimales(event, this);" OnTextChanged="TxtValorUma_TextChanged"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -171,8 +171,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
-    <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="ÍNDICE NACIONALDE PRECIOS AL CONSUMIDOS (INCP)" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+    <div style="width: auto; text-align: center; ">
+        <asp:Label ID="LblLema" runat="server" Text="ÍNDICE NACIONAL DE PRECIOS AL CONSUMIDOR (INCP)" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 <asp:Content ID="Content4" runat="server" contentplaceholderid="HeadContent">
@@ -192,15 +192,12 @@
         .auto-style9 {
              width: 176px;
         }
-        .auto-style10 {
-            width: 545px;
-            Height: 17px;
-            Font-Size: Medium;
-            font-family: Verdana;
-            font-size: small;
-            font-weight: 400;
-            border: 1px solid #663622;
-            margin-left: 0px;
+        .auto-style11 {
+            width: 176px;
+            height: 28px;
+        }
+        .auto-style12 {
+            height: 28px;
         }
     </style>
 </asp:Content>
