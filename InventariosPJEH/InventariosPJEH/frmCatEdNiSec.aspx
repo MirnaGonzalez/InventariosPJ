@@ -366,8 +366,7 @@
                                <ItemStyle Width="30px" /> 
                                 </asp:TemplateField>
 
-                            <asp:BoundField DataField="IdENSU" HeaderText="Clave Ubicación" ItemStyle-Width="40px">
-                                 <ItemStyle Width="60px" />   </asp:BoundField>
+                  
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Modificar Sección" Text="Editar"
                                 CommandName="Prueba" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />

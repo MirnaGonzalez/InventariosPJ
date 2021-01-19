@@ -1464,50 +1464,9 @@ namespace InventariosPJEH
                 maxid = "";
             }
             con.Close();
-            try
-            {
-                Conn.Open();
-                lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                SqlCommand cmd = new SqlCommand("SP_Insertar_HistoricoUbicacion", Conn, lTransaccion);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Clear();
-                cmd.Parameters.Add(new SqlParameter("@IdInventario", Convert.ToInt32(maxid)));
-                cmd.Parameters.Add(new SqlParameter("@IdENSU", ENSU));
-                cmd.Parameters.Add(new SqlParameter("@IdUsuario", IdUsuario));
-                cmd.Parameters.Add(new SqlParameter("@Fecha", Convert.ToDateTime(fechaAd)));
-                cmd.Parameters.Add(new SqlParameter("@IdActividad", IdAct));
-                SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
-                ValorRetorno.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(ValorRetorno);
-                cmd.ExecuteNonQuery();
-                Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-                if (Valor_Retornado == 1)
-                    success = true;
-            }
-            catch (Exception ex)
-            {
-                string script = ex.ToString();
-
-                MostrarMensaje("** Error al insertar Serie **", "info", "Normal");
-            }
-            finally
-            {
-                if (success)
-                {
-                    lTransaccion.Commit();
-                    Conn.Close();
-                }
-                else
-                {
-                    lTransaccion.Rollback();
-                    Conn.Close();
-                }
-            }
 
 
-            ///////////////////////////////////////////
-            //Insertar en Tabla Ubicación
-
+            //////////////////////////////////////////////////
             try
             {
                 Conn.Open();
@@ -1548,6 +1507,57 @@ namespace InventariosPJEH
                 }
             }
 
+
+
+
+           // try
+           // {
+           //     Conn.Open();
+           //     lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
+           //     SqlCommand cmd = new SqlCommand("SP_Insertar_HistoricoUbicacion", Conn, lTransaccion);
+           //     cmd.CommandType = CommandType.StoredProcedure;
+           //     cmd.Parameters.Clear();
+           //     cmd.Parameters.Add(new SqlParameter("@IdInventario", Convert.ToInt32(maxid)));
+           ////     cmd.Parameters.Add(new SqlParameter("@IdENSU", ENSU));
+           //     cmd.Parameters.Add(new SqlParameter("@IdUsuario", IdUsuario));
+           ////     cmd.Parameters.Add(new SqlParameter("@Fecha", Convert.ToDateTime(fechaAd)));
+           //     cmd.Parameters.Add(new SqlParameter("@IdActividad", IdAct));
+
+           //    //SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
+           //    // ValorRetorno.Direction = ParameterDirection.Output;
+           //    // cmd.Parameters.Add(ValorRetorno);
+           //     cmd.ExecuteNonQuery();
+           //    // Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
+           //    // if (Valor_Retornado == 1)
+           //    //     success = true;
+           // }
+
+
+           // catch (Exception ex)
+           // {
+           //     string script = ex.ToString();
+
+           //     MostrarMensaje("** Error al insertar la ubicación del bien **", "info", "Normal");
+           // }
+           // finally
+           // {
+           //     if (success)
+           //     {
+           //         lTransaccion.Commit();
+           //         Conn.Close();
+           //     }
+           //     else
+           //     {
+           //         lTransaccion.Rollback();
+           //         Conn.Close();
+           //     }
+           // }
+
+
+            ///////////////////////////////////////////
+            //Insertar en Tabla Ubicación
+
+           
 
         }
 
@@ -1935,9 +1945,9 @@ namespace InventariosPJEH
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@IdInventario", Convert.ToInt32(maxid)));
-                    cmd.Parameters.Add(new SqlParameter("@IdENSU", ENSU));
+                 //   cmd.Parameters.Add(new SqlParameter("@IdENSU", ENSU));
                     cmd.Parameters.Add(new SqlParameter("@IdUsuario", IdUsuario));
-                    cmd.Parameters.Add(new SqlParameter("@Fecha", Convert.ToDateTime(fechaAd)));
+                 //   cmd.Parameters.Add(new SqlParameter("@Fecha", Convert.ToDateTime(fechaAd)));
                     cmd.Parameters.Add(new SqlParameter("@IdActividad", IdAct));
                     SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
                     ValorRetorno.Direction = ParameterDirection.Output;
