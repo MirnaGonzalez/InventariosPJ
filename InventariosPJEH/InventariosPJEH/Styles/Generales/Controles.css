@@ -8,57 +8,72 @@
     text-decoration: none;
 }
 
-.Boton:hover {
-  background: silver;
-  color: White;
-  text-decoration: none;
+    .Boton:hover {
+        background: silver;
+        color: White;
+        text-decoration: none;
+    }
+
+.StyleGridV, .StyleGridVActaAdmin {
+    background-color: #fff;
+    margin: 5px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
 }
-.StyleGridV { 
-    background-color: #fff;  
-    margin: 5px 0 10px 0;  
-    border: solid 1px #525252;  
-    border-collapse: collapse;  
-}
-.StyleGridV td {  
-    padding: 2px;
-    border: solid 1px #c1c1c1;
-    color: #717171;
-    text-transform: uppercase;
-    font-size: 8pt;
-}
-.StyleGridV th {  
-    padding: 4px 2px;  
-    color: #fff;  
-    background: #424242 url(../Imagenes/Generales/EncabezadoGrid.png) repeat-x top;
-    border-left: solid 1px #525252;  
-    font-size: 0.9em;  
-}
-.StyleGridV .AlterS {  
-    background: #fcfcfc url(../Imagenes/Generales/FondoRowGrid.png) repeat-x top;
-}
-.StyleGridV .PagerS   
-{
-    background: #424242 url(../Imagenes/Generales/EncabezadoGrid.png) repeat-x top;
-}
-.StyleGridV .PagerS table {  
-    margin: 5px 0;  
-}
-.StyleGridV .PagerS td {  
-    border-width: 0;  
-    padding: 0 6px;  
-    border-left: solid 1px #666;  
-    font-weight: bold;  
-    color: #fff;  
-    line-height: 12px;  
-}
-.StyleGridV .PagerS a {  
-    color: #666;  
-    text-decoration: none;  
-}
-.StyleGridV .PagerS a:hover {  
-    color: #000;  
-    text-decoration: none;  
-}
+
+    .StyleGridV td, .StyleGridVActaAdmin td {
+        padding: 2px;
+        border: solid 1px #c1c1c1;
+        color: #717171;
+        text-transform: uppercase;
+    }
+
+    .StyleGridV th, .StyleGridVActaAdmin th {
+        padding: 4px 2px;
+        color: #fff;
+        background: #424242 url(../Imagenes/Generales/EncabezadoGrid.png) repeat-x top;
+        border-left: solid 1px #525252;
+        font-size: 0.9em;
+    }
+
+    .StyleGridV td {
+        font-size: 8pt;
+    }
+
+    .StyleGridVActaAdmin td {
+        font-size: 6pt;
+    }
+
+    .StyleGridV .AlterS {
+        background: #fcfcfc url(../Imagenes/Generales/FondoRowGrid.png) repeat-x top;
+    }
+
+    .StyleGridV .PagerS {
+        background: #424242 url(../Imagenes/Generales/EncabezadoGrid.png) repeat-x top;
+    }
+
+        .StyleGridV .PagerS table {
+            margin: 5px 0;
+        }
+
+        .StyleGridV .PagerS td {
+            border-width: 0;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: #fff;
+            line-height: 12px;
+        }
+
+        .StyleGridV .PagerS a {
+            color: #666;
+            text-decoration: none;
+        }
+
+            .StyleGridV .PagerS a:hover {
+                color: #000;
+                text-decoration: none;
+            }
 
 /* Inicia estilo para color y tipo de letra de todos los tipos de controles y las clases necesarias */
 /*input[type="text"]
@@ -69,16 +84,14 @@
     font-family: Century Schoolbook;
 }*/
 
-textarea
-{
+textarea {
     color: #663622;
     background-color: White;
     border: 1px solid #663622;
     font-family: Century Schoolbook;
 }
 
-select
-{
+select {
     color: #663622;
     background-color: White;
     border: 1px solid #663622;
@@ -87,19 +100,18 @@ select
 
 
 .StyleDdl {
-   overflow: hidden;
-   color: #663622;
-   background-color: #E2E1C1;
-   border: 1px solid #663622;
-   border-radius: 3px;
-   font-family: Century Schoolbook;
-   text-transform: uppercase;
+    overflow: hidden;
+    color: #663622;
+    background-color: #E2E1C1;
+    border: 1px solid #663622;
+    border-radius: 3px;
+    font-family: Century Schoolbook;
+    text-transform: uppercase;
 }
 
 
-.TxtNotasDirDil
-{
-    width:300px;
+.TxtNotasDirDil {
+    width: 300px;
     color: #663622;
     background-color: White;
     border: 1px solid #663622;
@@ -107,48 +119,42 @@ select
 }
 
 
-.TxtNotasDil
-{
-    width:400px;
-    
+.TxtNotasDil {
+    width: 400px;
     color: #663622;
     background-color: White;
     border: 1px solid #663622;
     font-family: Century Schoolbook;
 }
 
-fieldset
-{
-    height:auto; 
-    width:auto;
+fieldset {
+    height: auto;
+    width: auto;
 }
 
 /* Terminan estilos */
-.ImgCalendario
-{
-    margin-left:10px;
+.ImgCalendario {
+    margin-left: 10px;
 }
 
-.GralDivContenedorDerecha
-{
-    width:100%;
+.GralDivContenedorDerecha {
+    width: 100%;
     height: 40px;
     float: right;
 }
-.GralDivBotonesDerecha
-{
-    float:right;
+
+.GralDivBotonesDerecha {
+    float: right;
 }
-.GralDivContenedor
-{
-    height:100%;
-    width:100%;
+
+.GralDivContenedor {
+    height: 100%;
+    width: 100%;
 }
 
 /* DataViewRow no visible */
-.hidden
-{
-    display:none;
+.hidden {
+    display: none;
 }
 
 .LblTitulo {
@@ -159,33 +165,77 @@ fieldset
     color: #0C2261;
 }
 
-.LblLema {
-    background: linear-gradient(to bottom, #0C2261 0%, #0C2261 100%);
-    font-size: large;
-    font-family: Calibri;
-    font-weight: bold;
-    color: #0C2261;
-}
-
-.DivTitulo
-{
-    height:20px;
-    text-align:center;
+.DivTitulo {
+    height: 20px;
+    text-align: center;
     background: #717171; /*#F5F4EC;*/
     text-decoration: underline;
     letter-spacing: 2px;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
-#bodyContenedorBda {width:950px; height:550px;}
+#bodyContenedorBda {
+    width: 950px;
+    height: 550px;
+}
 
-#bodyBienvenida{width:55%; height:510px; float:left; background:White; position:relative; padding:0 88px; clear:both; margin-top:20px; margin-bottom:20px; border-color:#88836B; border-style:double; }
-#bodyBienvenida h2{width:130px; height:35px; display:block; color:#3C2724; font:20px/50px Georgia, "Times New Roman", Times, serif; font-weight:normal;}
-#bodyBienvenida p{text-align:justify; color:Black;}
+#bodyBienvenida {
+    width: 55%;
+    height: 510px;
+    float: left;
+    background: White;
+    position: relative;
+    padding: 0 88px;
+    clear: both;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: #88836B;
+    border-style: double;
+}
 
-.DivObjetivos {margin-left:2%; width:21%; float:left; height:510px; margin-top:20px; background:White; border-color:#88836B; border-style:double;}
-.DivObjetivos h2 {width:85%; height:20px; display:block; background:#A4A4A4; color:#3C2724; padding-left:10px; padding-right:10px; margin: 5px; text-align:center; font:15px/15px Georgia, "Times New Roman", Times, serif; font-weight:normal;}
-.DivObjetivos p{text-align:justify; color:Black;}
+    #bodyBienvenida h2 {
+        width: 130px;
+        height: 35px;
+        display: block;
+        color: #3C2724;
+        font: 20px/50px Georgia, "Times New Roman", Times, serif;
+        font-weight: normal;
+    }
+
+    #bodyBienvenida p {
+        text-align: justify;
+        color: Black;
+    }
+
+.DivObjetivos {
+    margin-left: 2%;
+    width: 21%;
+    float: left;
+    height: 510px;
+    margin-top: 20px;
+    background: White;
+    border-color: #88836B;
+    border-style: double;
+}
+
+    .DivObjetivos h2 {
+        width: 85%;
+        height: 20px;
+        display: block;
+        background: #A4A4A4;
+        color: #3C2724;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: 5px;
+        text-align: center;
+        font: 15px/15px Georgia, "Times New Roman", Times, serif;
+        font-weight: normal;
+    }
+
+    .DivObjetivos p {
+        text-align: justify;
+        color: Black;
+    }
 
 /*Color Notificaciones*/
 .CustomPnotify div.ui-pnotify-container {
@@ -211,14 +261,14 @@ fieldset
 }
 
 #bodyInfoAdquisicion h2 {
-        width: 796px;
-        height: 30px;
-        display: block;
-        color: #3C2724;
-        font: 15px/20px Georgia, "Times New Roman", Times, serif;
-        font-weight: normal;
-        text-align: center;
-    }
+    width: 796px;
+    height: 30px;
+    display: block;
+    color: #3C2724;
+    font: 15px/20px Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+    text-align: center;
+}
 
 #bodyInfoGeneral {
     margin-left: 9.6%;
@@ -230,7 +280,7 @@ fieldset
     text-align: left;
 }
 
-#bodyInfoGeneral h2 {
+    #bodyInfoGeneral h2 {
         width: 750px;
         height: 55px;
         display: block;
@@ -253,6 +303,7 @@ fieldset
     /*height: 1100px;*/
     margin-right: 6px;
 }
+
 #bodyInfoAdquisicionModificacion {
     margin-left: 0.6%;
     width: 45%;
@@ -266,7 +317,7 @@ fieldset
     text-align: center;
 }
 
-#bodyInfoAdquisicionModificacion h2 {
+    #bodyInfoAdquisicionModificacion h2 {
         width: 413px;
         height: 30px;
         display: block;
@@ -286,7 +337,7 @@ fieldset
     text-align: center;
 }
 
-#bodyInfoGeneralModificacion h2 {
+    #bodyInfoGeneralModificacion h2 {
         width: 445px;
         height: 55px;
         display: block;
@@ -323,9 +374,8 @@ fieldset
     width: 100%;
 }
 
-.Lbl25
-{
-    width:25%;
+.Lbl25 {
+    width: 25%;
 }
 
 .DropGeneral {
@@ -335,6 +385,7 @@ fieldset
     border: 1px solid #0c2261;
     color: black;
 }
+
 .TxtGeneral {
     width: 400px;
     Height: 17px;
@@ -367,4 +418,3 @@ fieldset
     Width: 160px;
     text-transform: uppercase;
 }
-

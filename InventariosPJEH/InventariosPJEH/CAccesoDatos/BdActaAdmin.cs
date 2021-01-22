@@ -86,7 +86,7 @@ namespace InventariosPJEH.CAccesoDatos
             {
                 Conn.Open();
 
-                lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);                
+                lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 SqlCommand cmd = new SqlCommand("SP_Insertar_Acta", Conn, lTransaccion);
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -109,7 +109,7 @@ namespace InventariosPJEH.CAccesoDatos
                 cmd.ExecuteNonQuery();
                 Valor_Retornado_Insert_Acta = Convert.ToInt32(ValorRetorno.Value);
                 int idActa = Convert.ToInt32(idActaParam.Value);
-                
+
                 cmd = new SqlCommand("SP_Insertar_Acta_ActaInventario", Conn, lTransaccion);
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -123,7 +123,7 @@ namespace InventariosPJEH.CAccesoDatos
                     table.Columns.Add("idActaT", typeof(int));
                     table.Columns.Add("idInventarioT", typeof(int));
 
-                    foreach(var bien in listBienes)
+                    foreach (var bien in listBienes)
                     {
                         row = table.NewRow();
                         row["idActaT"] = idActa;
@@ -131,7 +131,7 @@ namespace InventariosPJEH.CAccesoDatos
                         table.Rows.Add(row);
                     }
 
-                        
+
 
                     var pList = new SqlParameter("@listActaInventario", SqlDbType.Structured);
 
@@ -144,7 +144,7 @@ namespace InventariosPJEH.CAccesoDatos
                     ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
 
                     ValorRetorno.Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add(ValorRetorno);                    
+                    cmd.Parameters.Add(ValorRetorno);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -258,7 +258,7 @@ namespace InventariosPJEH.CAccesoDatos
             {
                 cnn.Open();
 
-                SqlCommand cmd = generarObjectoSQLConsultaActa(numActa,numInventario,fechaIni,fechaFin,cnn);
+                SqlCommand cmd = generarObjectoSQLConsultaActa(numActa, numInventario, fechaIni, fechaFin, cnn);
 
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -278,7 +278,7 @@ namespace InventariosPJEH.CAccesoDatos
                         acta.strSerie = rd["Serie"].ToString();
                         acta.strStatus = rd["status"].ToString();
                         acta.strDescripcionActa = rd["Descripcion"].ToString();
-                        acta.strFechaCancela = rd["FechaCancela"].ToString(); 
+                        acta.strFechaCancela = rd["FechaCancela"].ToString();
 
                         actas.Add(acta);
                     }
@@ -300,7 +300,7 @@ namespace InventariosPJEH.CAccesoDatos
 
         public static String generarQueryConsultaActa(String numActa, String numInventario, String fechaIni, String fechaFin)
         {
-            String query = "SELECT NumActa, Nombre, UniAdmin, CONVERT(varchar,FechaAlta,103) as FechaAlta, NumInventario, DescripcionBien, Marca, Modelo, Serie, IdResguardo, IdActa, status, Descripcion, FechaCancela FROM Vta_ConsultarActas WHERE";
+            String query = "SELECT NumActa, Nombre, UniAdmin, CONVERT(varchar,FechaAlta,103) as FechaAlta, NumInventario, DescripcionBien, Marca, Modelo, Serie, IdResguardo, IdActa, status, Descripcion, CONVERT(varchar,FechaCancela,103) as FechaCancela FROM Vta_ConsultarActas WHERE";
 
             if (!String.IsNullOrWhiteSpace(numActa))
             {
@@ -339,7 +339,7 @@ namespace InventariosPJEH.CAccesoDatos
                 cmd.Parameters.Add("@fechaIni", SqlDbType.Date).Value = fechaIni;
                 cmd.Parameters.Add("@fechaFin", SqlDbType.DateTime).Value = fechaFin + " 23:59:59.999";
             }
-                                    
+
             return cmd;
         }
 

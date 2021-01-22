@@ -24,6 +24,24 @@ namespace InventariosPJEH
         protected global::System.Web.UI.WebControls.Label LblTitulo;
 
         /// <summary>
+        /// Control ScriptManagerHistoricoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManagerHistoricoPersonal;
+
+        /// <summary>
+        /// Control GAdministrativa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel GAdministrativa;
+
+        /// <summary>
         /// Control LblNomP.
         /// </summary>
         /// <remarks>
