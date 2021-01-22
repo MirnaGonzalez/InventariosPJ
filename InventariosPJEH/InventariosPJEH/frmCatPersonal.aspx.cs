@@ -29,7 +29,6 @@ namespace InventariosPJEH
             BdCat_Personal cPersonal = new BdCat_Personal();
             if (Request.Form["__EVENTTARGET"] == "AccionEliminarr")
             {
-                // AccionEliminar_Click(this, new EventArgs());
                 GridBuscar_RowDeleting(this, new GridViewDeleteEventArgs(Int32.Parse(Rowindex.Value)));
             }
             else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
@@ -234,6 +233,7 @@ namespace InventariosPJEH
                 if (clasificacion == "Seleccionar")
                 {
                     clasificacion = "";
+                    MostrarMensaje("** El tipo de área es requerido **", "error", "Normal", "Incorrecto");
                 }
 
                 if (distrito == "Seleccionar")
@@ -255,7 +255,9 @@ namespace InventariosPJEH
 
                 if (gridBuscar.Rows.Count==0)
                     {
-                        MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
+
+                   
+                    MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
                     }
 
              
@@ -263,7 +265,7 @@ namespace InventariosPJEH
             }
             else
             {
-                MostrarMensaje("** Campos Vacíos **", "error", "Normal", "Incorrecto");
+                MostrarMensaje("** El tipo de área es requerida  **", "error", "Normal", "Incorrecto");
             }
 
         }
@@ -282,6 +284,7 @@ namespace InventariosPJEH
             if (clasificacion == "Seleccionar")
             {
                 clasificacion = "";
+                MostrarMensaje("** El tipo de área es requerido **", "error", "Normal", "Incorrecto");
             }
 
             if (distrito == "Seleccionar")
@@ -310,6 +313,7 @@ namespace InventariosPJEH
             if (clasificacion == "Seleccionar")
             {
                 clasificacion = "";
+                MostrarMensaje("** El tipo de área es requerido **", "error", "Normal", "Incorrecto");
             }
 
             if (distrito == "Seleccionar")
@@ -342,6 +346,7 @@ namespace InventariosPJEH
             if (clasificacion == "Seleccionar")
             {
                 clasificacion = "";
+                 MostrarMensaje("** El tipo de área es requerido **", "error", "Normal", "Incorrecto");
             }
 
             if (distrito == "Seleccionar")
@@ -529,48 +534,47 @@ namespace InventariosPJEH
                                                         SqlTransaction lTransaccion = null;
                                                         //Variable para el valor de retorno
                                                         int Valor_Retornado = 0;
-                                                        //inicializa un try catch
-                                                        try
-                                                        {
-                                                            Conn.Open();
+                                                    //inicializa un try catch
+                                                    try
+                                                    {
+                                                        Conn.Open();
 
-                                                            lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                                                            //Especificamos el comando, en este caso el nombre del Procedimiento Almacenado, lTransaccion
-                                                            SqlCommand cmd = new SqlCommand("SP_Insertar_Personal", Conn, lTransaccion);
+                                                        lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                                                        //Especificamos el comando, en este caso el nombre del Procedimiento Almacenado, lTransaccion
+                                                        SqlCommand cmd = new SqlCommand("SP_Insertar_Personal", Conn, lTransaccion);
 
-                                                            cmd.CommandType = CommandType.StoredProcedure;
-                                          
-                                                            cmd.Parameters.Clear();
-                                           
-                                                            cmd.Parameters.AddWithValue("@claveEmpleado", TxtClaveEmpleadoNuevo.Text);
-                                                            cmd.Parameters.AddWithValue("@nombre", TxtNombreNuevo.Text.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@aPaterno", TxtAPaternoNuevo.Text.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@aMaterno", TxtAMaternoNuevo.Text.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@idUniAdmin", uniAdmin);
-                                                            cmd.Parameters.AddWithValue("@idCargo", cargo);
-                                                            cmd.Parameters.AddWithValue("@titular", titular.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@estatusPer", estatusper.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@estatusInv", estatusinv.ToUpper());
-                                                            cmd.Parameters.AddWithValue("@nomina", nomina.ToUpper());
-                                                            //declaramos el valor de retorno
-                                                            SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
+                                                        cmd.CommandType = CommandType.StoredProcedure;
 
-                                                            ValorRetorno.Direction = ParameterDirection.Output;
-                                                            cmd.Parameters.Add(ValorRetorno);
+                                                        cmd.Parameters.Clear();
 
-                                                            cmd.ExecuteNonQuery();
-                                                            Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-                                                            //Dependiendo del valor de retorno la variable success si el procedimiento retorna un 1 la operación se realizó
-                                                            //con exito de no ser así s emantiene en false y por lo tanto falló la operación
-                                                            if (Valor_Retornado == 1)
-                                                                success = true;
+                                                        cmd.Parameters.AddWithValue("@claveEmpleado", TxtClaveEmpleadoNuevo.Text);
+                                                        cmd.Parameters.AddWithValue("@nombre", TxtNombreNuevo.Text.ToUpper().Trim());
+                                                        cmd.Parameters.AddWithValue("@aPaterno", TxtAPaternoNuevo.Text.ToUpper().Trim());
+                                                        cmd.Parameters.AddWithValue("@aMaterno", TxtAMaternoNuevo.Text.ToUpper().Trim());
+                                                        cmd.Parameters.AddWithValue("@idUniAdmin", uniAdmin);
+                                                        cmd.Parameters.AddWithValue("@idCargo", cargo);
+                                                        cmd.Parameters.AddWithValue("@titular", titular.ToUpper());
+                                                        cmd.Parameters.AddWithValue("@estatusPer", estatusper.ToUpper());
+                                                        cmd.Parameters.AddWithValue("@estatusInv", estatusinv.ToUpper());
+                                                        cmd.Parameters.AddWithValue("@nomina", nomina.ToUpper());
+                                                        //declaramos el valor de retorno
+                                                        SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
 
-                                                            ///////////////////////////////////////////////////
-                                                            //ACTUALIZAR EL TITULAR DE UNA ÁREA ADMINISTRATIVA
-                                                            ActualizarTitular(uniAdmin);
+                                                        ValorRetorno.Direction = ParameterDirection.Output;
+                                                        cmd.Parameters.Add(ValorRetorno);
+
+                                                        cmd.ExecuteNonQuery();
+                                                        Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
+                                                        //Dependiendo del valor de retorno la variable success si el procedimiento retorna un 1 la operación se realizó
+                                                        //con exito de no ser así s emantiene en false y por lo tanto falló la operación
+                                                        if (Valor_Retornado == 1)
+                                                            success = true;
+                                                      
+                                                        ///////////////////////////////////////////////////
 
 
-                                                        }
+                                                       
+                                                    }
                                                         catch (Exception ex)
                                                         {
                                                       
@@ -582,9 +586,26 @@ namespace InventariosPJEH
                                                             {
                                                                 lTransaccion.Commit();
                                                                 Conn.Close();
-                                                             
+                                                                string IdEmpleado;
 
-                                                                MostrarMensaje("** Personal guardado correctamente **", "error", "Normal", "Incorrecto");
+                                                            if (rbTitularSi.Checked.ToString() == "True")
+                                                            {
+                                                                Conn.Open();
+                                                                string conSQLEmpleado = "SELECT MAX(IdEmpleado) from Cat_Personal where IdUniAdmin = '" + uniAdmin + "'";
+                                                                SqlCommand cmd2 = new SqlCommand(conSQLEmpleado, Conn);
+                                                                 IdEmpleado = Convert.ToString(cmd2.ExecuteScalar());
+                                                                Conn.Close();
+                                                            }
+                                                            else
+                                                            {
+                                                                IdEmpleado = "";
+                                                            }
+                                                            //ACTUALIZAR EL TITULAR DE UNA ÁREA ADMINISTRATIVA
+                                                            ActualizarTitular(uniAdmin, IdEmpleado);
+
+                                                          
+
+                                                            MostrarMensaje("** Personal guardado correctamente **", "error", "Normal", "Incorrecto");
                                                                 BuscarPersonalNuevo();
                                                                 DivMostrarNuevo.Visible = false;
                                                                 btnGuardar.Visible = false;
@@ -958,9 +979,9 @@ namespace InventariosPJEH
 
                                                     cmd.Parameters.AddWithValue("@IdEmpleado", LbId.Text);
                                                     cmd.Parameters.AddWithValue("@ClaveEmpleado", TxtClaveEmpleadoNuevo.Text);
-                                                    cmd.Parameters.AddWithValue("@Nombre", TxtNombreNuevo.Text.ToUpper());
-                                                    cmd.Parameters.AddWithValue("@APaterno", TxtAPaternoNuevo.Text.ToUpper());
-                                                    cmd.Parameters.AddWithValue("@AMaterno", TxtAMaternoNuevo.Text.ToUpper());
+                                                    cmd.Parameters.AddWithValue("@Nombre", TxtNombreNuevo.Text.ToUpper().Trim());
+                                                    cmd.Parameters.AddWithValue("@APaterno", TxtAPaternoNuevo.Text.ToUpper().Trim());
+                                                    cmd.Parameters.AddWithValue("@AMaterno", TxtAMaternoNuevo.Text.ToUpper().Trim());
                                                     cmd.Parameters.AddWithValue("@IdUniAdmin", uniAdmin);
                                                     cmd.Parameters.AddWithValue("@IdCargo", cargo);
                                                     cmd.Parameters.AddWithValue("@Titular", HiddenTitular.Value.ToUpper());
@@ -980,9 +1001,20 @@ namespace InventariosPJEH
                                                     if (Valor_Retornado == 1)
                                                         success = true;
 
+                                                    string IdEmpleado;
                                                     ///////////////////////////////////////////////////
+                                                    if ( rbTitularSi.Checked.ToString() == "True")
+                                                    {
+                                                        IdEmpleado = LbId.Text;
+                                                    }
+                                                    else
+                                                    {
+                                                        IdEmpleado = "";
+                                                    }
+
+
                                                     //ACTUALIZAR EL TITULAR DE UNA ÁREA ADMINISTRATIVA
-                                                    ActualizarTitular(uniAdmin);
+                                                    ActualizarTitular(uniAdmin, IdEmpleado);
 
                                                 }
 
@@ -1085,26 +1117,46 @@ namespace InventariosPJEH
             else
             {
                 HiddenClaveEmpleado.Value = TxtClaveEmpleadoNuevo.Text;
+                int n = e.RowIndex;
+                string IdEmpleado = gridBuscar.DataKeys[n].Value.ToString();
+                obJN.IdEmpleado = IdEmpleado;
+
                 Boolean encontrado = true;
             try
             {
-                if (encontrado == true)
-                {
+                    if (encontrado == true)
+                    {
+                        SqlConnection Conn = new SqlConnection(CConexion.Obtener());
+                        Conn.Open();
+                        string consultar = "SELECT IdEmpleado FROM Cat_Personal WHERE IdEmpleado= '" + IdEmpleado + "' AND EstatusInv = 'P'";
 
-                    int n = e.RowIndex;
+                        SqlCommand cmd1 = new SqlCommand(consultar, Conn);
+                        string clave = Convert.ToString(cmd1.ExecuteScalar());
 
-                        string xcod = gridBuscar.DataKeys[n].Value.ToString();
-                   
-                        obJN.IdEmpleado = xcod;
-                    obJE.Eliminar_Personal(obJN);
-                    gridBuscar.EditIndex = -1;
-                        BuscarPersona();
-                    MostrarMensaje("** Personal eliminado **", "error", "Normal", "Incorrecto");
-                        Rowindex.Value = "";
+                        SqlDataReader leer = cmd1.ExecuteReader();
+
+
+
+                        if (clave == IdEmpleado)
+                        {
+                            MostrarMensaje("** El empleado no se puede eliminar porque tiene inventario pendiente **", "error", "Normal", "Incorrecto");
+
+                        }
+
+                        else
+                        { 
+                                                   
+                            obJE.Eliminar_Personal(obJN);
+                            gridBuscar.EditIndex = -1;
+                            
+                            MostrarMensaje("** Personal eliminado de forma correcta **", "error", "Normal", "Incorrecto");
+                            Rowindex.Value = "";
+                            BuscarPersona();
+                        }
                     }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                     Rowindex.Value = "";
                     MostrarMensaje("** Error al eliminar personal **", "error", "Normal", "Incorrecto");
@@ -1172,7 +1224,7 @@ namespace InventariosPJEH
         }
 
 
-        public void ActualizarTitular (int uniAdmin)
+        public void ActualizarTitular (int uniAdmin, string IdEmpleado)
         {
             ///////////////////////////////////////////////////
             //ACTUALIZAR EL TITULAR DE UNA ÁREA ADMINISTRATIVA
@@ -1182,32 +1234,9 @@ namespace InventariosPJEH
 
                 SqlConnection Conn1 = new SqlConnection(CConexion.Obtener());
 
-  
-                string IdEmpleado;
 
-                if (HiddenTitular.Value == "S")
-                    {
-                    Conn1.Open();
-                    string conSQLEmpleado = "SELECT MAX(IdEmpleado) from Cat_Personal;";
-                     SqlCommand cmd2 = new SqlCommand(conSQLEmpleado, Conn1);
-                     SqlDataReader leer1 = cmd2.ExecuteReader();
-                  
 
-                    if (leer1.Read() == true)
-                          {
-                              IdEmpleado = leer1[0].ToString();
-                          }
-                       else
-                         {
-                              IdEmpleado = "0";
-                          }
-                    
-                      }
-                else
-                {
-                 IdEmpleado = "0";
-                }
-                Conn1.Close();
+
 
                 Conn1.Open();
                 SqlCommand update = new SqlCommand("UPDATE Cat_UniAdmin SET IdEmpleado=@IdEmpleado WHERE IdUniAdmin=@IdUniAdmin", Conn1);

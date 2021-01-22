@@ -58,7 +58,7 @@
                 <asp:HiddenField ID="Rowindex" runat="server"></asp:HiddenField>
 
                 <div style="width: auto;">
-                    <fieldset style="width: auto; height: auto; border-color: #6D252B;">
+                    <fieldset style="width: auto; height: auto; border-color: #0C2261;">
                         <legend style="text-align: left; color: darkblue;">Buscar CONAC</legend>
                         <table style="width: 100%;">
 
@@ -67,7 +67,7 @@
                                     <asp:Label ID="LbDescripcionBuscar" runat="server" Text="Descripción:" Font-Size="Medium" Style="font-family: Verdana; font-size: small; font-weight: 400; margin-left: 10px;"></asp:Label>
                                 </td>
                                 <td class="auto-style3">
-                                    <asp:TextBox runat="server" ID="TxtDescripcionBuscar" CssClass="auto-style47" Height="20px" onkeypress="return ValidacionLetras(event);" Width="513px" ></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="TxtDescripcionBuscar" CssClass="TxtGeneral" Height="20px" onkeypress="return ValidacionLetras(event);" Width="513px" OnTextChanged="TxtDescripcionBuscar_TextChanged" ></asp:TextBox>
                                 </td>
                                 <td class="auto-style4" style="text-align: center">
                                     <asp:Button ID="BtnTipoPartida" runat="server" Text="Buscar" CssClass="Boton" OnClick="BtnBuscar_Click" Style="align-content: space-around; height: 28px;" />
@@ -137,7 +137,7 @@
 
                 <asp:HiddenField ID="HiddenId" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Nuevo registro</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro" visible="false">Modificar registro</legend>
 
@@ -189,7 +189,7 @@
                                 <asp:Label ID="LbTipoPartida" runat="server" Text="Tipo de partida:" Style="font-family: Verdana; font-size: small;"></asp:Label>
                             </td>
                             <td>
-                                <asp:DropDownList ID="DropTpoPartida" runat="server" AutoPostBack="true" Width="478px" Height="19px">
+                                <asp:DropDownList ID="DropTpoPartida" runat="server" CssClass="DropGeneral" AutoPostBack="true" Width="478px" Height="19px">
                                     <asp:ListItem Text="Seleccionar"></asp:ListItem>
                                         <asp:ListItem Value="1">BIENES INFORMÁTICOS</asp:ListItem>
                                         <asp:ListItem Value="2">BIENES MUEBLES</asp:ListItem>
@@ -229,7 +229,7 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="CONAC" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="CONAC" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 

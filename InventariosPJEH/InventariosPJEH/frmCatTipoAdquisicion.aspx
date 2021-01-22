@@ -12,7 +12,7 @@
                 <asp:HiddenField ID="Rowindex" runat="server"></asp:HiddenField>
 
                 <div style="width: auto;">
-                    <fieldset style="width: auto; height: auto; border-color: #6D252B;">
+                    <fieldset style="width: auto; height: auto; border-color: #0C2261;">
                         <legend style="text-align: left; color: darkblue;">Buscar Tipo de adquisición</legend>
 
                         <table style="width: 100%;">
@@ -65,7 +65,7 @@
 
                 <asp:HiddenField ID="HiddenId" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Nuevo registro</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro" visible="false">Modificar Registro</legend>
 
@@ -123,7 +123,7 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="TIPO DE ADQUISICIÓN" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="TIPO DE ADQUISICIÓN" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 

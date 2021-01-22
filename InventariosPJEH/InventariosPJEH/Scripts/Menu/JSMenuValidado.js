@@ -84,7 +84,7 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmImpresionEtiquetas.aspx"' +
             '			            }' +            
             '		            ]' +
             '	            },' +
@@ -173,7 +173,7 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmImpresionEtiquetas.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +

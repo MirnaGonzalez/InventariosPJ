@@ -266,13 +266,48 @@ namespace InventariosPJEH.CAccesoDatos
 
         public void Eliminar_Personal(CPersonal obJE)
         {
-            SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-            SqlCommand cmd = new SqlCommand("SP_Eliminar_Personal", cnn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@idEmpleado", obJE.IdEmpleado);
-            cnn.Open();
-            cmd.ExecuteNonQuery();
-            cnn.Close();
+            SqlConnection Conn = new SqlConnection(CConexion.Obtener());
+            bool success = false;
+            SqlTransaction lTransaccion = null;
+            int Valor_Retornado = 0;
+
+            try
+            {
+                Conn.Open();
+                lTransaccion = Conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
+                SqlCommand cmd = new SqlCommand("SP_Eliminar_Personal", Conn, lTransaccion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEmpleado", obJE.IdEmpleado);
+                SqlParameter ValorRetorno = new SqlParameter("@Comprobacion", SqlDbType.Int);
+                ValorRetorno.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(ValorRetorno);
+                cmd.ExecuteNonQuery();
+                Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
+                if (Valor_Retornado == 1)
+                    success = true;
+
+
+            }
+            catch (Exception ex)
+            {
+                Conn.Close();
+            }
+
+
+            finally
+            {
+                if (success)
+                {
+                    lTransaccion.Commit();
+                    Conn.Close();
+                }
+                else
+                {
+                    lTransaccion.Rollback();
+                    Conn.Close();
+                }
+            }
         }
 
 
