@@ -154,14 +154,22 @@ namespace InventariosPJEH
             //Capturamos los errores con try catch
             try
             {
-                if (!BdActaAdmin.InsertarActaInventario(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text, datosBienes))
+                int resultado = BdActaAdmin.InsertarActaInventario(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text, datosBienes);
+                if (resultado != 1)
                 {
-                    MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    if (resultado == 2)
+                    {
+                        MostrarMensaje("** El número de acta ya existe, favor de ingresar uno diferente **", "error", "Normal", "Incorrecto");
+                    }
+                    else
+                    {
+                        MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    }
                 }
                 else
                 {
                     limpiarCamposGenerarActa();
-                    MostrarMensaje("La Insersión se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                    MostrarMensaje("Acta administrativa generada de forma correcta", "info", "Normal", "ModificacionCorrecta");
                 }
             }
             catch (Exception ex)
@@ -184,6 +192,7 @@ namespace InventariosPJEH
                     cancelarEdicionConsultaActa();
                     divConsultaActasEditar.Visible = false;
                     MostrarMensaje("La modificación se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                    consultarActa();
                 }
             }
             catch (Exception ex)
@@ -250,6 +259,17 @@ namespace InventariosPJEH
             }
         }
 
+        public void consultarActa()
+        {
+            datosActas = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
+            gridConsultaActas.DataSource = datosActas;
+            gridConsultaActas.DataBind();
+            tablaConsultaActas.Visible = true;
+            if (gridConsultaActas.Rows.Count == 0)
+            {
+                MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
+            }
+        }
         protected void BtnConsultarActa(object sender, EventArgs e)
         {
             try
@@ -262,14 +282,7 @@ namespace InventariosPJEH
                     }
                     else
                     {
-                        datosActas = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
-                        gridConsultaActas.DataSource = datosActas;
-                        gridConsultaActas.DataBind();
-                        tablaConsultaActas.Visible = true;
-                        if (gridConsultaActas.Rows.Count == 0)
-                        {
-                            MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                        }
+                        consultarActa();
                     }
                 }
                 else
@@ -280,14 +293,7 @@ namespace InventariosPJEH
                     }
                     else
                     {
-                        datosActas = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
-                        gridConsultaActas.DataSource = datosActas;
-                        gridConsultaActas.DataBind();
-                        tablaConsultaActas.Visible = true;
-                        if (gridConsultaActas.Rows.Count == 0)
-                        {
-                            MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                        }
+                        consultarActa();
                     }
                 }
 

@@ -75,13 +75,13 @@ namespace InventariosPJEH.CAccesoDatos
             }
         }
 
-        public static bool InsertarActaInventario(int idAreaResguardante, int idResguardo, String NumActa, String fechaActa, List<CDatosBienesActa> listBienes)
+        public static int InsertarActaInventario(int idAreaResguardante, int idResguardo, String NumActa, String fechaActa, List<CDatosBienesActa> listBienes)
         {
             SqlTransaction lTransaccion = null;
             SqlConnection Conn = new SqlConnection(CConexion.Obtener());
             int Valor_Retornado_Insert_Acta = 0;
             int Valor_Retornado_Insert_ActaInventario = 0;
-            bool success = false;
+            int success = -1;
             try
             {
                 Conn.Open();
@@ -108,6 +108,10 @@ namespace InventariosPJEH.CAccesoDatos
 
                 cmd.ExecuteNonQuery();
                 Valor_Retornado_Insert_Acta = Convert.ToInt32(ValorRetorno.Value);
+                if (Valor_Retornado_Insert_Acta == 2)
+                {
+                    return 2;
+                }
                 int idActa = Convert.ToInt32(idActaParam.Value);
 
                 cmd = new SqlCommand("SP_Insertar_Acta_ActaInventario", Conn, lTransaccion);
@@ -152,11 +156,11 @@ namespace InventariosPJEH.CAccesoDatos
 
                 if (Valor_Retornado_Insert_Acta == 1 && Valor_Retornado_Insert_ActaInventario == 1)
                 {
-                    success = true;
+                    success = 1;
                 }
                 else
                 {
-                    success = false;
+                    success = 0;
                 }
                 return success;
             }
@@ -165,11 +169,11 @@ namespace InventariosPJEH.CAccesoDatos
                 error = e.Message;
                 Console.WriteLine(e.ToString());
                 Conn.Close();
-                return false;
+                return 0;
             }
             finally
             {
-                if (success)
+                if (success == 1)
                 {
                     lTransaccion.Commit();
                     Conn.Close();
