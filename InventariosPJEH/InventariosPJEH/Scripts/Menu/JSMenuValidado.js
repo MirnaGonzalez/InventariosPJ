@@ -13,9 +13,8 @@
             '	                "Nombre": "Catálogos",' +
             '	                "SubMenus": [' +
             '			            {' +
- //           '			            "Nombre": "Unidades Administrativas",' +
- //           '			                "URL": ""' +
- //           '			                "URL": "frmCatUniAdmin.aspx"' +
+            '			            "Nombre": "Unidades Administrativas",' +
+            '			                "URL": "frmCatUniAdmin.aspx"' +
             '			            },' +
             '			            {' +
             '			            "Nombre": "Personal",' +

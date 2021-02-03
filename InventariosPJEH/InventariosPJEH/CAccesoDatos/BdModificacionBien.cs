@@ -612,11 +612,17 @@ namespace InventariosPJEH.CAccesoDatos
         {
             string NumBien = Lblbien.Text;
             DataTable TablaFactura = new DataTable("Resultado");
+            //SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+            //var query = @"select Nombre from Cat_Secciones
+            //              inner join FichaBien
+            //              on FichaBien.IdENSU = Cat_Secciones.IdSeccion
+            //              where NumInventario = @numBien";
+
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-            var query = @"select Nombre from Cat_Secciones
-                          inner join FichaBien
-                          on FichaBien.IdENSU = Cat_Secciones.IdSeccion
-                          where NumInventario = @numBien";
+            var query = @"SELECT Cat_Secciones.Nombre FROM Cat_Secciones INNER JOIN 
+                         Cat_ENSUbicacion ON Cat_Secciones.IdSeccion = Cat_ENSUbicacion.IdSeccion INNER JOIN
+                         FichaBien ON Cat_ENSUbicacion.IdENSU = FichaBien.IdENSU
+                         WHERE FichaBien.NumInventario = @numBien";
             SqlCommand cmd = new SqlCommand(query, cnn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             cmd.CommandType = CommandType.Text;
