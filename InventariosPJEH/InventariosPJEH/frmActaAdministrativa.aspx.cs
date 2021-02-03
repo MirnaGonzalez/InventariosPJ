@@ -151,25 +151,32 @@ namespace InventariosPJEH
 
         protected void BtnInsertarActa_Click(object sender, EventArgs e)
         {
-            //Capturamos los errores con try catch
+            //Capturamos los errores con try catch           
             try
             {
-                int resultado = BdActaAdmin.InsertarActaInventario(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text, datosBienes);
-                if (resultado != 1)
+                if (!String.IsNullOrEmpty(txtNumActa.Text) && !String.IsNullOrEmpty(txtFechaAdquisicion.Text))
                 {
-                    if (resultado == 2)
+                    int resultado = BdActaAdmin.InsertarActaInventario(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text, datosBienes);
+                    if (resultado != 1)
                     {
-                        MostrarMensaje("** El número de acta ya existe, favor de ingresar uno diferente **", "error", "Normal", "Incorrecto");
+                        if (resultado == 2)
+                        {
+                            MostrarMensaje("** El número de acta ya existe, favor de ingresar uno diferente **", "error", "Normal", "Incorrecto");
+                        }
+                        else
+                        {
+                            MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                        }
                     }
                     else
                     {
-                        MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                        limpiarCamposGenerarActa();
+                        MostrarMensaje("Acta administrativa generada de forma correcta", "info", "Normal", "ModificacionCorrecta");
                     }
                 }
                 else
                 {
-                    limpiarCamposGenerarActa();
-                    MostrarMensaje("Acta administrativa generada de forma correcta", "info", "Normal", "ModificacionCorrecta");
+                    MostrarMensaje("** Datos Faltantes **", "error", "Normal", "Incorrecto");
                 }
             }
             catch (Exception ex)
@@ -183,16 +190,23 @@ namespace InventariosPJEH
             //Capturamos los errores con try catch
             try
             {
-                if (!BdActaAdmin.ActualizarActa(txtEditNumActa.Text, txtEditConActaFechaSol.Text, lstEstatus.SelectedValue, txtEditConActaDescripcion.Text))
+                if (!String.IsNullOrEmpty(txtEditConActaFechaSol.Text) && !lstEstatus.SelectedValue.Equals("-1"))
                 {
-                    MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    if (!BdActaAdmin.ActualizarActa(txtEditNumActa.Text, txtEditConActaFechaSol.Text, lstEstatus.SelectedValue, txtEditConActaDescripcion.Text))
+                    {
+                        MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    }
+                    else
+                    {
+                        cancelarEdicionConsultaActa();
+                        divConsultaActasEditar.Visible = false;
+                        MostrarMensaje("La modificación se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                        consultarActa();
+                    }
                 }
                 else
                 {
-                    cancelarEdicionConsultaActa();
-                    divConsultaActasEditar.Visible = false;
-                    MostrarMensaje("La modificación se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
-                    consultarActa();
+                    MostrarMensaje("** Datos Faltantes **", "error", "Normal", "Incorrecto");
                 }
             }
             catch (Exception ex)
