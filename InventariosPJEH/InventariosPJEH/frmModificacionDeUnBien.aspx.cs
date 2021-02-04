@@ -1671,13 +1671,16 @@ namespace InventariosPJEH
         /// <param name="e"></param>
         protected void btnGuardarSerie_Click(object sender, ImageClickEventArgs e)
         {
+            int fila = 0;
             ImageButton imageButton = (ImageButton)sender;
             TableCell tableCell = (TableCell)imageButton.Parent;
             GridViewRow row = (GridViewRow)tableCell.Parent;
 
             GridModificar.SelectedIndex = row.RowIndex;
-            int fila = row.RowIndex;
-            string serie = ((TextBox)row.Cells[fila].FindControl("TxtNoSerie")).Text;
+            //fila = row.RowIndex;
+
+            string serie = ((TextBox)row.Cells[fila].FindControl("TxtNoSerie")).Text.ToUpper();
+             
 
             if (serie == "")
             {
