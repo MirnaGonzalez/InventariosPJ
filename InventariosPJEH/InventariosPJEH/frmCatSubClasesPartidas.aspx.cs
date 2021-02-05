@@ -99,8 +99,8 @@ namespace InventariosPJEH
         public void BuscarPartida()
         {
 
-            if (TxtPartidaBuscar.Text != "")
-            {
+           // if (TxtPartidaBuscar.Text != "")
+            //{
                 DivTabla.Visible = true;
                 DivMostrarNuevoR.Visible = false;
                 BtnGuardar.Visible = false;
@@ -117,11 +117,11 @@ namespace InventariosPJEH
                     DivTabla.Visible = false;
                     MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
                 }
-            }
-            else
-            {
-                MostrarMensaje("** Campo vacío **", "error", "Normal", "Incorrecto");
-            }
+          //  }
+           // else
+            //{
+               // MostrarMensaje("** Campo vacío **", "error", "Normal", "Incorrecto");
+            //}
 
         }
 
@@ -129,27 +129,27 @@ namespace InventariosPJEH
         /// Clase que realiza la consulta a la Base de datos, posteriormente lo muestra en la tabla
         /// busca una nueva partida
         /// </summary>
-        public void BuscarPartidaNuevo()
-        {
+        //public void BuscarPartidaNuevo()
+        //{
 
-            if (TxtPartidaBuscar.Text != "")
-            {
-                DivTabla.Visible = true;
-                string partida = Convert.ToString(DropTipoPartida.SelectedValue);
-                GridBuscar.DataSource = BdCatSubClase_Partidas.ConsultarGbPartidasVuevo(TxtPartidaNuevo.Text, partida);
-                GridBuscar.DataBind();
-                if (GridBuscar.Rows.Count == 0)
-                {
-                    DivTabla.Visible = false;
-                    MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                }
-            }
-            else
-            {
-                MostrarMensaje("** Campo vacío **", "error", "Normal", "Incorrecto");
-            }
+        //    if (TxtPartidaBuscar.Text != "")
+        //    {
+        //        DivTabla.Visible = true;
+        //        string partida = Convert.ToString(DropTipoPartida.SelectedValue);
+        //        GridBuscar.DataSource = BdCatSubClase_Partidas.ConsultarGbPartidasVuevo(TxtPartidaNuevo.Text, partida);
+        //        GridBuscar.DataBind();
+        //        if (GridBuscar.Rows.Count == 0)
+        //        {
+        //            DivTabla.Visible = false;
+        //            MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MostrarMensaje("** Campo vacío **", "error", "Normal", "Incorrecto");
+        //    }
 
-        }
+        //}
 
 
         /// <summary>
@@ -277,7 +277,8 @@ namespace InventariosPJEH
                         obJN.IdPartida = xcod;
                         obJE.Eliminar_Partidas(obJN);
                         GridBuscar.EditIndex = -1;
-                        BuscarPartidaNuevo();
+                        // BuscarPartidaNuevo();
+                        BuscarPartida();
                         MostrarMensaje("** Partida eliminada **", "error", "Normal", "Incorrecto");
                         Rowindex.Value = "";
 
@@ -294,10 +295,10 @@ namespace InventariosPJEH
                     }
 
                 }
-                catch (Exception )
+                catch (Exception ex)
                 {
                     Rowindex.Value = "";
-                    MostrarMensaje("** Error al eliminar personal **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** Error al eliminar registro **", "error", "Normal", "Incorrecto");
                 }
             }
         }
@@ -411,17 +412,17 @@ namespace InventariosPJEH
                             else
                             {
                                 SqlCommand insert = new SqlCommand("INSERT INTO Cat_Partidas(Partida,TipoPartida,NumPartida) values(@partida,@tipoPartida,@numPartida)", cnn);
-                                insert.Parameters.AddWithValue("@partida", TxtPartidaNuevo.Text.ToUpper());
+                                insert.Parameters.AddWithValue("@partida", TxtPartidaNuevo.Text.ToUpper().Trim());
                                 insert.Parameters.AddWithValue("@tipoPartida", tipoPartida);
-                                insert.Parameters.AddWithValue("@numPartida", TxtNumPartidaNuevo.Text);
+                                insert.Parameters.AddWithValue("@numPartida", TxtNumPartidaNuevo.Text.Trim());
 
                                 try
                                 {
                                     cnn.Open();
                                     insert.ExecuteNonQuery();
                                     MostrarMensaje("** Registro exitoso **", "error", "Normal", "Incorrecto");
-                                    BuscarPartidaNuevo();
-
+                                    //  BuscarPartidaNuevo();
+                                    BuscarPartida();
                                     LimpiarRegistro();
                                     DivMostrarNuevoR.Visible = false;
                                     BtnGuardar.Visible = false;
@@ -479,9 +480,9 @@ namespace InventariosPJEH
                         SqlConnection cnn = new SqlConnection(CConexion.Obtener());
                         SqlCommand update = new SqlCommand("UPDATE Cat_Partidas SET Partida=@partida, TipoPartida=@tipoPartida, NumPartida=@numPartida WHERE IdPartida=@idPartida", cnn);
                         update.Parameters.AddWithValue("@idPartida", lbPartida.Text);
-                        update.Parameters.AddWithValue("@partida", TxtPartidaNuevo.Text.ToUpper());
+                        update.Parameters.AddWithValue("@partida", TxtPartidaNuevo.Text.ToUpper().Trim());
                         update.Parameters.AddWithValue("@tipoPartida", tipoPartida);
-                        update.Parameters.AddWithValue("@numPartida", TxtNumPartidaNuevo.Text);
+                        update.Parameters.AddWithValue("@numPartida", TxtNumPartidaNuevo.Text.Trim());
 
                         try
                         {
@@ -616,9 +617,9 @@ namespace InventariosPJEH
                                 string Partida = Convert.ToString(DropPartidaNuevo.SelectedValue);
                                 SqlConnection cnn = new SqlConnection(CConexion.Obtener());
                                 SqlCommand insert = new SqlCommand("INSERT INTO Cat_SubClase(IdSubClase,SubClase,IdPartida, Folio) values(@idSubClase,@subClase,@idPartida,@folio)", cnn);
-                                insert.Parameters.AddWithValue("@idSubClase", TxtClaveSubClase.Text);
-                                insert.Parameters.AddWithValue("@subClase", TxtSubClaseNuevo.Text);
-                                insert.Parameters.AddWithValue("@idPartida", Partida);
+                                insert.Parameters.AddWithValue("@idSubClase", TxtClaveSubClase.Text.Trim());
+                                insert.Parameters.AddWithValue("@subClase", TxtSubClaseNuevo.Text.Trim());
+                                insert.Parameters.AddWithValue("@idPartida", Partida.Trim());
                                 insert.Parameters.AddWithValue("@folio", TxtFolioNuevo.Text);
 
                                 try
@@ -691,10 +692,10 @@ namespace InventariosPJEH
                             string Partida = Convert.ToString(DropPartidaNuevo.SelectedValue);
                             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
                             SqlCommand insert = new SqlCommand("UPDATE Cat_SubClase SET SubClase=@subClase,IdPartida=@idPartida, Folio=@folio WHERE IdSubClase=@idSubClase", cnn);
-                            insert.Parameters.AddWithValue("@idSubClase", TxtClaveSubClase.Text);
-                            insert.Parameters.AddWithValue("@subClase", TxtSubClaseNuevo.Text);
-                            insert.Parameters.AddWithValue("@idPartida", Partida);
-                            insert.Parameters.AddWithValue("@folio", TxtFolioNuevo.Text);
+                            insert.Parameters.AddWithValue("@idSubClase", TxtClaveSubClase.Text.Trim());
+                            insert.Parameters.AddWithValue("@subClase", TxtSubClaseNuevo.Text.Trim());
+                            insert.Parameters.AddWithValue("@idPartida", Partida.Trim());
+                            insert.Parameters.AddWithValue("@folio", TxtFolioNuevo.Text.Trim());
 
                             try
                             {

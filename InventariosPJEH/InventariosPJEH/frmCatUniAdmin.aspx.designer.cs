@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace InventariosPJEH {
-    
-    
-    public partial class frmCatUniAdmin {
-        
+namespace InventariosPJEH
+{
+
+
+    public partial class frmCatUniAdmin
+    {
+
         /// <summary>
         /// Control ScriptManager1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control ConsultaPanel.
         /// </summary>
@@ -38,7 +40,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel ConsultaPanel;
-        
+
         /// <summary>
         /// Control LblSección.
         /// </summary>
@@ -47,7 +49,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblSección;
-        
+
         /// <summary>
         /// Control ddlSeccion.
         /// </summary>
@@ -56,7 +58,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSeccion;
-        
+
         /// <summary>
         /// Control LblDistrito.
         /// </summary>
@@ -65,7 +67,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblDistrito;
-        
+
         /// <summary>
         /// Control DropDistrito.
         /// </summary>
@@ -74,7 +76,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDistrito;
-        
+
         /// <summary>
         /// Control LblUniAdmin.
         /// </summary>
@@ -83,7 +85,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblUniAdmin;
-        
+
         /// <summary>
         /// Control ddlUniAdmin.
         /// </summary>
@@ -92,7 +94,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlUniAdmin;
-        
+
         /// <summary>
         /// Control btnConsulta.
         /// </summary>
@@ -101,7 +103,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConsulta;
-        
+
         /// <summary>
         /// Control GridUniAdmin.
         /// </summary>
@@ -110,7 +112,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridUniAdmin;
-        
+
         /// <summary>
         /// Control lblSeccionMod.
         /// </summary>
@@ -119,7 +121,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSeccionMod;
-        
+
         /// <summary>
         /// Control ddlSeccionMod.
         /// </summary>
@@ -128,7 +130,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSeccionMod;
-        
+
         /// <summary>
         /// Control lblTipoMod.
         /// </summary>
@@ -137,7 +139,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTipoMod;
-        
+
         /// <summary>
         /// Control ddlTipoMod.
         /// </summary>
@@ -146,7 +148,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoMod;
-        
+
         /// <summary>
         /// Control lblUniAdminMod.
         /// </summary>
@@ -155,7 +157,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUniAdminMod;
-        
+
         /// <summary>
         /// Control txtUniAdmin.
         /// </summary>
@@ -164,7 +166,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUniAdmin;
-        
+
         /// <summary>
         /// Control btnGuardar.
         /// </summary>
@@ -173,7 +175,7 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-        
+
         /// <summary>
         /// Control HFIdUniAdmin.
         /// </summary>
@@ -182,14 +184,14 @@ namespace InventariosPJEH {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HFIdUniAdmin;
-        
+
         /// <summary>
-        /// Control LblTitulo.
+        /// Control LblLema.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblTitulo;
+        protected global::System.Web.UI.WebControls.Label LblLema;
     }
 }

@@ -22,8 +22,7 @@ namespace InventariosPJEH
             if (Request.Form["__EVENTTARGET"] == "AccionEliminarEdificio")
             {
                 EliminarEdificio();
-             // GridBuscarEdificios_RowDeleting(this, new GridViewDeleteEventArgs(Int32.Parse(Rowindex.Value)));
-            }
+              }
 
             else if (Request.Form["__EVENTTARGET"] == "AccionVacio")
             {
@@ -319,16 +318,7 @@ namespace InventariosPJEH
 
                         MostrarMensaje("Prueba", "info", "NotificacionEliminar", "Inicio");
                     }
-                    //else
-                    //{
 
-                    //    idEdificio = Page.Session["idEdificio"].ToString();
-
-                    //    BorrarEdificio(idEdificio);
-                    //    BuscarPorFiltros();
-
-                    //    Rowindex.Value = "";
-                    //}
 
                     break;
 
@@ -337,16 +327,20 @@ namespace InventariosPJEH
                 case "AgregarNivel":
 
                     DivNuevoNivel.Visible = true;
+                    TxtNivelNuevo.Text = "";
+
 
                     IniciarLlenadoDropEdificioNuevo();
 
                     DropEdificiosNuevo.SelectedValue = idEdificio.ToString();
 
                     DivNuevoNivel.Visible = true;
+                    lgNuevoRegistro2.Visible = true;
+                    lgModificarRegistro2.Visible = false;
                     btnGuardarNivel.Visible = true;
                     BtnActualizar.Visible = false;
-                    lgNuevoRegistro.Visible = true;
-                    lgModificarRegistro2.Visible = false;
+
+
                                                           
                     break;
 
@@ -433,9 +427,7 @@ namespace InventariosPJEH
                         BtnGuardar.Visible = false;
                         BtnCancelarSeccion.Visible = false;
 
-                      //  bool success = false;
-                      //  SqlTransaction lTransaccion = null;
-                      //  int Valor_Retornado = 0;
+
                         SqlConnection cnn = new SqlConnection(CConexion.Obtener());
 
                                 try
@@ -451,17 +443,6 @@ namespace InventariosPJEH
 
 
 
-                                    //    ValorRetorno.Direction = ParameterDirection.Output;
-                                    //    cmd.Parameters.Add(ValorRetorno);
-                                    //    cmd.ExecuteNonQuery();
-                                    //    Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-
-
-                                     //Valor_Retornado = Convert.ToInt32(ValorRetorno.Value);
-                                    //    if (Valor_Retornado == 1)
-                                    
-                                  //  success = true;
-
                                     cnn.Close();
 
                                     MostrarMensaje("** Edificio eliminado de forma correcta**", "error", "Normal", "Incorrecto");                  
@@ -472,19 +453,7 @@ namespace InventariosPJEH
                                     string script = ex.ToString();
                                      MostrarMensaje("** No se puede eliminar el edificio por que tiene niveles asociados**", "error", "Normal", "Incorrecto");
         }
-        //                        finally
-        //{
-        //    if (success)
-        //    {
-        //        lTransaccion.Commit();
-        //        cnn.Close();
-        //    }
-        //    else
-        //    {
-        //        lTransaccion.Rollback();
-        //        cnn.Close();
-        //    }
-        //}
+        
 
    }   
 
@@ -509,7 +478,6 @@ namespace InventariosPJEH
                     lgNuevoRegistro.Visible = true;
                     lgModificarRegistro.Visible = false;
                     BtnCancelarSeccion.Visible = true;
-                    //BtnLimpiar.Visible = true;
                     LimpiarRegistro();
 
                 }
@@ -522,7 +490,6 @@ namespace InventariosPJEH
                 DivNuevoNivel.Visible = false;
                 DivNuevaSeccion.Visible = false;
                 BtnGuardar.Visible = false;
-              //  BtnLimpiar.Visible = false;
                 BtnCancelarSeccion.Visible = false;
                 btnGuardarNivel.Visible = false;
                 btnGuadarSeccion.Visible = false;
@@ -868,6 +835,7 @@ namespace InventariosPJEH
             string idNivel = GridNiveles.DataKeys[index].Values["IdNivel"].ToString();
             string idEdificio = GridNiveles.DataKeys[index].Values["IdEdificio"].ToString();
 
+
             switch (e.CommandName)
 
 
@@ -914,14 +882,16 @@ namespace InventariosPJEH
                         if (DivNuevaSeccion.Visible == true)
                         {
                             DivNuevaSeccion.Visible = true;
+                            TxtSeccionesNuevo.Text = "";
+                            DivEdificios.Visible = true;
                             btnGuadarSeccion.Visible = true;
-                            BtnActualizar3.Visible = false;
                             lgNuevaSeccion.Visible = true;
                             lgModificarRegistro3.Visible = false;
+                            BtnActualizar3.Visible = false;
                             BtnCancelarSeccion.Visible = true;
                             LimpiarRegistro3();
                             DivNuevoNivel.Visible = false;
-                            DivEdificios.Visible = false;
+                            
 
                         }
                     }
@@ -931,7 +901,7 @@ namespace InventariosPJEH
                         DivNuevaSeccion.Visible = false;
                         btnGuadarSeccion.Visible = false;
                         BtnCancelarSeccion.Visible = false;
-                        DivEdificios.Visible = false;
+                        DivEdificios.Visible = true;
                         DivNuevoNivel.Visible = false;
                     }
 
@@ -939,13 +909,13 @@ namespace InventariosPJEH
                     {
                         DivNuevaSeccion.Visible = true;
                         btnGuadarSeccion.Visible = true;
-                        BtnActualizar3.Visible = false;
                         lgNuevaSeccion.Visible = true;
-                        lgModificarRegistro3.Visible = false;
                         BtnCancelarSeccion.Visible = true;
                         //  BtnLimpiar.Visible = true;
-                        DivEdificios.Visible = false;
+                       // DivEdificios.Visible = false;
                         DivNuevoNivel.Visible = false;
+                        BtnActualizar3.Visible = false;
+                        lgModificarRegistro3.Visible = false;
                         LimpiarRegistro3();
 
                     }
@@ -958,7 +928,6 @@ namespace InventariosPJEH
                     btnGuardarNivel.Visible = false;
                     BtnActualizar2.Visible = false;
                     BtnCancelarSeccion.Visible = false;
-                    //BtnLimpiar.Visible = false;
                     DivNuevoNivel.Visible = false;
                     DivSecciones.Visible = true;
                     GridSecciones.Visible = true;
@@ -967,7 +936,8 @@ namespace InventariosPJEH
 
             
                     HiddenIdNivel.Value = idNivel;
-                    BuscarSeccionNuevo(idNivel, HiddenIdEdificio.Value);
+                    HiddenIdEdificio.Value = idEdificio;
+                    BuscarSeccionNuevo(idNivel, idEdificio);
                     break;
 
                 default:
@@ -1045,9 +1015,6 @@ namespace InventariosPJEH
                     string edificio = Convert.ToString(HiddenEdificio.Value);
                     string edi = Convert.ToString(DropEdificiosNuevo.SelectedItem);
 
-//                    btnGuardarNivel.Visible = false;
- //                   DivNiveles.Visible = true;
-
                     int seccion = Convert.ToInt32(DropEdificiosNuevo.SelectedValue);
 
                     SqlConnection cnn = new SqlConnection(CConexion.Obtener());
@@ -1060,12 +1027,9 @@ namespace InventariosPJEH
                         cnn.Open();
                         insert.ExecuteNonQuery();
                         MostrarMensaje("** Nivel guardado correctamente **", "error", "Normal", "Incorrecto");
+                        
                         BuscarNiveles(HiddenIdEdificio.Value);
-                        //BtnCancelarSeccion.Visible = false;
-                        //BtnActualizar2.Visible = false;
-
                         LimpiarNuevoNivel();
-
                         DivNuevoNivel.Visible = false;
                         DivNiveles.Visible = false;
 
@@ -1115,9 +1079,10 @@ namespace InventariosPJEH
                     update.ExecuteNonQuery();
                     MostrarMensaje("** Se actualizó correctamente el nivel **", "error", "Normal", "Incorrecto");
                     BuscarNiveles(HiddenIdEdificio.Value);
-                        BtnCancelarSeccion.Visible = false;
-                        DivNuevoNivel.Visible = false;
-                        BtnActualizar2.Visible = false;
+                    BtnCancelarSeccion.Visible = false;
+                    DivNuevoNivel.Visible = false;
+                    BtnActualizar2.Visible = false;
+                      
                     }
                 catch (Exception)
                 {
@@ -1127,7 +1092,7 @@ namespace InventariosPJEH
                 }
                 else
                 {
-                    MostrarMensaje("** Selecciona un edificio **", "error", "Normal", "Incorrecto");
+                    MostrarMensaje("** Seleccione un edificio **", "error", "Normal", "Incorrecto");
 
                 }
             }
@@ -1151,15 +1116,12 @@ namespace InventariosPJEH
             LimpiarRegistro();
           
             DivNuevoEdificio.Visible = false;
-            DivEdificios.Visible = false;
-            //BtnLimpiar.Visible = false;
             BtnActualizar.Visible = false;
             BtnGuardar.Visible = false;
             BtnCancelarSeccion.Visible = false;
             ddlMunicipio.SelectedIndex = 0;
             ddlEdificio.SelectedIndex = 0;
-          //  ddlNivel.SelectedIndex = 0;
-         //   ddlSeccion.SelectedIndex = 0;
+
       
 
         }
@@ -1201,7 +1163,7 @@ namespace InventariosPJEH
 
             string idSeccion = GridSecciones.DataKeys[index].Values["IdSeccion"].ToString();
             string tipo = (RowSelecionada.Cells[6].Controls[1] as Label).Text;
-            string idENSU = GridSecciones.DataKeys[index].Values["IdENSU"].ToString();
+           // string idENSU = GridSecciones.DataKeys[index].Values["IdENSU"].ToString();
 
 
             
@@ -1228,8 +1190,8 @@ namespace InventariosPJEH
 
             LbIdSecciones.Text = idSeccion;
             TxtSeccionesNuevo.Text = nombre;
-            LbIdENSU.Text = idENSU;
-            HiddenIdENSU.Value = idENSU;
+            //LbIdENSU.Text = idENSU;
+           // HiddenIdENSU.Value = idENSU;
 
             Boolean encontrado = true;
             int a = 0;
@@ -1273,13 +1235,31 @@ namespace InventariosPJEH
                         int n = e.RowIndex;
                         int index = Convert.ToInt32(e.RowIndex);
                         GridViewRow RowSelecionada = GridSecciones.Rows[index];
-                        string idENSU1 = GridSecciones.DataKeys[index].Values["IdENSU"].ToString();
                         string idSeccion = GridSecciones.DataKeys[index].Values["IdSeccion"].ToString();
-                        // string xcod = GridSecciones.DataKeys[n].Value.ToString();
+                        
+
+
+                        //// SELECCIONAR IDENSE PARA VALIDAR SI HAY REGISTROS RELACIONADOS
+                        SqlConnection Conn = new SqlConnection(Conexion.Obtener());
+                        SqlCommand cmdsql = new SqlCommand("SELECT IdENSU FROM Cat_ENSUbicacion WHERE IdSeccion = @IdSeccion ", Conn);
+                        cmdsql.Parameters.AddWithValue("@IdSeccion", idSeccion);
+                        Conn.Open();
+                        SqlDataReader leer = cmdsql.ExecuteReader();
+
+                        string IdENSU;
+                        if (leer.Read() == true)
+                        {
+                            IdENSU = leer[0].ToString();
+                        }
+                        else
+                        {
+                            IdENSU = "";
+                        }
+
 
 
                         obJN.IdSeccion = idSeccion;
-                        obJN1.IdENSU = HiddenIdENSU.Value;
+                        obJN1.IdENSU = IdENSU;
 
                         obJE.Eliminar_Secciones(obJN, obJN1);
                         GridSecciones.EditIndex = -1;
@@ -1380,42 +1360,7 @@ namespace InventariosPJEH
         {
             GuardarSeccionNuevo();
 
-            SqlConnection Conn = new SqlConnection(CConexion.Obtener());
-            Conn.Open();
-            string conSQLEdificio = "SELECT MAX(IdEdificio) from Cat_Edificio";
-            SqlCommand cmd1 = new SqlCommand(conSQLEdificio, Conn);
-            SqlDataReader leer = cmd1.ExecuteReader();
-            string IdEdificio;
-            if (leer.Read() == true)
-            {
-                IdEdificio = leer[0].ToString();
-            }
-            else
-            {
-                IdEdificio = "";
-            }
-            Conn.Close();
-
-         
-                SqlConnection Conn1 = new SqlConnection(CConexion.Obtener());
-            Conn1.Open();
-            string conSQLNivel = "SELECT MAX(IdNivel) from Cat_Niveles";
-                SqlCommand cmd2 = new SqlCommand(conSQLNivel, Conn1);
-                SqlDataReader leer1 = cmd2.ExecuteReader();
-                string IdNivel;
-                if (leer1.Read() == true)
-                {
-                    IdNivel = leer1[0].ToString();
-                }
-                else
-                {
-                    IdNivel = "";
-                }
-                Conn1.Close();
-
-            
-
-
+      
             //// SELECCIONAR SECCIÓN
 
             SqlConnection Conn2 = new SqlConnection(CConexion.Obtener());
@@ -1435,12 +1380,14 @@ namespace InventariosPJEH
             Conn2.Close();
 
 
-            btnGuadarSeccion.Visible = true;
-            DivSecciones.Visible = true;
+          
 
 
             string seccion = Convert.ToString(DropTipoNuevo.SelectedValue);
 
+            string IdEdificio = HiddenIdEdificio.Value;
+            string IdNivel = HiddenIdNivel.Value;
+      
 
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
             SqlCommand insert = new SqlCommand("INSERT INTO Cat_ENSUbicacion(IdEdificio, IdNivel,IdSeccion) VALUES(@idEdificio, @idNivel, @idSeccion)", cnn);
@@ -1454,20 +1401,16 @@ namespace InventariosPJEH
                 insert.ExecuteNonQuery();
                 MostrarMensaje("** Sección guardada correctamente **", "error", "Normal", "Incorrecto");
 
-                //BuscarSeccionNuevo(HiddenId2.Value);
+              
                 BuscarSecciones(HiddenIdNivel.Value, IdEdificio);
-                DivNuevaSeccion.Visible = false;
+                btnGuadarSeccion.Visible = true;
                 DivSecciones.Visible = true;
+                DivEdificios.Visible = true;
                 GridSecciones.Visible = true;
-
-
-                //  BtnCancelarSeccion.Visible = false;
-                //   btnGuadarSeccion.Visible = false;
+                DivNuevaSeccion.Visible = false;
 
 
 
-                // btnGuardarNivel.Visible = false;
-                //   BtnCancelarSeccion.Visible = false;
             }
             catch (Exception )
             {

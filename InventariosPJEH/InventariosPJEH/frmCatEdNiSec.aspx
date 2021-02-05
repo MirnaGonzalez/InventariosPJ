@@ -12,7 +12,7 @@
                 <asp:HiddenField ID="Rowindex" runat="server"></asp:HiddenField>
                 <asp:HiddenField ID="HiddenMunicipio" runat="server"></asp:HiddenField>
                 <div style="width: auto;">
-                    <fieldset style="width: auto; height: auto; border-color: #6D252B;">
+                    <fieldset style="width: auto; height: auto; border-color: #0C2261;">
                         <legend style="text-align: left; color: darkblue;">Buscar edificios </legend>
                         <table class="auto-style8">
                             <tr>
@@ -20,7 +20,7 @@
                                     <asp:Label ID="LbMunicipiosBuscar" runat="server" Text="Municipio:" Font-Size="Medium" Style="font-family: Verdana; font-size: small; font-weight: 400; margin-left: 10px;"></asp:Label>
                                 </td>
                                 <td class="auto-style3" style="text-align: left;">
-                                    <asp:DropDownList ID="ddlMunicipio" runat="server" AutoPostBack="true" Width="600px" OnSelectedIndexChanged="BuscarEdificio"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlMunicipio" runat="server" AutoPostBack="true" CssClass="DropGeneral" Width="600px" OnSelectedIndexChanged="BuscarEdificio"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -28,7 +28,7 @@
                                     <asp:Label ID="LbEdificiosBuscar" runat="server" Text="Edificio:" Font-Size="Medium" Style="font-family: Verdana; font-size: small; font-weight: 400; margin-left: 10px;"></asp:Label>
                                 </td>
                                 <td class="auto-style3" style="text-align: left;">
-                                    <asp:DropDownList ID="ddlEdificio" runat="server" AutoPostBack="true" Width="600px" ></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlEdificio" runat="server" CssClass="DropGeneral" AutoPostBack="true" Width="600px" ></asp:DropDownList>
                                 </td>
                             </tr>
                         </table>
@@ -122,7 +122,7 @@
 
                 <asp:HiddenField ID="HiddenIdEdificio" runat="server" />
                 <asp:HiddenField ID="HiddenEdificioNuevo" runat="server" />
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Nuevo edificio</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro" visible="false">Modificar edificio</legend>
 
@@ -177,7 +177,7 @@
                                 <asp:Label ID="LbMunicipio" runat="server" Text="Municipio:" Style="font-family: Verdana; font-size: small;"></asp:Label>
                             </td>
                             <td class="auto-style1">
-                                <asp:DropDownList ID="DropMunicipioNuevo" runat="server" AutoPostBack="true" Width="478px" Height="19px"> </asp:DropDownList>
+                                <asp:DropDownList ID="DropMunicipioNuevo" CssClass="DropGeneral" runat="server" AutoPostBack="true" Width="478px" Height="19px"> </asp:DropDownList>
                             </td>
                          
                         </tr>
@@ -272,7 +272,7 @@
                 <asp:HiddenField ID="Rowindex2" runat="server" />
                 <asp:HiddenField ID="HiddenIdNivel" runat="server" />
                 <asp:HiddenField ID="HiddenEdificio" runat="server" />
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro2" visible="True">Nuevo nivel</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro2" visible="false">Modificar nivel</legend>
 
@@ -304,7 +304,7 @@
 
                             </td>
                             <td class="auto-style2">
-                                <asp:DropDownList ID="DropEdificiosNuevo" runat="server" AutoPostBack="true"  Width="478px" Height="20px"></asp:DropDownList>
+                                <asp:DropDownList ID="DropEdificiosNuevo" runat="server" CssClass="DropGeneral" AutoPostBack="true"  Width="478px" Height="20px"></asp:DropDownList>
                             </td>
                         </tr>
 
@@ -366,8 +366,7 @@
                                <ItemStyle Width="30px" /> 
                                 </asp:TemplateField>
 
-                            <asp:BoundField DataField="IdENSU" HeaderText="Clave Ubicación" ItemStyle-Width="40px">
-                                 <ItemStyle Width="60px" />   </asp:BoundField>
+                  
                             <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/editar.png" ControlStyle-Width="30px" HeaderText="Modificar Sección" Text="Editar"
                                 CommandName="Prueba" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="10px">
                                 <ControlStyle Width="30px" />
@@ -403,7 +402,7 @@
                 <asp:HiddenField ID="Rowindex3" runat="server" />
                 <asp:HiddenField ID="HiddenIdENSU" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevaSeccion" visible="false">Nueva sección</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro3" visible="false">Modificar sección</legend>
 
@@ -436,7 +435,7 @@
                                 <asp:Label ID="LbTipoNuevo" runat="server" Text="Tipo:" Style="font-family: Verdana; font-size: small;"></asp:Label>
                             </td>
                             <td class="auto-style1">
-                                <asp:DropDownList ID="DropTipoNuevo" runat="server" AutoPostBack="true" Width="478px" Height="19px"> 
+                                <asp:DropDownList ID="DropTipoNuevo" runat="server" AutoPostBack="true" CssClass="DropGeneral" Width="478px" Height="19px"> 
                                    <asp:ListItem Text="Seleccionar"></asp:ListItem>
                                         <asp:ListItem Value="T">TRABAJO</asp:ListItem>
                                         <asp:ListItem Value="R">RESGUARDO</asp:ListItem>
@@ -487,7 +486,7 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="EDIFICIOS - NIVELES - SECCIONES" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="EDIFICIOS - NIVELES - SECCIONES" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 

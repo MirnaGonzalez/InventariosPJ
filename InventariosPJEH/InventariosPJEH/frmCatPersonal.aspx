@@ -73,24 +73,24 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
 
-    <asp:Label ID="LbId" runat="server"></asp:Label>
+    <asp:Label ID="LbId" runat="server" Visible="False"></asp:Label>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
             <div id="bodyContenedorBda;" style="width: auto; height: auto; text-align: center">
 
-                <asp:HiddenField id="Rowindex" runat="server"></asp:HiddenField>
+                <asp:HiddenField id="Rowindex" runat="server" Visible="False"></asp:HiddenField>
 
                 <div style="width: auto;">
-                    <fieldset class="auto-style7" style="border-color: #6D252B; ">
+                    <fieldset class="auto-style7" style="border-color: #0c2261; ">
                         <legend style="text-align: left;  color:darkblue;" >Buscar personal </legend>
                         <div class="auto-style15">
 
                             <table style="width: 100%; margin-top: 30px;">
                                 <tr>
                                     <td class="auto-style13" style="text-align: right;">
-                                        <asp:Label ID="LabelGeneral" runat="server" CssClass="LabelGenera" Text="Tipo de área: "></asp:Label>
+                                        <asp:Label ID="LabelGeneral" runat="server" CssClass="LabelGenera" Text="* Tipo de área: "></asp:Label>
                                     </td>
                                     <td style="text-align: left;">
                                         <asp:DropDownList ID="ddlClasificacion" runat="server" AutoPostBack="true" CssClass="DropGeneral" OnSelectedIndexChanged="ClasificacionSeleccionado" Width="420px">
@@ -115,7 +115,7 @@
                                     </td>
                                     <td style="text-align: left;">
 
-                                        <asp:DropDownList ID="ddlUniAdmin" runat="server" AutoPostBack="True" CssClass="auto-style20" Height="20px" Width="420px"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlUniAdmin" runat="server" AutoPostBack="True" CssClass="DropGeneral" Height="20px" Width="420px"></asp:DropDownList>
 
                                     </td>
                                 </tr>
@@ -168,7 +168,7 @@
                                         <br />
                                     </td>
                                     <td class="auto-style16">
-                                        <asp:Button ID="btnMostrarNuevoR" runat="server" Text="Nuevo Registro" CssClass="Boton" OnClick="BtnMostraOcultar" Style="margin-top: 15px; align-content: space-around; " Height="33px" Width="153px" />
+                                        <asp:Button ID="btnMostrarNuevoR" runat="server" Text="Nuevo registro" CssClass="Boton" OnClick="BtnMostraOcultar" Style="margin-top: 15px; align-content: space-around; " Height="33px" Width="153px" />
                                         <br />
                                     </td>
 
@@ -250,7 +250,7 @@
                               <asp:HiddenField ID="HiddenDescripcion" runat="server" />
                         
 
-                    <fieldset style="height: auto; border-color: #6D252B;"  runat="server" >
+                    <fieldset style="height: auto; border-color: #0c2261;"  runat="server" >
                       
                         <legend style="text-align: left; color:darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Datos del personal</legend>
                            
@@ -406,7 +406,7 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="PERSONAL" Font-Size="Large" Font-Bold="True" Font-Italic="True" CssClass="LblLema"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="PERSONAL" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 

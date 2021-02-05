@@ -13,9 +13,8 @@
             '	                "Nombre": "Catálogos",' +
             '	                "SubMenus": [' +
             '			            {' +
- //           '			            "Nombre": "Unidades Administrativas",' +
- //           '			                "URL": ""' +
- //           '			                "URL": "frmCatUniAdmin.aspx"' +
+            '			            "Nombre": "Unidades Administrativas",' +
+            '			                "URL": "frmCatUniAdmin.aspx"' +
             '			            },' +
             '			            {' +
             '			            "Nombre": "Personal",' +
@@ -84,7 +83,7 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmImpresionEtiquetas.aspx"' +
             '			            }' +            
             '		            ]' +
             '	            },' +
@@ -173,7 +172,7 @@
             '			            },' +
             '			            {' +
             '			            "Nombre": "Impresión de Etiquetas",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmImpresionEtiquetas.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +

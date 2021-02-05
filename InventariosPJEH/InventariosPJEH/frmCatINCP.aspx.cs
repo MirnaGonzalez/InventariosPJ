@@ -50,6 +50,7 @@ namespace InventariosPJEH
             DropINCP.Items.Insert(0, new ListItem("Seleccionar", "0"));
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -66,8 +67,8 @@ namespace InventariosPJEH
         /// </summary>
         public void BuscarINCP()
         {
-            if (DropINCP.SelectedIndex != 0)
-            {
+           // if (DropINCP.SelectedIndex != 0)
+          //  {
                 string incp = Convert.ToString(DropINCP.SelectedItem);
                 DivTabla.Visible = true;
                 GridBuscar.DataSource = BdCatINCP.ConsultarGbINCP(incp);              
@@ -76,11 +77,11 @@ namespace InventariosPJEH
                 {
                     MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
                 }
-            }
-            else
-            {
-                MostrarMensaje("** Selecciona un año **", "error", "Normal", "Incorrecto");
-            }
+        //    }
+       //     else
+         //   {
+           //     MostrarMensaje("** Selecciona un año **", "error", "Normal", "Incorrecto");
+            //}
         }
 
         public void BuscarINCPNuevo()
@@ -194,18 +195,21 @@ namespace InventariosPJEH
                                     MostrarMensaje("** Registro exitoso **", "error", "Normal", "Incorrecto");
                                     if (DropINCP.SelectedIndex != 0)
                                     {
-                                        BuscarINCP();
+                                       
                                         BtnGuardar.Visible = false;
                                         BtnCancelar.Visible = false;
                                         DivMostrarNuevoR.Visible = false;
                                     }
                                     else
                                     {
-                                        BuscarINCPNuevo();
+                                     
+                                        //BuscarINCPNuevo();
                                         BtnGuardar.Visible = false;
                                         BtnCancelar.Visible = false;
                                         DivMostrarNuevoR.Visible = false;
                                     }
+                                    BuscarINCP();
+                                    IniciarLlenadoDropDown();
 
                                 }
                                 catch (Exception )
@@ -260,7 +264,10 @@ namespace InventariosPJEH
                                 update.Parameters.AddWithValue("@iva", Convert.ToDecimal(TxtIVA.Text, CultureInfo.CreateSpecificCulture("en-US")));
                                 update.Parameters.AddWithValue("@numumas", Convert.ToDecimal(TxtNumUmas.Text, CultureInfo.CreateSpecificCulture("en-US")));
                                 update.Parameters.AddWithValue("@valorumas", Convert.ToDecimal(TxtValorUma.Text, CultureInfo.CreateSpecificCulture("en-US")));
-                                update.Parameters.AddWithValue("@incp", Convert.ToDecimal(LbINCP.Text, CultureInfo.CreateSpecificCulture("en-US")));/* Convert.ToDecimal(rd["INCP"]).ToString("###,###.00");*/
+                                
+                                update.Parameters.AddWithValue("@incp", Convert.ToDecimal(LbINCP.Text, CultureInfo.CreateSpecificCulture("en-US")));
+                                //update.Parameters.AddWithValue ("@incp", Convert.ToDecimal(LbINCP.Text).ToString("###,###.00"));
+                      
                                 update.Parameters.AddWithValue("@idINCP", LbId.Text);
 
                                 try
@@ -269,6 +276,7 @@ namespace InventariosPJEH
                                     update.ExecuteNonQuery();
                                     MostrarMensaje("** Se actualizó correctamente **", "error", "Normal", "Incorrecto");
                                     BuscarINCP();
+                                    IniciarLlenadoDropDown();
                                     BtnActualizar.Visible = false;
                                     BtnCancelar.Visible = false;
                                     DivMostrarNuevoR.Visible = false;
@@ -329,12 +337,12 @@ namespace InventariosPJEH
             string iva = RowSelecionada.Cells[2].Text.Replace(",", ".");
             string numumas = RowSelecionada.Cells[3].Text.Replace(",", ".");
             string valorumas = RowSelecionada.Cells[4].Text.Replace(",", ".");
-            string incp= RowSelecionada.Cells[5].Text.Replace(",", ".");
+            string incp = RowSelecionada.Cells[5].Text;
 
             LbId.Text = idINCP;
             TxtAnio.Text = anio;
             TxtIVA.Text= iva;
-            TxtNumUmas.Text = numumas;
+            TxtNumUmas.Text = numumas; 
             TxtValorUma.Text = valorumas;
             LbINCP.Text = incp;
         }
@@ -360,7 +368,9 @@ namespace InventariosPJEH
                     obJN.IdINCP = xcod;
                     obJE.Eliminar_INCP(obJN);
                     GridBuscar.EditIndex = -1;
-                    BuscarINCPNuevo();
+                    BuscarINCP();
+                    IniciarLlenadoDropDown();
+                   // BuscarINCPNuevo();
                     MostrarMensaje("** INCP eliminado **", "error", "Aviso", "Incorrecto");
                     Rowindex.Value = "";
                     LimpiarBuscar();
@@ -371,7 +381,7 @@ namespace InventariosPJEH
                     }
                     else if (GridBuscar.Rows.Count != 0)
                     {
-                        MostrarMensaje("** No se puede eliminar existen campos relacionados a otras tablas **", "error", "Normal", "Incorrecto");
+                        MostrarMensaje("** No se puede eliminar, existen campos relacionados a otras tablas **", "error", "Normal", "Incorrecto");
 
                     }
 
@@ -449,5 +459,9 @@ namespace InventariosPJEH
            
         }
 
+        protected void TxtIVA_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
         }

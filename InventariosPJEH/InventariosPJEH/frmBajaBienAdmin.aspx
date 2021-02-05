@@ -317,7 +317,7 @@
 </asp:Content>
 <asp:Content ID="ContentTituloBBA" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblTituloBBA" runat="server" Text="BAJA DEFINITIVA / TEMPORAL DE BIENES" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblTituloBBA" runat="server" Text="BAJA DEFINITIVA / TEMPORAL DE BIENES" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="HeadContent">

@@ -176,7 +176,7 @@ namespace InventariosPJEH.CAccesoDatos
         {
             List<CEdificios_Niveles_Secciones> lista = new List<CEdificios_Niveles_Secciones>();
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-            SqlCommand cmd = new SqlCommand(string.Format("Select DISTINCT IdEdificio,Edificio,IdNivel,Nivel,IdSeccion,Nombre,TipoSeccion, IdENSU from VistaEdificiosNivelesSecciones where IdNivel like '%{0}%' and IdEdificio like '%{1}%' ORDER BY Edificio ASC", pNivel, pEdificio), cnn);
+            SqlCommand cmd = new SqlCommand(string.Format("Select DISTINCT IdEdificio,Edificio,IdNivel,Nivel,IdSeccion,Nombre,TipoSeccion from VistaEdificiosNivelesSecciones where IdNivel = {0} and IdEdificio = {1} ORDER BY Edificio ASC", pNivel, pEdificio), cnn);
             cnn.Open();
             using (var rd = cmd.ExecuteReader())
             {
@@ -190,7 +190,7 @@ namespace InventariosPJEH.CAccesoDatos
                     cENS.IdSeccion = rd["IdSeccion"].ToString();
                     cENS.Nombre = rd["Nombre"].ToString();
                     cENS.Tipo = rd["TipoSeccion"].ToString();
-                    cENS.IdENSU = rd["IdENSU"].ToString();
+                  //  cENS.IdENSU = rd["IdENSU"].ToString();
                     lista.Add(cENS);
                 }
             }

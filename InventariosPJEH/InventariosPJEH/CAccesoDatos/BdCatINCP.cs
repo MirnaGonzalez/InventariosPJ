@@ -40,11 +40,23 @@ namespace InventariosPJEH.CAccesoDatos
         {
             List<CINCP> lista = new List<CINCP>();
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+            string cmdString = "";
 
             try
             {
-                
-                SqlCommand cmd = new SqlCommand(string.Format("Select IdINCP,Anio,IVA,NumUMAS,ValorUMA,INCP from Cat_INPC where Anio like '%{0}%' ORDER BY Anio ASC", pAnio), cnn);
+
+                if (pAnio == "Seleccionar")
+                {
+                    cmdString = "Select IdINCP,Anio,IVA,NumUMAS,ValorUMA,INCP from Cat_INPC ORDER BY Anio ASC";
+                }
+
+                else
+                {
+                    cmdString = "Select IdINCP,Anio,IVA,NumUMAS,ValorUMA,INCP from Cat_INPC where Anio like '%{0}%' ORDER BY Anio ASC";
+                }
+
+
+                SqlCommand cmd = new SqlCommand(string.Format(cmdString, pAnio), cnn);
                             
                 cnn.Open();
 

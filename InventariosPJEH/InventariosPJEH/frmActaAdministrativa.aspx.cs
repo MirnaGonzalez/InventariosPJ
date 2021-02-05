@@ -10,14 +10,22 @@ namespace InventariosPJEH
     public partial class frmActaAdministrativa : System.Web.UI.Page
     {
 
+        private static Dictionary<CDatosResguardante, List<CDatosBienesActa>> datosBienesResguardo;
+        private static List<CDatosBienesActa> datosBienes;
+        private static List<CActa> datosActas;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            BtnFiltroB_Click();
+            if (!Page.IsPostBack)
+            {
+                Dictionary<CDatosResguardante, List<CDatosBienesActa>> datosBienesResguardo = new Dictionary<CDatosResguardante, List<CDatosBienesActa>>();
+                List<CDatosBienesActa> datosBienes = new List<CDatosBienesActa>();
+                List<CActa> datosActas = new List<CActa>();
+            }
         }
 
         protected void BtnActasRadio_CheckedChanged(object sender, EventArgs e)
         {
-
             if (tabGeneracionRadio.Checked == true)
             {
                 divGeneracionActas.Visible = true;
@@ -33,7 +41,7 @@ namespace InventariosPJEH
 
         }
 
-        protected void BtnFiltroB_Click()
+        protected void BtnFiltroB_Click(object sender, EventArgs e)
         {
             List<string> listaErrores = ValidarDatos();
 
@@ -44,18 +52,18 @@ namespace InventariosPJEH
                 {
                     error += " - " + itemError;
                 }
-               // MostrarMensaje($"DATOS FALTANTES:  {error}", "info", "Intervalo", "Inicio");
+                MostrarMensaje($"DATOS FALTANTES:  {error}", "error", "Normal", "Incorrecto");
                 // DivMostrar.Visible = false;
 
             }
             else
             {
-                Dictionary<CDatosResguardante, List<CDatosBienesActa>> resBusqueda = MostrarFiltro();
+                datosBienesResguardo = buscarBienes();
                 DivTablaResultadosResguardo.Visible = true;
-                if(resBusqueda.Count > 0)
+                if (datosBienesResguardo.Count > 0)
                 {
                     sectionBienes.Visible = true;
-                    foreach (KeyValuePair<CDatosResguardante, List<CDatosBienesActa>> entry in resBusqueda)
+                    foreach (KeyValuePair<CDatosResguardante, List<CDatosBienesActa>> entry in datosBienesResguardo)
                     {
                         // do something with entry.Value or entry.Key
                         lblNombreResul.Text = entry.Key.txtONombreResguardante;
@@ -63,13 +71,14 @@ namespace InventariosPJEH
                         lblAreaResul.Text = entry.Key.txtOAreaAdscripcionResguardo;
                         lblIdResguardo.Text = entry.Key.idResguardo.ToString();
                         lblIdUniAdmin.Text = entry.Key.idAreaAdscrip.ToString();
-                        gridResultados.DataSource = entry.Value;
-                        gridResultados.DataBind();
+                        datosBienes = entry.Value;
+                        gridResultadosBienes.DataSource = entry.Value;
+                        gridResultadosBienes.DataBind();
                         sectionGuardarActa.Visible = true;
-                        if (gridResultados.Rows.Count == 0)
+                        if (gridResultadosBienes.Rows.Count == 0)
                         {
                             MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                        }                        
+                        }
                     }
                 }
                 else
@@ -77,8 +86,8 @@ namespace InventariosPJEH
                     sectionBienes.Visible = false;
                     MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
                 }
-                
-              
+
+
             }
 
         }
@@ -110,9 +119,18 @@ namespace InventariosPJEH
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), ClaveMsj, Msj, true);
         }
 
-        public Dictionary<CDatosResguardante, List<CDatosBienesActa>> MostrarFiltro()
+        public Dictionary<CDatosResguardante, List<CDatosBienesActa>> buscarBienes()
         {
-            Dictionary<CDatosResguardante, List<CDatosBienesActa>> lstActaAdmin = BdActaAdmin.MostrarBusqueda(Convert.ToInt64(TxtFiltroB.Text));
+            Dictionary<CDatosResguardante, List<CDatosBienesActa>> lstActaAdmin = new Dictionary<CDatosResguardante, List<CDatosBienesActa>>();
+            try
+            {
+                datosBienesResguardo = BdActaAdmin.buscarBienes(Convert.ToInt64(TxtFiltroB.Text));
+                lstActaAdmin = datosBienesResguardo;
+            }
+            catch (Exception e)
+            {
+                MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+            }
             return lstActaAdmin;
         }
 
@@ -126,24 +144,39 @@ namespace InventariosPJEH
             txtNumActa.Text = "";
             txtFechaAdquisicion.Text = "";
             TxtFiltroB.Text = "";
-            gridResultados.DataSource = null;
-            gridResultados.DataBind();
+            gridResultadosBienes.DataSource = null;
+            gridResultadosBienes.DataBind();
             sectionBienes.Visible = false;
         }
 
         protected void BtnInsertarActa_Click(object sender, EventArgs e)
         {
-            //Capturamos los errores con try catch
+            //Capturamos los errores con try catch           
             try
             {
-                if(!BdActaAdmin.InsertarActa(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text))
+                if (!String.IsNullOrEmpty(txtNumActa.Text) && !String.IsNullOrEmpty(txtFechaAdquisicion.Text))
                 {
-                    MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    int resultado = BdActaAdmin.InsertarActaInventario(int.Parse(lblIdUniAdmin.Text), int.Parse(lblIdResguardo.Text), txtNumActa.Text, txtFechaAdquisicion.Text, datosBienes);
+                    if (resultado != 1)
+                    {
+                        if (resultado == 2)
+                        {
+                            MostrarMensaje("** El número de acta ya existe, favor de ingresar uno diferente **", "error", "Normal", "Incorrecto");
+                        }
+                        else
+                        {
+                            MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                        }
+                    }
+                    else
+                    {
+                        limpiarCamposGenerarActa();
+                        MostrarMensaje("Acta administrativa generada de forma correcta", "info", "Normal", "ModificacionCorrecta");
+                    }
                 }
                 else
                 {
-                    limpiarCamposGenerarActa();
-                    MostrarMensaje("La Insersión se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                    MostrarMensaje("** Datos Faltantes **", "error", "Normal", "Incorrecto");
                 }
             }
             catch (Exception ex)
@@ -157,15 +190,23 @@ namespace InventariosPJEH
             //Capturamos los errores con try catch
             try
             {
-                if (!BdActaAdmin.ActualizarActa(txtEditNumActa.Text, txtEditConActaFechaSol.Text, lstEstatus.SelectedValue, txtEditConActaDescripcion.Text))
+                if (!String.IsNullOrEmpty(txtEditConActaFechaSol.Text) && !lstEstatus.SelectedValue.Equals("-1"))
                 {
-                    MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    if (!BdActaAdmin.ActualizarActa(txtEditNumActa.Text, txtEditConActaFechaSol.Text, lstEstatus.SelectedValue, txtEditConActaDescripcion.Text))
+                    {
+                        MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                    }
+                    else
+                    {
+                        cancelarEdicionConsultaActa();
+                        divConsultaActasEditar.Visible = false;
+                        MostrarMensaje("La modificación se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                        consultarActa();
+                    }
                 }
                 else
                 {
-                    cancelarEdicionConsultaActa();
-                    divConsultaActasEditar.Visible = false;
-                    MostrarMensaje("La modificación se realizó correctamente", "info", "Normal", "ModificacionCorrecta");
+                    MostrarMensaje("** Datos Faltantes **", "error", "Normal", "Incorrecto");
                 }
             }
             catch (Exception ex)
@@ -203,7 +244,7 @@ namespace InventariosPJEH
         }
 
         protected void BtnActivarPeriodo(object sender, EventArgs e)
-        {            
+        {
             if (checkConPeriodo.Checked == true)
             {
                 celdaConFechaIni.Visible = true;
@@ -229,9 +270,20 @@ namespace InventariosPJEH
                 txtConNumInventario.Visible = true;
                 txtConNumActa.Text = "";
                 txtConNumInventario.Text = "";
-            }            
+            }
         }
 
+        public void consultarActa()
+        {
+            datosActas = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
+            gridConsultaActas.DataSource = datosActas;
+            gridConsultaActas.DataBind();
+            tablaConsultaActas.Visible = true;
+            if (gridConsultaActas.Rows.Count == 0)
+            {
+                MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
+            }
+        }
         protected void BtnConsultarActa(object sender, EventArgs e)
         {
             try
@@ -244,13 +296,7 @@ namespace InventariosPJEH
                     }
                     else
                     {
-                        gridConsultaActas.DataSource = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
-                        gridConsultaActas.DataBind();
-                        tablaConsultaActas.Visible = true;
-                        if (gridConsultaActas.Rows.Count == 0)
-                        {
-                            MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                        }
+                        consultarActa();
                     }
                 }
                 else
@@ -261,25 +307,21 @@ namespace InventariosPJEH
                     }
                     else
                     {
-                        gridConsultaActas.DataSource = BdActaAdmin.ConsultarActas(txtConNumActa.Text, txtConNumInventario.Text, txtConFechaIni.Text, txtConFechaFin.Text);
-                        gridConsultaActas.DataBind();
-                        tablaConsultaActas.Visible = true;
-                        if (gridConsultaActas.Rows.Count == 0)
-                        {
-                            MostrarMensaje("** No existen datos con la búsqueda solicitada **", "error", "Normal", "Incorrecto");
-                        }
+                        consultarActa();
                     }
-                }               
-                
+                }
+
             }
             catch (Exception ex)
             {
+                MostrarMensaje("** Error en Base de Datos **", "error", "Normal", "Incorrecto");
+                Console.WriteLine(ex.ToString());
                 throw ex;
             }
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
-        {            
+        {
             try
             {
                 divConsultaActasEditar.Visible = true;
@@ -293,9 +335,26 @@ namespace InventariosPJEH
         protected void GridModificar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow RowSelecionada = gridConsultaActas.Rows[index];  
+            GridViewRow RowSelecionada = gridConsultaActas.Rows[index];
             txtEditNumActa.Text = Page.Server.HtmlDecode(RowSelecionada.Cells[0].Text);
-            txtEditActaFechaActa.Text = Page.Server.HtmlDecode(RowSelecionada.Cells[3].Text);            
+            txtEditActaFechaActa.Text = Page.Server.HtmlDecode(RowSelecionada.Cells[3].Text);
+            CActa acta = datosActas.Find(x => x.strNumActa == txtEditNumActa.Text);
+            if (acta != null)
+            {
+                if (!acta.strStatus.Equals("A"))
+                {
+                    checkConActasFechaMod.Checked = true;
+                    txtEditConActaDescripcion.Visible = true;
+                    celdaConActasFechaSolucion.Visible = true;
+                    lblConActaEstatus.Visible = true;
+                    lstEstatus.Visible = true;
+                    lblEditConActasDescripcion.Visible = true;
+                    txtEditConActaFechaSol.Text = acta.strFechaCancela;
+                    txtEditConActaDescripcion.Text = acta.strDescripcionActa;
+                    lstEstatus.SelectedValue = acta.strStatus;
+                }
+            }
+            Console.WriteLine();
         }
 
         protected void BtnConActasFechaModificar(object sender, EventArgs e)
@@ -319,7 +378,7 @@ namespace InventariosPJEH
                 txtEditConActaFechaSol.Text = "";
                 lstEstatus.SelectedValue = "-1";
             }
-            
+
 
         }
 
@@ -333,10 +392,10 @@ namespace InventariosPJEH
             txtConNumActa.Text = "";
             txtConNumInventario.Text = "";
         }
-        
+
 
         public void cancelarEdicionConsultaActa()
-        {            
+        {
             txtEditConActaDescripcion.Visible = false;
             celdaConActasFechaSolucion.Visible = false;
             lblConActaEstatus.Visible = false;
@@ -348,6 +407,7 @@ namespace InventariosPJEH
             txtEditNumActa.Text = "";
             txtEditActaFechaActa.Text = "";
             checkConActasFechaMod.Checked = false;
+            divConsultaActasEditar.Visible = false;
         }
 
         //protected void BtnSetFechaFinConsulta(object sender, EventArgs e)

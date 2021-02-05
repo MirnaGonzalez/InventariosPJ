@@ -405,5 +405,10 @@ namespace InventariosPJEH
             HiddenId.Value = IdCONAC.Text;
             BuscarNuevoRegistro();
         }
+
+        protected void TxtDescripcionBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

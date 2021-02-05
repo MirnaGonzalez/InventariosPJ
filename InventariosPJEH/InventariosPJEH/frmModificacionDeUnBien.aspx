@@ -178,7 +178,7 @@
                                                     <asp:Label ID="LablPartida" runat="server" Text="Partida: "></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlPartida" CssClass="Drop" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListPartida_SelectedIndexChanged" Width="490px">
+                                                    <asp:DropDownList ID="ddlPartida" CssClass="DropGeneral" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListPartida_SelectedIndexChanged" Width="490px">
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -187,7 +187,7 @@
                                                     <asp:Label ID="LablSubClase" runat="server" Text="SubClase: "></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlSubClase" AutoPostBack="true" runat="server" CssClass="Drop" Width="490px">
+                                                    <asp:DropDownList ID="ddlSubClase" AutoPostBack="true" runat="server" CssClass="DropGeneral" Width="490px">
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -196,7 +196,7 @@
                                                     <asp:Label ID="LablCatCONAC" runat="server" Text="Catálogo CONAC:"></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlCatCONAC" CssClass="Drop" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListCatCONAC_SelectedIndexChanged" Height="22px" Width="490px">
+                                                    <asp:DropDownList ID="ddlCatCONAC" CssClass="DropGeneral" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListCatCONAC_SelectedIndexChanged" Height="22px" Width="490px">
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -223,7 +223,7 @@
                                                     <asp:Label ID="LablMarca" runat="server" Text="Marca: "></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="Drop" Width="490px">
+                                                    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="DropGeneral" Width="490px">
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -256,7 +256,7 @@
                                                     <asp:Label ID="LablAreaDeResguardoInicial" runat="server" Text="Área de Resguardo Inicial: "></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:DropDownList ID="ddlResguardoInicial" runat="server" CssClass="Drop" Width="490px">
+                                                    <asp:DropDownList ID="ddlResguardoInicial" runat="server" CssClass="DropGeneral" Width="490px">
                                                     </asp:DropDownList>
                                                 </td>
                                             </tr>
@@ -407,6 +407,6 @@
 </asp:Content>
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="MODIFICACIÓN DE UN BIEN" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="MODIFICACIÓN DE UN BIEN" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>

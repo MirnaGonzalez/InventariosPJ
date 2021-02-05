@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Inventarios1.Master" CodeBehind="frmCatSubClases_Partidas.aspx.cs" Inherits="InventariosPJEH.frmCatSubClases_Partidas" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Inventarios1.Master" CodeBehind="frmCatSubClasesPartidas.aspx.cs" Inherits="InventariosPJEH.frmCatSubClases_Partidas" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -12,7 +12,7 @@
                 <asp:HiddenField ID="Rowindex" runat="server"></asp:HiddenField>
 
                 <div style="width: auto;">
-                    <fieldset style="width: auto; height: auto; border-color: #6D252B;">
+                    <fieldset style="width: auto; height: auto; border-color: #0C2261;">
                         <legend style="text-align: left; color: darkblue;">Buscar partidas</legend>
                         <table style="width: 100%;">
 
@@ -105,7 +105,7 @@
 
                 <asp:HiddenField ID="HiddenId" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro" visible="false">Nuevo registro</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro" visible="false">Modificar registro</legend>
 
@@ -146,7 +146,7 @@
                                 <asp:Label ID="LbTipoPartidaNuevo" runat="server" Text="Tipo de partida:" Style="font-family: Verdana; font-size: small;"></asp:Label>
                             </td>
                             <td class="auto-style1">
-                                <asp:DropDownList ID="DropTipoPartida" runat="server" AutoPostBack="true" Width="478px" Height="19px">
+                                <asp:DropDownList ID="DropTipoPartida" runat="server" AutoPostBack="true" CssClass="DropGeneral" Width="478px" Height="19px">
                                     <asp:ListItem Text="Seleccionar"></asp:ListItem>
                                     <asp:ListItem Value="1">BIENES INFORMÁTICOS</asp:ListItem>
                                     <asp:ListItem Value="2">BIENES MUEBLES</asp:ListItem>
@@ -232,7 +232,7 @@
 
                 <asp:HiddenField ID="Rowindex2" runat="server" />
 
-                <fieldset style="height: auto; border-color: #6D252B;">
+                <fieldset style="height: auto; border-color: #0C2261;">
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgNuevoRegistro2" visible="false">Nuevo registro</legend>
                     <legend style="text-align: left; color: darkblue;" runat="server" id="lgModificarRegistro2" visible="false">Modificar registro</legend>
 
@@ -318,7 +318,7 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="SUBCLASES Y PARTIDAS" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="SUBCLASES Y PARTIDAS" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
 

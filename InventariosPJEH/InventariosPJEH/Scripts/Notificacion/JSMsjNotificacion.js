@@ -46,7 +46,7 @@ function confirma() {
 function confirm(event) {
 
     swal({
-        title: "¿Desea eliminar el edificio?",
+        title: "¿Desea eliminar el registro?",
         showCancelButton: true,
         confirmButtonColor: '#3000d6',
         cancelButtonColor: '#d33',

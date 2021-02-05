@@ -2,21 +2,20 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<script runat="server">
-    public void BtnSetFechaFinConsulta()
-    {
-        this.calConFechaFin.SelectedDate = calConFechaIni.SelectedDate.Value.AddDays(1);
-    }
-</script>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
         .auto-style19 {
             width: 826px;
         }
-
         .auto-style20 {
             text-transform: uppercase;
+        }
+        TEXTAREA
+        {
+            /* font size, line height, face */
+            font: 400 12.5px Arial;
+            /* useful for supporting 100% width inclusive of padding and border */
+            box-sizing: border-box; 
         }
     </style>
 </asp:Content>
@@ -33,17 +32,17 @@
     <asp:UpdatePanel ID="GAdministrativa" runat="server">
         <ContentTemplate>
             <div id="ContenerTodo">            
-                <div id="tabControl" runat="server" visible="true" style="width: 95%; margin-left: 0px;">
+                <div id="tabControl" runat="server" visible="true" style="margin: auto; width: 30%; padding: 10px;">
                     <asp:RadioButton ID="tabGeneracionRadio" runat="server" Text="Generar Acta" AutoPostBack="true" GroupName="tabControlButtons" OnCheckedChanged="BtnActasRadio_CheckedChanged" Checked="true"/>
                     <asp:RadioButton ID="tabConsultaRadio" runat="server" Text="Consultar Acta" AutoPostBack="true" GroupName="tabControlButtons" OnCheckedChanged="BtnActasRadio_CheckedChanged"/>
                 </div>
                 <div id="divGeneracionActas" runat="server" visible="true">
                     <div id="FiltroB" style="width: 95%; margin-left: 0px;">
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Busqueda</legend>
+                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Búsqueda</legend>
                             <asp:Label ID="lblNoResguardo" runat="server" CssClass="LabelGeneral" Text="Número de Resguardo: "/>
                             <asp:TextBox ID="TxtFiltroB" runat="server" CssClass="TextBox" Height="22px" Width="183px"/>
-                            <asp:Button  ID="BtnFiltroB" runat="server" CssClass="Boton" Height="28px" Text="Busqueda" Width="100px" OnClientClick="BtnGenerarA_CheckedChanged"/>                            
+                            <asp:Button  ID="BtnFiltroB" runat="server" CssClass="Boton" Height="28px" Text="Búsqueda" Width="100px" OnClick="BtnFiltroB_Click"/>                            
                     </fieldset>
                     <fieldset id="sectionBienes" style="border-color: black; width: 95%; margin-left: 11px;" visible ="false" runat="server">
                            <legend style="width: auto; color: darkblue; font-size: 12px;">Bienes no Localizados</legend>
@@ -59,7 +58,7 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                          <asp:Label ID="lblCargoR" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Cargo del Resguadante"/>
+                                          <asp:Label ID="lblCargoR" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Cargo del Resguadante:"/>
                                       </td>
                                       <td>
                                           <asp:Label ID="lblCargoResul" runat="server" CssClass="LabelGeneral" Text=""/>                                          
@@ -67,7 +66,7 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                          <asp:Label ID="lblAreaAdri" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Area de Adcripción"/>
+                                          <asp:Label ID="lblAreaAdri" Font-Bold="true" runat="server" CssClass="LabelGeneral" Text="Área de Ascripción:"/>
                                       </td>
                                       <td>
                                           <asp:Label ID="lblAreaResul"  runat="server" CssClass="LabelGeneral" Text=""/>
@@ -82,10 +81,11 @@
 
                             <fieldset style="height: auto">
 
-                                <asp:GridView ID="gridResultados" CssClass="StyleGridV" runat="server" Height="142px" Width="100%"
+                                <asp:GridView ID="gridResultadosBienes" CssClass="StyleGridV" runat="server" Height="142px" Width="100%"
                                     AutoGenerateColumns="False" HorizontalAlign="Center"
-                                    DataKeyNames="txtOInventarioResguardo,txtONombreBienResguardo,txtOMarcaResguardo,txtOModeloResguardo,txtOSerieResguardo"                                    >
-                                    <Columns>                                        
+                                    DataKeyNames="idInventario">
+                                    <Columns>                                                  
+                                        <asp:BoundField DataField="idInventario" Visible="false" />
                                         <asp:BoundField DataField="txtOInventarioResguardo" HeaderText="Inventario" />
                                         <asp:BoundField DataField="txtONombreBienResguardo" HeaderText="Nombre del Bien" />
                                         <asp:BoundField DataField="txtOMarcaResguardo" HeaderText="Marca" />
@@ -134,7 +134,7 @@
                 <div id="divConsultaActas" runat="server" visible="false">
                     <div id="FiltroBusquedaConsulta" style="width: 95%; margin-left: 0px;">
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Busqueda</legend>
+                        <legend style="width: auto; color: darkblue; font-size: 12px;">Filtro Búsqueda</legend>
                             <table style="margin-left: 100px" class="auto-style8">
                                 <tr>
                                     <td>
@@ -152,7 +152,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:CheckBox ID="checkConPeriodo" runat="server" Text="Periodo" oncheckedchanged="BtnActivarPeriodo" AutoPostBack="true" />
+                                        <asp:CheckBox ID="checkConPeriodo" runat="server" Text="Periodo por fechas" oncheckedchanged="BtnActivarPeriodo" AutoPostBack="true" />
                                     </td>
                                     <td runat="server" id="celdaConFechaIni" Visible="false">
                                         <asp:TextBox ID="txtConFechaIni" runat="server" CssClass="TextBox" Enabled="false"/>
@@ -181,20 +181,29 @@
 
                     <fieldset style="height: auto">
 
-                        <asp:GridView ID="gridConsultaActas" CssClass="StyleGridV" runat="server" Height="142px" Width="100%"
+                        <asp:GridView ID="gridConsultaActas" CssClass="StyleGridVActaAdmin"  runat="server" Height="142px" Width="100%"
                             AutoGenerateColumns="False" OnRowCommand="GridModificar_RowCommand"
                             DataKeyNames="idActa">
                             <Columns>                                                                        
-                                <asp:BoundField DataField="strNumActa" HeaderText="No. Acta" />
+                                <asp:BoundField DataField="strNumActa" HeaderText="No. Acta"/>
+                                
                                 <asp:BoundField DataField="strNombreResguardante" HeaderText="Nombre" />
-                                <asp:BoundField DataField="strUniAdmin" HeaderText="Area" />                                        
+                                <asp:BoundField DataField="strUniAdmin" HeaderText="Área" />                                        
                                 <asp:BoundField DataField="strFechaActa" HeaderText="Fecha Acta" />                                        
                                 <asp:BoundField DataField="strNumInventario" HeaderText="Inventario" />         
                                 <asp:BoundField DataField="strNombreBien" HeaderText="Nombre del Bien" />     
                                 <asp:BoundField DataField="strMarca" HeaderText="Marca" />                                        
-                                <asp:BoundField DataField="strModelo" HeaderText="Modelo" />                                        
+                                <asp:BoundField DataField="strModelo" HeaderText="Modelo" />
                                 <asp:BoundField DataField="strSerie" HeaderText="Serie" />                                        
                                 <asp:BoundField DataField="strNumResguardo" HeaderText="No. Resguardo" />
+                                <asp:BoundField DataField="strFechaCancela" HeaderText="Fecha Solución" />
+                                <%--<asp:BoundField DataField="strStatus" HeaderText="Estatus" />--%>
+                                <asp:TemplateField HeaderText="Status">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="columnStatus" Text='<%# (Eval("strStatus").ToString().Equals("A") ) ? "Activo" : (Eval("strStatus").ToString().Equals("R") ) ? "Reposición" : (Eval("strStatus").ToString().Equals("C") ) ? "Cancelación" : ""   %>'/>
+                                    </ItemTemplate>
+                                    <ItemStyle Width="50px" />
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Editar" ItemStyle-Width="50">
                                     <ItemTemplate>
                                         <asp:ImageButton runat="server" ID="btnEditar" Width="16" Height="16" ImageUrl="~/Imagenes/Generales/editar.png" CommandName="Editar" OnClick="btnEditar_Click" CommandArgument='<%# Container.DataItemIndex.ToString() %>' />
@@ -246,7 +255,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblEditConActasDescripcion" runat="server" CssClass="LabelGeneral" Text="Descripcion: " Visible="false" />
+                                        <asp:Label ID="lblEditConActasDescripcion" runat="server" CssClass="LabelGeneral" Text="Descripción: " Visible="false" />
                                     </td>
                                     <th colspan="3">
                                         <asp:TextBox ID="txtEditConActaDescripcion" runat="server" TextMode="MultiLine" Rows="2" AutoPostBack="true" CssClass="TextBox" Width="100%" Height="100%" Visible="false"/>

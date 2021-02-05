@@ -138,7 +138,7 @@ namespace InventariosPJEH.CAccesoDatos
 
 
             }
-            catch (Exception ex )
+            catch (Exception  )
             {
                 Conn.Close();
             }

@@ -42,7 +42,7 @@
                                         <asp:Label ID="LablProveedor" runat="server" Text="Proveedor: " Width="190px"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="DropDownListProveedor" runat="server" CssClass="Drop">
+                                        <asp:DropDownList ID="DropDownListProveedor" runat="server" CssClass="DropGeneral">
                                         </asp:DropDownList>
 
                                     </td>
@@ -52,7 +52,7 @@
                                         <asp:Label ID="LablTipoDocumento" runat="server" Text="Tipo de documento: " Width="190px"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="DropDownListTipoDocumento" runat="server" CssClass="Drop">
+                                        <asp:DropDownList ID="DropDownListTipoDocumento" runat="server" CssClass="DropGeneral">
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -61,7 +61,7 @@
                                         <asp:Label ID="LblTipoAdquisicion" runat="server" Text="Tipo de adquisición: " Width="190px"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="DropDownListTipoAdquisicion" runat="server" CssClass="Drop">
+                                        <asp:DropDownList ID="DropDownListTipoAdquisicion" runat="server" CssClass="DropGeneral">
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -78,7 +78,7 @@
                                         <asp:Label ID="LablPropiedad" runat="server" Text="Propiedad: " Width="190px"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:DropDownList ID="DropDownListPropiedad" runat="server" CssClass="Drop">
+                                        <asp:DropDownList ID="DropDownListPropiedad" runat="server" CssClass="DropGeneral">
                                         </asp:DropDownList>
                                     </td>
                                 </tr>
@@ -116,6 +116,6 @@
 </asp:Content>
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="Modificar Factura" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#6D252B"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="Modificar Factura" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>

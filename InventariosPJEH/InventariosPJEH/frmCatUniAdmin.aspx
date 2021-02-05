@@ -187,10 +187,8 @@
 
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CPHTitulo" runat="server">
-    <div>
-        <div class="DivTituloCA">
-            <asp:Label ID="LblTitulo" runat="server" Text="Unidades Administrativas" CssClass="LblTituloCA"></asp:Label>
-        </div>
+    <div style="width: auto; text-align: center; background-color: #d8d8d8;">
+        <asp:Label ID="LblLema" runat="server" Text="UNIDADES ADMINISTRATIVAS" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
      

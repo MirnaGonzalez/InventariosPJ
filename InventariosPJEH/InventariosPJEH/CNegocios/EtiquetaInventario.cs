@@ -96,7 +96,7 @@ namespace InventariosPJEH.CNegocios
                 rdr = cmd.ExecuteReader();
             }
 
-            catch (Exception ex)
+            catch (Exception )
             {
                 if (cnn.State == ConnectionState.Open)
                     cnn.Close();
@@ -123,7 +123,7 @@ namespace InventariosPJEH.CNegocios
                     return lista;
                 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 if (cnn.State == ConnectionState.Open)
                     cnn.Close();
