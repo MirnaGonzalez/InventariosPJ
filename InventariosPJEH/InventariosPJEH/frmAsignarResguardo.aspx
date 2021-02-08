@@ -27,11 +27,11 @@
                                 <asp:Label ID="LblTipUnAdm" runat="server" Text="Tipo Unidad Administrativa: " Width="190px" CssClass="auto-style6"></asp:Label>
                                 <asp:DropDownList ID="DdlTipUnAdm" runat="server" CssClass="Drop" OnSelectedIndexChanged="DdlTipUnAdm_SelectedIndexChanged" AutoPostBack="true">
                                     <asp:ListItem Value="0">---Seleccionar-----</asp:ListItem>
-                                    <asp:ListItem Value="UA">Unidad Administrativa</asp:ListItem>
                                     <asp:ListItem Value="1I">Primera Instancia</asp:ListItem>
                                     <asp:ListItem Value="2I">Segunda Instancia</asp:ListItem>
                                     <asp:ListItem Value="TE">Tribunal Electoral</asp:ListItem>
                                     <asp:ListItem Value="TF">Tribunal Fiscal</asp:ListItem>
+                                    <asp:ListItem Value="UA">Unidad Administrativa</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <br />
@@ -186,11 +186,11 @@
                         </div>
                         <div style="background-color: Yellow; color: Black; float: left; width: 23%; margin-right: 10px;">
                             <%--<asp:Label ID="LblAmaRepa" runat="server" BackColor="Yellow"></asp:Label>--%>
-                            <asp:Label ID="LblRepa" runat="server" Text="En reparacion" BackColor="Yellow"></asp:Label>
+                            <asp:Label ID="LblRepa" runat="server" Text="En reparación" BackColor="Yellow"></asp:Label>
                         </div>
                         <div style="background-color: #0033CC; color: Black; float: left; width: 23%;">
                             <%--<asp:Label ID="LblAzulDev" runat="server" BackColor="Blue"></asp:Label>--%>
-                            <asp:Label ID="LblDev" runat="server" Text="Devuelto de reparacion" BackColor="Blue"></asp:Label>
+                            <asp:Label ID="LblDev" runat="server" Text="Devuelto de reparación" BackColor="Blue"></asp:Label>
                         </div>
                     </div>
                 </div>
@@ -235,12 +235,14 @@
                                 
                                 <div id="Div1" runat="server" style="width: 100%;">
                                     <div style="height:30px;">
-                                        <div style="float:left; width:100%; height:30px;">
+                                        <div style="float:left; width:60%; height:30px;">
                                             <asp:Label ID="LblGrupo" runat="server" Text="Grupo:" Width="80px"></asp:Label>
-                                            <asp:DropDownList ID="DdlGrupo" runat="server" Width="40%" OnSelectedIndexChanged="DdlGrupo_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:DropDownList ID="DdlGrupo" runat="server" Width="60%" OnSelectedIndexChanged="DdlGrupo_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </div>
-                                        
+                                        <div id="DivEliminarGrupo" runat="server" visible="false" style="float: left; text-align:right;  height:30px;">
+                                            <asp:Button ID="BtnEliminarGrupo" runat="server" Text="Eliminar grupo" CssClass="Boton" Height="25px" Width="160px" OnClick="BtnEliminarGrupo_Click" />
+                                        </div>
                                         
                                     </div>
                                     <div style="float:left; width:75%; height:60px;">
