@@ -453,10 +453,10 @@ namespace InventariosPJEH
                 SqlConnection con = new SqlConnection(CConexion.Obtener());
                 con.Open();
                 DateTime today = DateTime.Today;
-                string anio = Convert.ToString(today.Year);
+                //string anio = Convert.ToString(today.Year);
                 string cadSql = " select IVA from Cat_INPC where Anio = @anio";
                 SqlCommand cmd = new SqlCommand(cadSql, con);
-                cmd.Parameters.Add("@anio", SqlDbType.Int, 4).Value = anio;
+                cmd.Parameters.Add("@anio", SqlDbType.Int, 4).Value = lblIVAanio.Text;
                 SqlDataReader leer = cmd.ExecuteReader();
 
                 if (leer.Read() == true)
@@ -832,6 +832,11 @@ namespace InventariosPJEH
             String Detalle = txtDetalleAdquisicion.Text;
             String Propiedad = Convert.ToString(ddlPropiedad.SelectedItem);
             string fecha = txtFechaAdquisicion.Text;
+
+            DateTime datevalue = (Convert.ToDateTime(fecha.ToString()));
+            string AnioAdquisicion = datevalue.Year.ToString();
+            lblIVAanio.Text = AnioAdquisicion;
+
             LblConcatena.Text = proveedor + "&nbsp;|&nbsp;" + tipoDoc + "&nbsp;" + NoDoc + " &nbsp;|&nbsp; " + tipoA + "," + Propiedad + "&nbsp;|&nbsp;" + fecha;
         }
 
@@ -2137,6 +2142,7 @@ namespace InventariosPJEH
             DateTime Fecha = Convert.ToDateTime(txtFechaAdquisicion.Text);
             Fecha = Fecha.AddDays(-1);
             DateTime FechaFinal = Fecha.AddYears(Convert.ToInt32(vida));
+            FechaFinal = FechaFinal.AddDays(-1);
 
             if (cbxAjustarCosto.Checked == true)
             {
@@ -2145,8 +2151,8 @@ namespace InventariosPJEH
                     montoR = txtAjustarCosto.Text;
                 }
             }
-            Decimal resMontoR = (Convert.ToDecimal(montoR, CultureInfo.CreateSpecificCulture("en-US")) - 1);
-            Decimal resMonto = (Convert.ToDecimal(montoR, CultureInfo.CreateSpecificCulture("en-US")));
+            Decimal resMontoDepreciar = (Convert.ToDecimal(montoR, CultureInfo.CreateSpecificCulture("en-US")) - 1);
+            Decimal resMontoReal = (Convert.ToDecimal(montoR, CultureInfo.CreateSpecificCulture("en-US")));
             SqlConnection Conn = new SqlConnection(CConexion.Obtener());
                 bool success = false;
                 SqlTransaction lTransaccion = null;
@@ -2161,8 +2167,8 @@ namespace InventariosPJEH
                     cmd.Parameters.Add(new SqlParameter("@IdInventario", Convert.ToInt32(idInven)));
                     cmd.Parameters.Add(new SqlParameter("@NumInventario", Convert.ToInt64(NumInventario)));
                     cmd.Parameters.Add(new SqlParameter("@VidaUtil", vida));
-                    cmd.Parameters.Add(new SqlParameter("@MontoDepreciar", Convert.ToInt32(resMontoR)));
-                    cmd.Parameters.Add(new SqlParameter("@MontoReal", Convert.ToInt32(resMonto)));
+                    cmd.Parameters.Add(new SqlParameter("@MontoDepreciar", Convert.ToDecimal(resMontoDepreciar)));
+                    cmd.Parameters.Add(new SqlParameter("@MontoReal", Convert.ToDecimal(resMontoReal)));
                     cmd.Parameters.Add(new SqlParameter("@IdCONAC", Convert.ToInt32(idConac)));
                     cmd.Parameters.Add(new SqlParameter("@IdPartida", idPartida));
                     cmd.Parameters.Add(new SqlParameter("@FechaInicio", Fecha));

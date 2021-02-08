@@ -166,7 +166,8 @@ namespace InventariosPJEH
         /// <param name="e"></param>
         protected void GridModificar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int index = Convert.ToInt32(e.CommandArgument);
+            int index = 0;
+            //int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow RowSelecionada = GridModificar.Rows[index];
             string Bien = Page.Server.HtmlDecode(RowSelecionada.Cells[0].Text);
             Lblbien.Text = Bien;
@@ -297,12 +298,16 @@ namespace InventariosPJEH
                 CModificacionBien cFactura = new CModificacionBien();
                 cFactura.Nombre = Convert.ToString(BuscarENSU.Rows[i]["Nombre"]);
                 ENSUList.Add(cFactura);
+
+
+                //// REVISAR
+                string Area = ENSUList.FirstOrDefault().Nombre.ToString();
+                ddlResguardoInicial.SelectedIndex = ddlResguardoInicial.Items.IndexOf(ddlResguardoInicial.Items.FindByText(Area));
+
             }
-            string Area = ENSUList.FirstOrDefault().Nombre.ToString();
-            ddlResguardoInicial.SelectedIndex = ddlResguardoInicial.Items.IndexOf(ddlResguardoInicial.Items.FindByText(Area));
 
 
-            
+
 
             /////////////////////////////////////////////////////////////////////////////////
             DataTable BuscarMarca = new DataTable();

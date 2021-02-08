@@ -112,7 +112,7 @@
             </div>
 <div>
     <asp:HiddenField ID="HFTipoPartida" runat="server" />
-    <asp:HiddenField ID="HFStatus" Value="9" runat="server" />
+    <asp:HiddenField ID="HFStatus" Value="10" runat="server" />
 </div>
     
 </asp:Content>

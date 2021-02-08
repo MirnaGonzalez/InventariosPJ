@@ -798,6 +798,15 @@ namespace InventariosPJEH
         protected global::System.Web.UI.WebControls.Label labelIVA;
 
         /// <summary>
+        /// Control lblIVAanio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIVAanio;
+
+        /// <summary>
         /// Control LabelSubtotal.
         /// </summary>
         /// <remarks>
