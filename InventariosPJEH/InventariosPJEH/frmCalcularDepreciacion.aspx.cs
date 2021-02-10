@@ -41,6 +41,7 @@ namespace InventariosPJEH
             {
                 DivInactivo.Visible = false;
                 HFStatus.Value = "0";
+                txtBaja.Text = "";
             }
         }
 
@@ -74,6 +75,7 @@ namespace InventariosPJEH
             int Trimestre = Convert.ToInt32(DdlTrimestre.SelectedValue);
             string FechaIT = "";
             string FechaFT = "";
+            string NOBAJADEFINITIVA = "";
 
             switch (Trimestre)
             {
@@ -118,7 +120,14 @@ namespace InventariosPJEH
                     break;
 
             }
-            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value);
+
+            if (CB_Inactivo.Checked == true)
+                NOBAJADEFINITIVA = txtBaja.Text.Trim();
+            else
+                NOBAJADEFINITIVA = "";
+
+
+            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value, NOBAJADEFINITIVA);
 
             decimal CostoTotal = listaDepreciacion.Sum(item => item.MOI);
             int TotalBienes = listaDepreciacion.Count;
@@ -129,11 +138,6 @@ namespace InventariosPJEH
 
             GridDepreciacion.DataSource = listaDepreciacion;
             GridDepreciacion.DataBind();
-
-
-
-
-
 
 
             if (listaDepreciacion.Count == 0 || listaDepreciacion == null)
@@ -177,8 +181,10 @@ namespace InventariosPJEH
             }
             if (CB_Inactivo.Checked == true)
             {
-                if (DdlBaja.SelectedIndex == 0 || DdlBaja.SelectedValue == "0" || DdlBaja.SelectedValue == "")
-                    LErrores.Add("Baja");
+                //if (DdlBaja.SelectedIndex == 0 || DdlBaja.SelectedValue == "0" || DdlBaja.SelectedValue == "")
+                //    LErrores.Add("Baja");
+                if (string.IsNullOrWhiteSpace(txtBaja.Text))
+                    LErrores.Add("Oficio de baja definitiva");
             }
 
             return LErrores;
@@ -193,8 +199,74 @@ namespace InventariosPJEH
             LblCostoTotal.Text = "";
             LblTotal.Text = "";
             CB_Inactivo.Checked = false;
-            DdlBaja.SelectedValue = null;
+            txtBaja.Text = "";
         }
 
+        protected void BtnImprimir_Click(object sender, EventArgs e)
+        {
+
+            int Trimestre = Convert.ToInt32(DdlTrimestre.SelectedValue);
+            string FechaIT = "";
+            string FechaFT = "";
+            string NOBAJADEFINITIVA = "";
+
+            switch (Trimestre)
+            {
+                // Primer Trimestre
+                case 1:
+
+                    FechaIT = TxtAnio.Text + "-01-01 00:00:00";
+                    FechaInicial = Convert.ToDateTime(FechaIT);
+
+                    FechaFT = TxtAnio.Text + "-03-31 23:59:59";
+                    FechaFinal = Convert.ToDateTime(FechaFT);
+
+                    break;
+
+                // Segundo Trimestre
+                case 2:
+                    FechaIT = TxtAnio.Text + "-04-01 00:00:00";
+                    FechaInicial = Convert.ToDateTime(FechaIT);
+
+                    FechaFT = TxtAnio.Text + "-06-30 23:59:59";
+                    FechaFinal = Convert.ToDateTime(FechaFT);
+                    break;
+
+
+                // Trimestre Trimestre
+                case 3:
+                    FechaIT = TxtAnio.Text + "-07-01 00:00:00";
+                    FechaInicial = Convert.ToDateTime(FechaIT);
+
+                    FechaFT = TxtAnio.Text + "-09-30 23:59:59";
+                    FechaFinal = Convert.ToDateTime(FechaFT);
+                    break;
+
+
+                // Cuarto Trimestre
+                case 4:
+                    FechaIT = TxtAnio.Text + "-10-01 00:00:00";
+                    FechaInicial = Convert.ToDateTime(FechaIT);
+
+                    FechaFT = TxtAnio.Text + "-12-31 23:59:59";
+                    FechaFinal = Convert.ToDateTime(FechaFT);
+                    break;
+
+            }
+
+            if (CB_Inactivo.Checked == true)
+                NOBAJADEFINITIVA = txtBaja.Text.Trim();
+            else
+                NOBAJADEFINITIVA = "";
+
+
+            List<CReporteDepreciacion> listaDepreciacion = BdCalcularDepreciacion.ReporteDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value, NOBAJADEFINITIVA);
+
+            Page.Session["listaDepreciacion"] = listaDepreciacion;
+
+            string _open = "window.open('MostrarReporteDepreciacion.aspx', '_blank');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+        }
     }
 }

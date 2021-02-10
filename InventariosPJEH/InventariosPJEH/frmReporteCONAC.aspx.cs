@@ -119,7 +119,7 @@ namespace InventariosPJEH
 
             }
 
-            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value);
+            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value, "");
 
             Double CostoTotal = listaDepreciacion.Sum(item => item.SaldoXDepreciar);
             int TotalBienes = listaDepreciacion.Count;
@@ -221,7 +221,7 @@ namespace InventariosPJEH
         protected  void ExportarExcel()
         {
 
-            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value);
+            List<CCalculoDepreciacion> listaDepreciacion = BdCalcularDepreciacion.MostraDepreciacion(FechaInicial, FechaFinal, Convert.ToInt32(HFStatus.Value), HFTipoPartida.Value, "");
                     
 
             GridDepreciacion.DataSource = listaDepreciacion;
