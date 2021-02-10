@@ -166,7 +166,8 @@ namespace InventariosPJEH
         /// <param name="e"></param>
         protected void GridModificar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int index = Convert.ToInt32(e.CommandArgument);
+            int index = 0;
+            //int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow RowSelecionada = GridModificar.Rows[index];
             string Bien = Page.Server.HtmlDecode(RowSelecionada.Cells[0].Text);
             Lblbien.Text = Bien;
@@ -297,12 +298,16 @@ namespace InventariosPJEH
                 CModificacionBien cFactura = new CModificacionBien();
                 cFactura.Nombre = Convert.ToString(BuscarENSU.Rows[i]["Nombre"]);
                 ENSUList.Add(cFactura);
+
+
+                //// REVISAR
+                string Area = ENSUList.FirstOrDefault().Nombre.ToString();
+                ddlResguardoInicial.SelectedIndex = ddlResguardoInicial.Items.IndexOf(ddlResguardoInicial.Items.FindByText(Area));
+
             }
-            string Area = ENSUList.FirstOrDefault().Nombre.ToString();
-            ddlResguardoInicial.SelectedIndex = ddlResguardoInicial.Items.IndexOf(ddlResguardoInicial.Items.FindByText(Area));
 
 
-            
+
 
             /////////////////////////////////////////////////////////////////////////////////
             DataTable BuscarMarca = new DataTable();
@@ -1671,13 +1676,16 @@ namespace InventariosPJEH
         /// <param name="e"></param>
         protected void btnGuardarSerie_Click(object sender, ImageClickEventArgs e)
         {
+            int fila = 0;
             ImageButton imageButton = (ImageButton)sender;
             TableCell tableCell = (TableCell)imageButton.Parent;
             GridViewRow row = (GridViewRow)tableCell.Parent;
 
             GridModificar.SelectedIndex = row.RowIndex;
-            int fila = row.RowIndex;
-            string serie = ((TextBox)row.Cells[fila].FindControl("TxtNoSerie")).Text;
+            //fila = row.RowIndex;
+
+            string serie = ((TextBox)row.Cells[fila].FindControl("TxtNoSerie")).Text.ToUpper();
+             
 
             if (serie == "")
             {

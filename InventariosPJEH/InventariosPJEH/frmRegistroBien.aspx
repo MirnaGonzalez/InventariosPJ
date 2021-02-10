@@ -388,6 +388,7 @@
                                             </td>
                                             <td class="auto-style13">
                                                 <asp:Label ID="labelIVA" runat="server" Visible="false"></asp:Label>
+                                                <asp:Label ID="lblIVAanio" runat="server" Visible="False"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>

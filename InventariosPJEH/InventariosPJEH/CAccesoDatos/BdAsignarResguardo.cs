@@ -63,7 +63,8 @@ namespace InventariosPJEH.CAccesoDatos
             cmd.CommandText += "FROM dbo.Cat_UniAdmin	UA ";
             cmd.CommandText += "INNER JOIN  dbo.Cat_UADistrito	UAD ON  UA.IdUniAdmin = UAD.IdUniAdmin ";
             cmd.CommandText += "INNER JOIN dbo.Cat_Distritos D ON UAD.IdDistrito = D.IdDistrito ";
-            cmd.CommandText += "WHERE UA.Clasificacion = @Tipo";
+            cmd.CommandText += "WHERE UA.Clasificacion = @Tipo ";
+            cmd.CommandText += "ORDER BY D.Distrito ";
             cmd.Parameters.Add("@Tipo", SqlDbType.VarChar, 2).Value = Tipo;
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
@@ -84,6 +85,8 @@ namespace InventariosPJEH.CAccesoDatos
             cmd.CommandText += "FROM dbo.Cat_UniAdmin	UA ";
             cmd.CommandText += "INNER JOIN  dbo.Cat_UADistrito	UAD ON  UA.IdUniAdmin = UAD.IdUniAdmin ";
             cmd.CommandText += "WHERE UAD.IdDistrito = @IdDistrito and UA.Clasificacion = @Clasificacion ";
+            cmd.CommandText += "ORDER BY UA.UniAdmin ";
+
             cmd.Parameters.Add("@IdDistrito", SqlDbType.Int).Value = IdDistrito;
             cmd.Parameters.Add("@Clasificacion", SqlDbType.VarChar, 2).Value = Clasificacion;
             cmd.CommandType = CommandType.Text;
@@ -104,6 +107,8 @@ namespace InventariosPJEH.CAccesoDatos
             cmd.CommandText = "SELECT IdUniAdmin, UniAdmin ";
             cmd.CommandText += "FROM dbo.Cat_UniAdmin ";
             cmd.CommandText += "WHERE Clasificacion = @Clasificacion ";
+            cmd.CommandText += "ORDER BY UniAdmin ";
+
             cmd.Parameters.Add("@Clasificacion", SqlDbType.VarChar, 2).Value = Clasificacion;
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
@@ -120,9 +125,11 @@ namespace InventariosPJEH.CAccesoDatos
             DataTable Tabla = new DataTable("Resultado");
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
             SqlDataAdapter adp = new SqlDataAdapter();
-            cmd.CommandText = "SELECT IdEmpleado, Nombre + APaterno + AMaterno AS NombrePersonal ";
+            cmd.CommandText = "SELECT IdEmpleado, Nombre + ' ' + APaterno + ' ' + AMaterno AS NombrePersonal ";
             cmd.CommandText += "FROM dbo.Cat_Personal ";
             cmd.CommandText += "WHERE IdUniAdmin = @IdUniAdmin ";
+            cmd.CommandText += "ORDER BY Nombre ";
+
             cmd.Parameters.Add("@IdUniAdmin", SqlDbType.VarChar, 2).Value = IdUniAdmin;
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
@@ -688,6 +695,40 @@ namespace InventariosPJEH.CAccesoDatos
                 //Resultado.Detalles = e.Message;
             }
             return NombreTitular;
+        }
+
+        public static int EliminarGrupo(int IdGrupo, ref TResultado Resultado)
+        {
+            int RegModificados = -1;
+            //CGrupoBienResguardo GrupoBienR = new CGrupoBienResguardo();
+            //object ResProcedimiento = new object();
+            //SqlDataReader rd;
+            SqlCommand cmd = new SqlCommand("[dbo].[stp_Grupo_Eliminar]", new SqlConnection(CConexion.Obtener()));
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@IdGrupo", SqlDbType.Int).Value = IdGrupo;
+
+            try
+            {
+                cmd.Connection.Open();
+                object res = cmd.ExecuteScalar();
+                cmd.Connection.Close();
+
+                int.TryParse(res.ToString(), out RegModificados);
+
+                return RegModificados;
+            }
+            catch (Exception e)
+            {
+                if (cmd.Connection.State != ConnectionState.Closed)
+                    cmd.Connection.Close();
+                Resultado.Exito = false;
+                Resultado.Mensaje.Add("Se generó un error al tratar de Eliminar el grupo.");
+                Resultado.Detalles = e.Message;
+                return -1;
+            }
+
+
         }
     }
 }

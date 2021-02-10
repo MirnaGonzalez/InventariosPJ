@@ -301,17 +301,13 @@ namespace InventariosPJEH
                 List<CFichaBien> LFichaBien = new List<CFichaBien>();
                 LFichaBien = BdAsignarResguardo.ObtenerFichaBienXSubClase(Convert.ToInt32(DdlSubclase.SelectedValue));
 
-                if (LFichaBien.Count > 0)
-                {
-                    GridDisponibles.DataSource = LFichaBien;
-                    GridDisponibles.DataBind();
+                GridDisponibles.DataSource = LFichaBien;
+                GridDisponibles.DataBind();
 
-                    Page.Session["LFichaBienDisponibles"] = LFichaBien;
-                }
-                else
-                {
+                Page.Session["LFichaBienDisponibles"] = LFichaBien;
+
+                if (LFichaBien.Count == 0)
                     MostrarMensaje("No se encontró inventario disponible", "info", "Normal", "ErrorInventarioNoDisponible");
-                }
             }
         }
 
@@ -353,17 +349,20 @@ namespace InventariosPJEH
             if (LFichaBienSelect.Count > 0)
             {
                 GridAsignados.DataSource = LFichaBienSelect;
-
                 GridAsignados.DataBind();
+
                 Page.Session["LFichaBienAsignados"] = LFichaBien;
+
+                DivEliminarGrupo.Visible = false;
             }
             else
             {
                 MostrarMensaje("El personal seleccionado no cuenta con resguardo asignado.", "info", "Normal", "NotExitoso");
                 
                 GridAsignados.DataSource = null;
-
                 GridAsignados.DataBind();
+
+                DivEliminarGrupo.Visible = true;
             }
         }
 
@@ -404,7 +403,7 @@ namespace InventariosPJEH
             }
             else
             {
-                MostrarMensaje("El personal seleccionado no cuenta con resguardo asignado.", "info", "Normal", "NotExitoso");
+                MostrarMensaje("El personal seleccionado no cuenta con bien asignado.", "info", "Normal", "NotExitoso");
 
                 DdlGrupo.Items.Clear();
                 LblResguardo.Text = "";
@@ -667,6 +666,21 @@ namespace InventariosPJEH
         protected void BtnNuevaBusqueda_Click(object sender, EventArgs e)
         {
             Response.Redirect("frmAsignarResguardo.aspx");
+        }
+
+        protected void BtnEliminarGrupo_Click(object sender, EventArgs e)
+        {
+            int IdGrupo = Convert.ToInt32(DdlGrupo.SelectedValue);
+            if (IdGrupo > 0)
+            {
+                TResultado ResGrupo = new TResultado();
+                int RegModificados = BdAsignarResguardo.EliminarGrupo(IdGrupo, ref ResGrupo);
+
+                if (ResGrupo.Exito)
+                    LlenarDdlGrupo(Convert.ToInt32(DdlNomPers.SelectedValue));
+                else
+                    MostrarMensaje(ResGrupo.Mensaje.FirstOrDefault(), "error", "Normal", "ErrorResGrupo");
+            }
         }
     }
 }
