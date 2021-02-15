@@ -720,12 +720,27 @@ namespace InventariosPJEH
 
         protected void GridBuscar_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            string comando = e.CommandName;
+            int index = Convert.ToInt32(e.CommandArgument);
+
+
+            if (comando == "Eliminar")
+            {
+                Task.Delay(5000);
+                string javaScript = "showhide();";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", javaScript, true);
+                Rowindex.Value = index.ToString();
+            }
+            else
+            {
+
+
+
                 DivMostrarNuevo.Visible = true;
                 lgNuevoRegistro.Visible = false;
                 btnActualizar.Visible = true;
                 btnCancelar.Visible = true;
                 btnGuardar.Visible = false;
-                int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow RowSelecionada = gridBuscar.Rows[index];
 
                 string idEmpleado = Page.Server.HtmlDecode(gridBuscar.DataKeys[index].Values["IdEmpleado"].ToString());
@@ -933,6 +948,7 @@ namespace InventariosPJEH
                     rbSPendiente.Checked = false;
                     rbPendiente.Checked = true;
                 }
+            }
         }
 
         protected void BtnActualizar_Click(object sender, EventArgs e)
@@ -1105,6 +1121,7 @@ namespace InventariosPJEH
 
         protected void GridBuscar_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+
             DivMostrarNuevo.Visible = false;
             btnActualizar.Visible = false;
             btnGuardar.Visible = false;
@@ -1122,8 +1139,8 @@ namespace InventariosPJEH
                 obJN.IdEmpleado = IdEmpleado;
 
                 Boolean encontrado = true;
-            try
-            {
+                try
+                {
                     if (encontrado == true)
                     {
                         SqlConnection Conn = new SqlConnection(CConexion.Obtener());
@@ -1144,24 +1161,24 @@ namespace InventariosPJEH
                         }
 
                         else
-                        { 
-                                                   
+                        {
+
                             obJE.Eliminar_Personal(obJN);
                             gridBuscar.EditIndex = -1;
-                            
+
                             MostrarMensaje("** Personal eliminado de forma correcta **", "error", "Normal", "Incorrecto");
                             Rowindex.Value = "";
                             BuscarPersona();
                         }
                     }
 
-            }
-            catch (Exception ex)
-            {
+                }
+                catch (Exception ex)
+                {
                     Rowindex.Value = "";
                     MostrarMensaje("** Error al eliminar personal **", "error", "Normal", "Incorrecto");
+                }
             }
-        }
 
         }
 
@@ -1252,6 +1269,84 @@ namespace InventariosPJEH
                  MostrarMensaje(ex.Message , "error", "Normal", "Incorrecto");
             }
 
+        }
+
+      
+
+        protected void btnConfirmEliminar_Click(object sender, EventArgs e)
+        {
+            Task.Delay(5000);
+            string javaScript = "Ocultar();";
+            ScriptManager.RegisterStartupScript(btnConfirmEliminar, this.GetType(), "script", javaScript, true);
+
+
+            DivMostrarNuevo.Visible = false;
+            btnActualizar.Visible = false;
+            btnGuardar.Visible = false;
+            btnCancelar.Visible = false;
+            if (String.IsNullOrEmpty(Rowindex.Value))
+            {
+
+            }
+            else
+            {
+                HiddenClaveEmpleado.Value = TxtClaveEmpleadoNuevo.Text;
+                int n = int.Parse(Rowindex.Value);
+                string IdEmpleado = gridBuscar.DataKeys[n].Value.ToString();
+                obJN.IdEmpleado = IdEmpleado;
+
+                Boolean encontrado = true;
+                try
+                {
+                    if (encontrado == true)
+                    {
+                        SqlConnection Conn = new SqlConnection(CConexion.Obtener());
+                        Conn.Open();
+                        string consultar = "SELECT IdEmpleado FROM Cat_Personal WHERE IdEmpleado= '" + IdEmpleado + "' AND EstatusInv = 'P'";
+
+                        SqlCommand cmd1 = new SqlCommand(consultar, Conn);
+                        string clave = Convert.ToString(cmd1.ExecuteScalar());
+
+                        SqlDataReader leer = cmd1.ExecuteReader();
+
+
+
+                        if (clave == IdEmpleado)
+                        {
+                            MostrarMensaje("** El empleado no se puede eliminar porque tiene inventario pendiente **", "error", "Normal", "Incorrecto");
+
+                        }
+
+                        else
+                        {
+
+                            obJE.Eliminar_Personal(obJN);
+                            gridBuscar.EditIndex = -1;
+
+                            MostrarMensaje("** Personal eliminado de forma correcta **", "error", "Normal", "Incorrecto");
+                            Rowindex.Value = "";
+                            BuscarPersona();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Rowindex.Value = "";
+                    MostrarMensaje("** Error al eliminar personal **", "error", "Normal", "Incorrecto");
+                }
+
+
+            }
+
+
+        }
+
+        protected void btnConfirmCancelar_Click(object sender, EventArgs e)
+        {
+            Task.Delay(5000);
+            string javaScript = "ocultar();";
+            ScriptManager.RegisterStartupScript(btnConfirmEliminar, this.GetType(), "script", javaScript, true);
         }
     }
 
