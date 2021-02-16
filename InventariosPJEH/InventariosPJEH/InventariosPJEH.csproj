@@ -212,6 +212,7 @@
     <Compile Include="CAccesoDatos\BdHistoricoPersonal.cs" />
     <Compile Include="CAccesoDatos\BdMantenimiento1.cs" />
     <Compile Include="CAccesoDatos\BdReparaBien.cs" />
+    <Compile Include="CAccesoDatos\BdUnidadAdmin.cs" />
     <Compile Include="CNegocios\CActa.cs" />
     <Compile Include="CNegocios\CActaAdmin.cs" />
     <Compile Include="CNegocios\CAsignarResguardos.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="CNegocios\CMantenimiento1.cs" />
     <Compile Include="CNegocios\CReparaBien.cs" />
     <Compile Include="CNegocios\CReporteDepreciacion.cs" />
+    <Compile Include="CNegocios\CUnidadAdmin.cs" />
     <Compile Include="CNegocios\EtiquetaInventario.cs" />
     <Compile Include="frmActaAdministrativa.aspx.cs">
       <DependentUpon>frmActaAdministrativa.aspx</DependentUpon>
@@ -239,6 +241,12 @@
     </Compile>
     <Compile Include="frmCalcularDepreciacion.aspx.designer.cs">
       <DependentUpon>frmCalcularDepreciacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatUniAdmin.aspx.cs">
+      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatUniAdmin.aspx.designer.cs">
+      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmHistoricoBien.aspx.cs">
       <DependentUpon>frmHistoricoBien.aspx</DependentUpon>
@@ -413,13 +421,6 @@
     </Compile>
     <Compile Include="frmCatTipoDocumento.aspx.designer.cs">
       <DependentUpon>frmCatTipoDocumento.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="frmCatUniAdmin.aspx.cs">
-      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="frmCatUniAdmin.aspx.designer.cs">
-      <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmCatPersonal.aspx.cs">
       <DependentUpon>frmCatPersonal.aspx</DependentUpon>
