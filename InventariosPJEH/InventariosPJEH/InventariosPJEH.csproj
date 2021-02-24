@@ -139,6 +139,7 @@
     <Content Include="frmRecibirBien.aspx" />
     <Content Include="frmRegistroBien.aspx" />
     <Content Include="frmReparaBien.aspx" />
+    <Content Include="frmReporteBienesMP.aspx" />
     <Content Include="frmReporteCONAC.aspx" />
     <Content Include="Imagenes\Generales\agregar.png" />
     <Content Include="Imagenes\Generales\Calendario.png" />
@@ -249,6 +250,13 @@
     </Compile>
     <Compile Include="frmImpresionEtiquetas.aspx.designer.cs">
       <DependentUpon>frmImpresionEtiquetas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmReporteBienesMP.aspx.cs">
+      <DependentUpon>frmReporteBienesMP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmReporteBienesMP.aspx.designer.cs">
+      <DependentUpon>frmReporteBienesMP.aspx</DependentUpon>
     </Compile>
     <Compile Include="frmReporteCONAC.aspx.cs">
       <DependentUpon>frmReporteCONAC.aspx</DependentUpon>

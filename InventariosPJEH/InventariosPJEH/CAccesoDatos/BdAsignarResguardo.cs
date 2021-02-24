@@ -370,12 +370,17 @@ namespace InventariosPJEH.CAccesoDatos
                     Resguardo.IdGrupo = BdConverter.FieldToInt(rd["IdGrupo"]);
                     Resguardo.IdENSU = BdConverter.FieldToInt(rd["IdENSU"]);
                     Resguardo.IdActividad = BdConverter.FieldToInt(rd["IdActividad"]);
+                    Resguardo.Grupo = BdConverter.FieldToString(rd["Grupo"]);
+                    Resguardo.NombreDirAdmon = BdConverter.FieldToString(rd["NombreDirAdmon"]);
+                    Resguardo.CargoD = BdConverter.FieldToString(rd["CargoD"]);
+                    Resguardo.CargoE = BdConverter.FieldToString(rd["CargoE"]);
+                    Resguardo.Cargo = BdConverter.FieldToString(rd["Cargo"]);
                     LResguardo.Add(Resguardo);
                 }
                 cmd.Connection.Close();
 
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 if (cmd.Connection.State != ConnectionState.Closed)
                     cmd.Connection.Close();
@@ -635,7 +640,7 @@ namespace InventariosPJEH.CAccesoDatos
             cmd.CommandText += " INNER JOIN Cat_Niveles ON Cat_ENSUbicacion.IdNivel = Cat_Niveles.IdNivel ";
             cmd.CommandText += " INNER JOIN Cat_Secciones ON Cat_ENSUbicacion.IdSeccion = Cat_Secciones.IdSeccion ";
             cmd.CommandText += " WHERE (Cat_ENSUbicacion.IdEdificio = @IdEdificio) AND (Cat_ENSUbicacion.IdNivel = @IdNivel) ";
-
+            cmd.CommandText += " GROUP BY Cat_ENSUbicacion.IdSeccion, Cat_Secciones.Nombre ";
             //cmd.CommandText += " WHERE IdEdificio = @IdEdificio ";
             cmd.Parameters.Add("@IdEdificio", SqlDbType.Int).Value = IdEdificio;
             cmd.Parameters.Add("@IdNivel", SqlDbType.Int).Value = IdNivel;
@@ -730,5 +735,55 @@ namespace InventariosPJEH.CAccesoDatos
 
 
         }
+    }
+    public class MostrarBienesMuebles
+    {
+        private static string error;
+        public static List<CCalculoDepreciacion> MostrarBienesMueblesLibro(DateTime FechaIT, DateTime FechaCT, int Status, string Tipo)
+        {
+
+            List<CCalculoDepreciacion> lista = new List<CCalculoDepreciacion>();
+            SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+
+            try
+            {
+
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("stp_MostrarBienesMuebles", cnn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@FechaIT", System.Data.SqlDbType.DateTime).Value = FechaIT;
+                cmd.Parameters.Add("@FechaCT", System.Data.SqlDbType.DateTime).Value = FechaCT;
+                cmd.Parameters.Add("@Status", System.Data.SqlDbType.Int).Value = Status;
+                cmd.Parameters.Add("@Tipo", System.Data.SqlDbType.VarChar).Value = Tipo;
+
+
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        CCalculoDepreciacion CCalculo = new CCalculoDepreciacion();
+
+                        CCalculo.DescripcionBien = BdConverter.FieldToString(rd["DescripcionBien"].ToString());
+                        CCalculo.NumInventario = BdConverter.FieldToInt64(rd["NumInventario"]);
+                        CCalculo.MontoDepreciar = Convert.ToDecimal(rd["MontoDepreciar"]);
+
+                        lista.Add(CCalculo);
+                    }
+                }
+            }
+            catch (Exception e)
+
+            {
+                error = e.Message;
+                cnn.Close();
+            }
+            return lista;
+            //}
+
+        }
+
+
+
     }
 }

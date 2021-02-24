@@ -56,10 +56,15 @@ namespace InventariosPJEH
                 //else if (SubTipo == "Edicto" || SubTipo == "EDICTO")
                 //    Documento.Load(Server.MapPath("~/Reportes/CREdicto.rpt"));
                 //else
+
+                CUsuario Usuario = Page.Session["Usuario"] as CUsuario;
+                string Encargado = "LIC. " + Usuario.Nombre.ToUpper() + " " + Usuario.APaterno.ToUpper() + " " + Usuario.AMaterno.ToUpper();
+
                 Documento.Load(Server.MapPath("~/Reportes/RptResguardo.rpt"));
 
                 Documento.SetDataSource(LFichaBien);
                 Documento.SetParameterValue("NombreTitular", Parametros.NombreTitular);
+                Documento.SetParameterValue("NombreEncargado", Encargado);
 
                 System.IO.BinaryReader stream = new System.IO.BinaryReader(Documento.ExportToStream(ExportFormatType.PortableDocFormat));
 

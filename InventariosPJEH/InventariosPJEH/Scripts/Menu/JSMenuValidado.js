@@ -117,7 +117,7 @@
             '			            },' +
             '                       {' +
             '			                "Nombre": "Patrimonio Bienes Muebles",' +
-            '			                "URL": ""' +
+            '			                "URL": "frmReporteBienesMP.aspx"' +
             '			            }' +
             '		            ]' +
             '	            },' +
