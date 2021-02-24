@@ -64,11 +64,34 @@
         .auto-style22 {
             height: 24px;
         }
+
     </style>
  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+
+     <script>  
+        function showhide() {
+            var div = document.getElementById("divProgress");
+            //if (div.style.display !== "none") {  
+            //    div.style.display = "none";  
+            //}  
+            //else {  
+            div.style.visibility = "visible";
+            //}  
+        }
+
+        function Ocultar() {
+            var div = document.getElementById("divProgress");
+            //if (div.style.display !== "none") {  
+            //    div.style.display = "none";  
+            //}  
+            //else {  
+            div.style.visibility = "collapse";
+            //}  
+        }
+     </script>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
@@ -232,9 +255,19 @@
                                 <ControlStyle Width="30px" />
                                 <ItemStyle Height="20px" HorizontalAlign="Center" Width="30px" />
                                 </asp:ButtonField>
-                                <asp:CommandField ButtonType="Image" HeaderText="Eliminar" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" runat="server" >
+
+
+                                   <asp:ButtonField ButtonType="Image" ImageUrl="~/Imagenes/Generales/eliminar.png" ControlStyle-Width="30px" HeaderText="Editar" Text="Editar" runat="server"
+                                    CommandName="Eliminar" ItemStyle-HorizontalAlign="Center" ItemStyle-Height="20px" ItemStyle-Width="30px" >
+                                <ControlStyle Width="30px" />
+                                <ItemStyle Height="20px" HorizontalAlign="Center" Width="30px" />
+                                </asp:ButtonField>
+
+
+
+                                <%--<asp:CommandField ButtonType="Image" HeaderText="Eliminar" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" runat="server" >
                                   <ControlStyle Width="30px" />
-                                </asp:CommandField>
+                                </asp:CommandField>--%>
                             </Columns>
                         </asp:GridView>
                     </fieldset>
@@ -387,21 +420,53 @@
                 <table style="width: 100%; margin-top: 10px;">
                             <tr>
                                 <td>
-
                                     <input onclick="window.location.reload()" type="button" value="Limpiar" class="Boton"> </input>
-
                                 </td>
                             </tr>
                  </table>
                 <br />
-
             </div>
 
             </div>
+
+ <div id="divProgress"  style="visibility: collapse;">
+                    <div style="position: fixed; background-color: white; opacity: .6; width: 100%; height: 100%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    </div>
+                 <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding:100px;">
+   <div style="width: auto; text-align: center; margin-bottom:30px">
+        <asp:Label ID="Label1" runat="server" Text="¿Desea eliminar el dato?" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
+    </div>
+   <asp:Button ID="btnConfirmCancelar" runat="server" CssClass="Boton" OnClick="btnConfirmCancelar_Click" Text="Cancelar" style="margin:10px;"/>
+    <asp:Button ID="btnConfirmEliminar" runat="server" CssClass="Boton" OnClick="btnConfirmEliminar_Click"  Text="Eliminar" style="margin:10px;" />
+  </div>
+                </div>
+   
+   
+
 
         </ContentTemplate>
     </asp:UpdatePanel>
+
+<%--    <div style="position: fixed; background-color:black; opacity:.8; width:100%; height:100%; top: 50%;left: 50%; transform: translate(-50%, -50%);">
+<div class="popup" style="position: fixed;  top: 50%;left: 50%; transform: translate(-50%, -50%); ">
+    <div style="background-color:white; padding:100px;">
+
+ 
+    <p>This is the message</p>
+    <button class="btn btn-cancel">Cancel</button>
+    <button class="btn btn-primary">Ok</button>
+  </div>
+   </div>
+
+
+        </div>--%>
+
+   
 </asp:Content>
+
+
+
+
 
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
@@ -409,8 +474,5 @@
         <asp:Label ID="LblLema" runat="server" Text="PERSONAL" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
     </div>
 </asp:Content>
-
-
-
 
 

@@ -47,14 +47,12 @@
                             </div>
                             <br />
                             <div class="auto-style6" id="DivInactivo" runat="server" visible="false" >
-                                <asp:Label ID="LblTitBaja" runat="server" Text="Baja:" align="right" Width="190px" ></asp:Label>
-                                <asp:DropDownList ID="DdlBaja" runat="server" CssClass="DropGeneral" AutoPostBack="true" Height="20px" Width="404px">
+                                <asp:Label ID="LblTitBaja" runat="server" Text="Oficio de baja definitiva:" align="right" Width="190px" ></asp:Label>
+                             <%--   <asp:DropDownList ID="DdlBaja" runat="server" CssClass="DropGeneral" AutoPostBack="true" Height="20px" Width="404px">
                                     <asp:ListItem Value="0">---Seleccionar-----</asp:ListItem>
-                                </asp:DropDownList>
-               
-                                    
-                        
-                             
+                                </asp:DropDownList>--%>
+                               <asp:TextBox ID="txtBaja" runat="server" CssClass="auto-style5" Width="125px" Height="21px" ></asp:TextBox>
+                                        
                             </div>
                             <br />
                             
@@ -74,7 +72,7 @@
                                 <asp:Label ID="LblTotal" runat="server" Width="166px" CssClass="auto-style6" Font-Bold="True"></asp:Label>
                                      </div>
                            <div  style="float:right; width:35%; height:20px;" >
-                               <asp:Button ID="BtnImprimir" runat="server" Text="Imprimir" CssClass="Boton Marginleft" />
+                               <asp:Button ID="BtnImprimir" runat="server" Text="Imprimir" CssClass="Boton Marginleft" OnClick="BtnImprimir_Click" />
                            </div>
                              <br />  
                        <div class="auto-style2" >

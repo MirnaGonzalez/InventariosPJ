@@ -301,7 +301,7 @@ namespace InventariosPJEH
                 }
                 else
                 {
-                    if ((String.IsNullOrWhiteSpace(txtConFechaIni.Text) && String.IsNullOrWhiteSpace(txtConFechaFin.Text)))
+                    if ((String.IsNullOrWhiteSpace(txtConFechaIni.Text) || String.IsNullOrWhiteSpace(txtConFechaFin.Text)))
                     {
                         MostrarMensaje("** Datos Faltantes **", "error", "Normal", "Incorrecto");
                     }

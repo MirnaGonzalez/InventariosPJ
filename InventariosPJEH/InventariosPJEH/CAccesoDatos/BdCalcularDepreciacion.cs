@@ -15,7 +15,7 @@ namespace InventariosPJEH.CAccesoDatos
     public class BdCalcularDepreciacion
     {
         private static string error;
-        public static List<CCalculoDepreciacion> MostraDepreciacion(DateTime FechaIT, DateTime FechaCT, int Status, string Tipo)
+        public static List<CCalculoDepreciacion> MostraDepreciacion(DateTime FechaIT, DateTime FechaCT, int Status, string Tipo, string NoBajaDefinitiva)
         {
             
              List<CCalculoDepreciacion> lista = new List<CCalculoDepreciacion>();
@@ -23,16 +23,25 @@ namespace InventariosPJEH.CAccesoDatos
              
             try
             {
-                
-                 cnn.Open();
-                SqlCommand cmd = new SqlCommand("stp_CalculoDepreciacion", cnn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd;
+                cnn.Open();
+                if (NoBajaDefinitiva=="")
+                {
+                   cmd = new SqlCommand("stp_CalculoDepreciacion", cnn);
+
+                }
+                else
+                {
+                    cmd = new SqlCommand("stp_CalculoDepreciacionInactivos", cnn);
+                    cmd.Parameters.Add("@OficioBaja", System.Data.SqlDbType.VarChar).Value = NoBajaDefinitiva;
+                }
 
                 cmd.Parameters.Add("@FechaIT", System.Data.SqlDbType.DateTime).Value = FechaIT;
                 cmd.Parameters.Add("@FechaCT", System.Data.SqlDbType.DateTime).Value = FechaCT;
                 cmd.Parameters.Add("@Status", System.Data.SqlDbType.Int).Value = Status;
                 cmd.Parameters.Add("@Tipo", System.Data.SqlDbType.VarChar).Value = Tipo;
-              
+
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var rd = cmd.ExecuteReader())
                 {
@@ -81,7 +90,62 @@ namespace InventariosPJEH.CAccesoDatos
 
         }
 
-        
-        
+        public static List<CReporteDepreciacion> ReporteDepreciacion(DateTime FechaIT, DateTime FechaCT, int Status, string Tipo, string NoBajaDefinitiva)
+        {
+
+            List<CReporteDepreciacion> lista = new List<CReporteDepreciacion>();
+             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
+
+            try
+            {
+                SqlCommand cmd;
+                cnn.Open();
+                if (NoBajaDefinitiva == "")
+                {
+                    cmd = new SqlCommand("stp_CalculoReporteDepreciacion", cnn);
+
+                }
+                else
+                {
+                    cmd = new SqlCommand("stp_CalculoReporteDepreciacionInactivos", cnn);
+                    cmd.Parameters.Add("@OficioBaja", System.Data.SqlDbType.VarChar).Value = NoBajaDefinitiva;
+                }
+
+                cmd.Parameters.Add("@FechaIT", System.Data.SqlDbType.DateTime).Value = FechaIT;
+                cmd.Parameters.Add("@FechaCT", System.Data.SqlDbType.DateTime).Value = FechaCT;
+                cmd.Parameters.Add("@Status", System.Data.SqlDbType.Int).Value = Status;
+                cmd.Parameters.Add("@Tipo", System.Data.SqlDbType.VarChar).Value = Tipo;
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        CReporteDepreciacion CCalculo = new CReporteDepreciacion();
+
+                        CCalculo.Partida = rd["Partida"].ToString();
+                        CCalculo.NumPartida = BdConverter.FieldToInt(rd["NumPartida"]);
+                        CCalculo.DepreciacionTrimestre = BdConverter.FieldToFloat(rd["DepreciacionTrimestre"]);
+                        CCalculo.SaldoAcumulado = BdConverter.FieldToFloat(rd["SaldoAcumulado"]);
+                        CCalculo.SaldoXDepreciar = BdConverter.FieldToFloat(rd["SaldoXDepreciar"]);
+                        CCalculo.AgrupaAnio = rd["AgrupaAnio"].ToString();
+
+                        lista.Add(CCalculo);
+                    }
+                }
+            }
+            catch (Exception e)
+
+            {
+                error = e.Message;
+                cnn.Close();
+            }
+            return lista;
+            //}
+
+        }
+
     }
 }

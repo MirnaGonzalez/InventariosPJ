@@ -2,30 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            height: 20px;
-            width: 643px;
-        }
-        .auto-style2 {
-            height: 20px;
-            width: 261px;
-        }
-        .auto-style3 {
-            width: 261px;
-        }
-        .auto-style4 {
-            width: 643px;
-        }
         .auto-style5 {
             width: 82%;
             height: 43px;
         }
-        .auto-style6 {
-            height: 20px;
-            width: 302px;
-        }
         .auto-style7 {
-            width: 302px;
+            width: 95%;
+            height: 136px;
         }
         .auto-style8 {
             margin-top: 10px;
@@ -33,164 +16,176 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
+    <asp:Label ID="Lbld" runat="server"></asp:Label>
 
-    <asp:ScriptManager ID="ScriptManager1" AsyncPostBackTimeout="3600" runat="server">
-    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel" runat="server">
+        <ContentTemplate>
+            <div id="Contenedor" style="width:auto; height:auto; text-align:center">
+               
+                <asp:HiddenField ID="Rowindex" runat="server" />
 
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-     
-     <ContentTemplate>
-          <div class="TempGralDivContenedor">
-               <div class="TempGralDivGenerales">
-                   <fieldset style="height:auto;">
-                       
-                        <asp:UpdatePanel ID="ConsultaPanel" runat="server">
-                            <ContentTemplate>
+                <div id="DivUniAdminPres" runat="server" visible="true">
+                    <div style="width: auto;">
+                   
+                        <fieldset class="auto-style7" style="border-color: black; margin-left: 11px;">
+                            <legend style="width: auto; color: darkblue; font-size: 12px;">Buscar</legend>
+                            <div class="auto-style5">
+                                <table style="margin-left: 100px" class="auto-style8">
+                                    <tr>
+                                        <td class="auto-style13" style="text-align:right">
+                                            <asp:Label ID="LabelClasif" runat="server" CssClass="LabelGeneral" Text="Clasificación: "></asp:Label>
+                                        </td>
+                                        <td style="text-align:left;">
+                                            <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true" CssClass="DropGeneral" Height="20px" Width="420px" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged"></asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr id="ddlDistritoDiv" runat="server">
+                                        <td class="auto-style13" style="text-align:right;">
+                                            <asp:Label ID="LabelDistrito" runat="server" CssClass="LabelGeneral" Text="Distrito: " Visible="false"></asp:Label>
+                                        </td>
+                                        <td style="text-align:left;">
+                                            <asp:DropDownList ID="ddlDistrito" runat="server" AutoPostBack="true" CssClass="DropGeneral" Visible="false" Height="20px" Width="420px" ></asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="auto-style8">
+                                            <asp:Button ID="BtnBuscar" runat="server" CssClass="Boton" Style="margin-top: 15px; align-content: center;" Height="33px" Width="98px" Text="Buscar" OnClick="BtnBuscar_Click"/>
+                                        </td>
+                                        <td class="auto-style8" style="text-align:right;">
+                                            <asp:Button ID="BtnNuevoR" runat="server" CssClass="Boton" Style="margin-top: 15px; align-content: center;" Height="33px" Width="161px" Text="Nuevo Registro" OnClick="BtnNuevoR_Click"/>
+                                        </td>
+                                    </tr>
 
-                                 <div class="TempGralDivContenedor">
-            <div class="TempGralDivGenerales">
-                <fieldset style="height:100px;">
-                    <legend>Consultar por: </legend>
-                    <div class="TempGralDivContGenerales">
-              
-                    <div class="TempGralDivContGenerales">
-                        &nbsp
-                        <br />
-                        <table class="auto-style5">
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div id="DivResultados" runat="server" style="width: 100%; text-align: center;" visible="false">
+                        <fieldset style="height: auto">
+                            <asp:GridView ID="GridTabla" runat="server" CssClass="StyleGridV" AutoGenerateColumns="False" HorizontalAlign="Center"
+                                DataKeyNames="IdUniAdmin" 
+                                OnRowCommand="GridModificar_RowCommand"
+                                OnRowDeleting="GridBuscar_RowDeleting">
+                                <Columns>
+                                    <asp:BoundField DataField="UniAdmin" HeaderText="Unidad Administrativa"/>
+                                    <asp:BoundField DataField="SubFondo" HeaderText="Subfondo"/>
+                                    <asp:BoundField DataField="DescTipo" HeaderText="Tipo"/>
+                                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono"/>
+                                    <asp:BoundField DataField="Email" HeaderText="Correo electrónico"/>
+                                    <asp:BoundField DataField="DescClasific" HeaderText="Clasificación"/>                               
+                                    <asp:TemplateField HeaderText="Editar" ItemStyle-Width="50">
+                                        <ItemTemplate>
+                                            <asp:ImageButton runat="server" ID="btnEditar" Width="30" Height="30" ImageUrl="~/Imagenes/Generales/editar.png" 
+                                                CommandName="Editar" OnClick="btnEditar_Click" CommandArgument='<%# Container.DataItemIndex.ToString() %>' />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="50px" />
+                                    </asp:TemplateField>
+                                    <asp:CommandField ButtonType="Image" HeaderText="Eliminar" DeleteImageUrl="~/Imagenes/Generales/eliminar.png" ShowDeleteButton="true" runat="server" >
+                                      <ControlStyle Width="30px" />
+                                    </asp:CommandField>                                   
+                                    
+                                </Columns>
+                            </asp:GridView>
+                        </fieldset>
+                    </div>
+               </div>
+                <div id="DivNuevoReg" runat="server" visible="false" style="width: 100%; height: auto;">
+                    <fieldset style="height: auto; border-color:black;">
+                        <legend id="lgNuevoR" runat="server" style="text-align: left; color: darkblue;" >Nuevo Registro</legend>
+                        <asp:TextBox ID="IdUniAdminTxt" runat="server" Visible="false" ></asp:TextBox>
+                        <table style="margin-top: 15px; margin: 0 auto; width: 70%;">
                             <tr>
-                                <td class="auto-style2">
-                                    <asp:Label ID="LblSección" runat="server" CssClass="TempGralLblGenerales4" Text="Tipo de Área : "></asp:Label>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="LblTipoA" runat="server" CssClass="LabelGeneral">Tipo de área</asp:Label>
                                 </td>
-                                <td class="auto-style1">
-                                    <asp:DropDownList ID="ddlSeccion" runat="server" Height="16px" Width="398px">
-                                        <asp:ListItem Value="0">---------------------------</asp:ListItem>
-                                        <asp:ListItem Value="1I">Primera Instancia</asp:ListItem>
-                                        <asp:ListItem Value="2I"></asp:ListItem>
-                                        <asp:ListItem Value="UA">Segunda Instancia</asp:ListItem>
-                                        <asp:ListItem Value="TE">Unidad Administrativa</asp:ListItem>
-                                        <asp:ListItem Value="TF">Tribunal ElectoralTribunal Fiscal</asp:ListItem>
-                                    </asp:DropDownList>
+                                <td style="text-align: left;">
+                                    <asp:DropDownList ID="ddlTipoNuevo" runat="server" CssClass="DropGeneral" AutoPostBack="true" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlTipoNuevo_SelectedIndexChanged"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="auto-style2">
-                                    <asp:Label ID="LblDistrito" runat="server" CssClass="TempGralLblGenerales4" Text="Distrito : "></asp:Label>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="LblDistritoN" runat="server" Text="Distrito" CssClass="LabelGeneral" Visible="false"></asp:Label>
                                 </td>
-                                <td class="auto-style1">
-                                    <asp:DropDownList ID="DropDistrito" runat="server" AutoPostBack="True" CssClass="auto-style8" Height="17px" OnSelectedIndexChanged="DropDistrito_SelectedIndexChanged" Visible="False" Width="398px">
-                                    </asp:DropDownList>
+                                <td style="text-align: left;">
+                                    <asp:DropDownList ID="ddlDistritoNuevo" runat="server" Visible="false" AutoPostBack="true" CssClass="DropGeneral"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="auto-style3">
-                                    <asp:Label ID="LblUniAdmin" runat="server" CssClass="TempGralLblGenerales4" Text="Unidad Administrativa : "></asp:Label>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="LblSubfondo" runat="server" Text="Subfondo" CssClass="LabelGeneral">SubFondo</asp:Label>
                                 </td>
-                                <td class="auto-style4">
-                                    <asp:DropDownList ID="ddlUniAdmin" runat="server" Height="16px" Width="398px">
-                                    </asp:DropDownList>
+                                <td style="text-align: left;">
+                                    <asp:DropDownList ID="ddlSubFondoN" runat="server" AutoPostBack="true" CssClass="DropGeneral"></asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="lblTipoSub" runat="server" Text="Tipo" CssClass="LabelGeneral">Tipo</asp:Label>
+                                </td>
+                                <td style="text-align: left;">
+                                    <asp:DropDownList ID="ddlTipoSub" runat="server" AutoPostBack="true" CssClass="DropGeneral"></asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="lblNombreUniNuevo" runat="server" Text="Nombre Unidad Administrativa" CssClass="LabelGeneral"></asp:Label>
+                                </td>
+                                <td style="text-align: left;">
+                                    <asp:TextBox ID="TxTNombreUniN" runat="server" CssClass="TxtGeneral" ></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="lblTelefonoNu" runat="server" CssClass="LabelGeneral" Text="Teléfono"></asp:Label>
+                                </td>
+                                <td style="text-align: left;">
+                                    <asp:TextBox ID="TxtTelefonoNue" runat="server" CssClass="TxtGeneral" ></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style14" style="text-align: right;">
+                                    <asp:Label ID="lblCorreoN" runat="server" Text="Correo Electrónico" CssClass="LabelGeneral"></asp:Label>
+                                </td>
+                                <td style="text-align: left;">
+                                    <asp:TextBox ID="TxTCorreoN" runat="server" CssClass="TxtGeneral"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style8" style="text-align:left;">
+                                    <asp:Button id="BtnGuardar" runat="server" Text="Guardar" CssClass="Boton" OnClick="BtnGuardar_Click"/>
+                                </td>
+                                <td class="auto-style8" style="text-align:right;">
+                                    <asp:Button id="BtnCancelar" runat="server" Text="Cancelar" CssClass="Boton" OnClick="BtnCancelar_Click"/>
                                 </td>
                             </tr>
                         </table>
-                        <br />
-                        <asp:Button ID="btnConsulta" runat="server" CssClass="Boton"  Text="Consultar" />
-                    </div>
-                              </div>
-
-                </fieldset>
-            </div>
-
-        </div>
-                                       
-                                <div class="DivResultados">   
-                                      <legend>Resultados: </legend>
-                                     <asp:GridView ID="GridUniAdmin" runat="server" AllowPaging="True" AlternatingRowStyle-CssClass="AlterS" AutoGenerateColumns="False" CssClass="StyleGridV" PagerStyle-CssClass="PagerS" PageSize="10" Width="100%">
-                                         <Columns>
-                                             <asp:BoundField DataField="Num" HeaderStyle-Width="30px" HeaderText="No." ItemStyle-Width="30px" />
-                                            <asp:BoundField DataField="Seccion" HeaderText="Sección" />
-                                             <asp:BoundField DataField="UniAdmin" HeaderText="Unidad Administrativa" />
-                                             <asp:BoundField DataField="Tipo" HeaderText="Tipo" />
-                                            
-                                             <asp:TemplateField HeaderStyle-Font-Size="7pt" HeaderText="Modificar" ItemStyle-Height="10px" ItemStyle-HorizontalAlign="Center">
-                                                 <ItemTemplate>
-                                                     <asp:CheckBox ID="ChkSeleccionar" runat="server" AutoPostBack="true"  Visible='<%# ((string)Eval("Estado") != "CERRADO") ? bool.Parse("True") : bool.Parse("False") %>' />
-                                                 </ItemTemplate>
-                                             </asp:TemplateField>
-                                         </Columns>
-                                     </asp:GridView>
-                                </div>
-
-
-               
-                    <fieldset style="height:auto;">
-                        
-
-                        <legend>Modificar: </legend>
-                        <div style="width:98%; float:left;">
-                            <table class="auto-style5">
-                                <tr>
-                                    <td class="auto-style6">
-                                        <asp:Label ID="lblSeccionMod" runat="server" CssClass="TempGralLblGenerales4" Text="Sección : "></asp:Label>
-                                    </td>
-                                    <td class="auto-style1">
-                                        <asp:DropDownList ID="ddlSeccionMod" runat="server" Height="16px" Width="499px">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="auto-style6">
-                                        <asp:Label ID="lblTipoMod" runat="server" CssClass="TempGralLblGenerales4" Text="Tipo: "></asp:Label>
-                                    </td>
-                                    <td class="auto-style1">
-                                        <asp:DropDownList ID="ddlTipoMod" runat="server">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="auto-style7">
-                                        <asp:Label ID="lblUniAdminMod" runat="server" CssClass="TempGralLblGenerales4" Text="Unidad Administrativa : "></asp:Label>
-                                    </td>
-                                    <td class="auto-style4">
-                                        <asp:TextBox ID="txtUniAdmin" runat="server" ReadOnly="true" Width="91%"></asp:TextBox>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br />
-                            <asp:Button ID="btnGuardar" runat="server" CssClass="Boton" Text="Guardar" />
-                            <br />
-                        </div>
-                        </div>
-
-                        <asp:HiddenField ID="HFIdUniAdmin" runat="server" />
                     </fieldset>
-                    
                 </div>
 
+                <div id="MostrarInfo" runat="server" visible="false">
+                    <asp:Label ID="IdSubF" runat="server"></asp:Label>
+                    <asp:Label ID="UniA" runat="server"></asp:Label>
+                    <asp:Label ID="TipoNu" runat="server"></asp:Label>
+                    <asp:Label ID="Tele" runat="server"></asp:Label>
+                    <asp:Label ID="Emails" runat="server"></asp:Label>
+                    <asp:Label ID="Clasifica" runat="server"></asp:Label>
+                    <asp:Label ID="IdAbrevi" runat="server"></asp:Label>
+                    <asp:Label ID="IdEmpleo" runat="server"></asp:Label>
 
-
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-
-                    </fieldset>
-               </div>
-
-
-
-          </div>
-
-     </ContentTemplate>
-
+                </div>
+            </div>
+        </ContentTemplate>
     </asp:UpdatePanel>
-   
 
 
 </asp:Content>
 
 
-<asp:Content ID="Content3" ContentPlaceHolderID="CPHTitulo" runat="server">
+<asp:Content ID="Content3" runat="server" ContentPlaceHolderID="CPHTitulo">
     <div style="width: auto; text-align: center; background-color: #d8d8d8;">
-        <asp:Label ID="LblLema" runat="server" Text="UNIDADES ADMINISTRATIVAS" Font-Size="Large" Font-Bold="True" Font-Italic="True" ForeColor="#0C2261"></asp:Label>
+        <asp:Label ID="LblLema" runat="server" Text="Unidad Administrativa" Font-Size="Large" Font-Bold="True" Font-Italic="True" CssClass="LblLema"></asp:Label>
     </div>
 </asp:Content>
-     
-           
 
