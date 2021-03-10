@@ -58,6 +58,11 @@ namespace InventariosPJEH.CNegocios
         public Int32 IdGrupo { get; set; }
         public Int32 IdENSU { get; set; }
         public Int32 IdActividad { get; set; }
+        public string Grupo { get; set; }
+        public string NombreDirAdmon { get; set; }
+        public string CargoD { get; set; }
+        public string CargoE { get; set; }
+        public string Cargo { get; set; }
 
     }
 
