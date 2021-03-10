@@ -27,6 +27,8 @@ namespace InventariosPJEH.CAccesoDatos
         protected SqlDataAdapter adaptador;
         protected SqlDataReader reader;
         protected DataSet data;
+
+
         public BdCat_Personal()
         {
             this.conexion = ConexionBD.getConexion();

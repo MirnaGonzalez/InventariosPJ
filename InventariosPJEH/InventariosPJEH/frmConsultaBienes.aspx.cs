@@ -310,6 +310,7 @@ namespace InventariosPJEH
                 //Aplicar el estilo de texto 
                 GridPrueba.Rows[i].Attributes.Add("class", "textmode");
             }
+
             GridPrueba.RenderControl(hw);
 
             //Estilo con el formato de número
