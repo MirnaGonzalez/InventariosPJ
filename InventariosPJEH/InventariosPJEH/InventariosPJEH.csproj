@@ -172,6 +172,9 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\InventariosPJ - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\InventariosPJ - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\InventariosPJ - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +248,7 @@
     </Compile>
     <Compile Include="frmCatUniAdmin.aspx.cs">
       <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="frmCatUniAdmin.aspx.designer.cs">
       <DependentUpon>frmCatUniAdmin.aspx</DependentUpon>

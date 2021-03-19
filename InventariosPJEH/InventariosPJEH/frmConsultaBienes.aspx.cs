@@ -38,7 +38,7 @@ namespace InventariosPJEH
                 IniciarLlenadoDropDownListProveedor();
                 IniciarLlenadoDropDown();
                 IniciarLlenadoDropEstatus();
-                IniciarLlenadoDropAreaResguardo();
+                //IniciarLlenadoDropAreaResguardo();
             }
         }
 
@@ -80,13 +80,41 @@ namespace InventariosPJEH
                 DivFiltrosDeBusqueda.Visible = false;
                 divGrid.Visible = true;
                 DataTable Datos = new DataTable();
-                Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
-                DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
-                TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
-                DropUniAdmin, DropEstatus, DropAreaMantenimiento);
+                //Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
+                //DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
+                //TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
+                //DropUniAdmin, DropEstatus, DropAreaMantenimiento);
+
+             
+               string idPropiedad = DropDownListPropiedad.Text;
+                string Partida = DropDownListPartida.Text;
+                string SubClase = DropDownListSubClase.Text;
+                string NoDocumento = TextBoxNoDocumento.Text;
+                string Proveedor = DropDownListProveedor.Text;
+                string FechaAdquisicion = TxtFechaAdquisicion.Text;
+                string NoInventario = TxtNoInventario.Text;
+                string Marca = DropDownListMarca.Text;
+                string Modelo = TextBoxModelo.Text;
+                string Serie = TextBoxSerie.Text;
+                string Persona = DropPersona.Text;
+                string NoResguardo = TxtNoResguardo.Text;
+                string Clasificacion = DropClasificacion.Text;
+                string Unidad = DropUniAdmin.Text;
+                string Estatus = DropEstatus.Text;
+   
+
+
+
+                Datos = BdConsultaBienes.BuscarGrid(idPropiedad, Partida, SubClase, NoDocumento, Proveedor,FechaAdquisicion, NoInventario, Marca, Modelo, Serie, Persona,NoResguardo, Clasificacion, Unidad, Estatus);
+
                 GridModificar.DataSource = Datos;
                 GridModificar.DataBind();
                 Botones.Visible = true;
+                DivFiltrosDeBusqueda.Visible = true;
+                divGrid.Visible = true;
+                LblTotal.Text = "Total de registros: " + GridModificar.Rows.Count.ToString();
+                LblTotal.Visible = true;
+                    
 
                 if (GridModificar.Rows.Count == 0)
                 {
@@ -94,6 +122,7 @@ namespace InventariosPJEH
                     DivFiltrosDeBusqueda.Visible = true;
                     divGrid.Visible = false;
                     Botones.Visible = false;
+                    LblTotal.Visible = false;
                 }
                 ////////////////////////////////////////////
             }
@@ -107,13 +136,13 @@ namespace InventariosPJEH
         /// <summary>
         /// Método para llenar el drop de área de resguardo
         /// </summary>
-        private void IniciarLlenadoDropAreaResguardo()
-        {
-            DropAreaMantenimiento.Items.Insert(0, new ListItem("Seleccionar", "0"));
-            DropAreaMantenimiento.Items.Insert(1, new ListItem("Soporte Técnico", "1"));
-            DropAreaMantenimiento.Items.Insert(2, new ListItem("Servicios Generales", "2"));
-            DropAreaMantenimiento.Items.Insert(3, new ListItem("Servicio de Autos", "3"));
-        }
+        //private void IniciarLlenadoDropAreaResguardo()
+        //{
+        //    DropAreaMantenimiento.Items.Insert(0, new ListItem("Seleccionar", "0"));
+        //    DropAreaMantenimiento.Items.Insert(1, new ListItem("Soporte Técnico", "1"));
+        //    DropAreaMantenimiento.Items.Insert(2, new ListItem("Servicios Generales", "2"));
+        //    DropAreaMantenimiento.Items.Insert(3, new ListItem("Servicio de Autos", "3"));
+        //}
 
         /// <summary>
         /// Método para llenar el drop de proveedores 
@@ -154,7 +183,7 @@ namespace InventariosPJEH
             DropDownListPropiedad.DataTextField = "Propiedad";
             DropDownListPropiedad.DataValueField = "IdPropiedad";
             DropDownListPropiedad.DataBind();
-            DropDownListPropiedad.Items.Insert(0, new ListItem("Seleccionar", "0"));
+            //DropDownListPropiedad.Items.Insert(0, new ListItem("Seleccionar", "0"));
         }
 
         /// <summary>
@@ -233,7 +262,7 @@ namespace InventariosPJEH
             DropPersona.SelectedIndex = 0;
             DropPersona.Visible = false;
             TxtNoResguardo.Text = "";
-            DropAreaMantenimiento.SelectedIndex = 0;
+            //DropAreaMantenimiento.SelectedIndex = 0;
             DropEstatus.SelectedIndex = 0;
         }
 
@@ -256,14 +285,27 @@ namespace InventariosPJEH
         /// <param name="e"></param>
         protected void BtnExportar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExpExcelDataTable();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            GridModificar.Width = Unit.Percentage(0);
+            HttpResponse response = Response;
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            System.Web.UI.Page pageToRender = new System.Web.UI.Page();
+            HtmlForm form = new HtmlForm();
+
+
+            form.Controls.Add(GridModificar);
+            pageToRender.Controls.Add(form);
+            response.Clear();
+            response.Buffer = true;
+            response.ContentType = "application/vnd.ms-excel";
+            response.AddHeader("Content-Disposition", "attachment;filename=ConsultaBienes.xls");
+            response.Charset = "UTF-8";
+            response.ContentEncoding = Encoding.Default;
+            pageToRender.RenderControl(htw);
+            response.Write(sw.ToString());
+            response.End();
+
+            GridModificar.Width = Unit.Percentage(100);
         }
 
         /// <summary>
@@ -275,10 +317,13 @@ namespace InventariosPJEH
         {
             GridModificar.PageIndex = e.NewPageIndex;
             DataTable Datos = new DataTable();
-            Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
-                DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
-                TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
-                DropUniAdmin, DropEstatus, DropAreaMantenimiento);
+            //Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
+            //    DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
+            //    TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
+            //    DropUniAdmin, DropEstatus, DropAreaMantenimiento);
+
+        //    Datos = BdConsultaBienes.BuscarGrid(string TxtNoInventario);
+
             GridModificar.DataSource = Datos;
             GridModificar.DataBind();
         }
@@ -289,12 +334,15 @@ namespace InventariosPJEH
         protected void ExpExcelDataTable()
         {
             DataTable Datos = new DataTable();
-            Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
-                DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
-                TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
-                DropUniAdmin, DropEstatus, DropAreaMantenimiento);
-            GridPrueba.DataSource = Datos;
-            GridPrueba.DataBind();
+            //Datos = BdConsultaBienes.BuscarGrid(DropDownListPropiedad, DropDownListPartida,
+            //    DropDownListSubClase, TextBoxNoDocumento, DropDownListProveedor, TxtFechaAdquisicion,
+            //    TxtNoInventario, DropDownListMarca, TextBoxModelo, TextBoxSerie, DropPersona, TxtNoResguardo, DropClasificacion,
+            //    DropUniAdmin, DropEstatus, DropAreaMantenimiento);
+
+           // Datos = BdConsultaBienes.BuscarGrid(TxtNoInventario);
+
+            //GridPrueba.DataSource = Datos;
+         //   GridPrueba.DataBind();
 
             Response.Clear();
             Response.Buffer = true;
@@ -305,15 +353,15 @@ namespace InventariosPJEH
             StringWriter sw = new StringWriter();
             HtmlTextWriter hw = new HtmlTextWriter(sw);
 
-            for (int i = 0; i < GridPrueba.Rows.Count; i++)
-            {
-                //Aplicar el estilo de texto 
-                GridPrueba.Rows[i].Attributes.Add("class", "textmode");
-            }
+            //for (int i = 0; i < GridPrueba.Rows.Count; i++)
+            //{
+            //    //Aplicar el estilo de texto 
+            //    GridPrueba.Rows[i].Attributes.Add("class", "textmode");
+            //}
 
-            GridPrueba.RenderControl(hw);
+            //GridPrueba.RenderControl(hw);
 
-            //Estilo con el formato de número
+            ////Estilo con el formato de número
             string style = @"<style> .textmode { mso-number-format:\@; } </style>";
             Response.Write(style);
             Response.Output.Write(sw.ToString());
@@ -425,7 +473,7 @@ namespace InventariosPJEH
             DropPersona.SelectedIndex = 0;
             DropPersona.Visible = false;
             TxtNoResguardo.Text = "";
-            DropAreaMantenimiento.SelectedIndex = 0;
+            //DropAreaMantenimiento.SelectedIndex = 0;
             DropEstatus.SelectedIndex = 0;
             LabelDistrito.Visible = false;
             LblPersona.Visible = false;

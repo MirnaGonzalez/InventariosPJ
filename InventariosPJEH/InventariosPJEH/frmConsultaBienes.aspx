@@ -86,7 +86,7 @@
                                     <asp:Label ID="LblNoInventario" runat="server" Text="No. Inventario: " Width="190px"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TxtNoInventario" runat="server" AutoPostBack="true" onkeypress="return Precio(event);" CssClass="TextBox"></asp:TextBox>
+                                    <asp:TextBox ID="TxtNoInventario" runat="server" AutoPostBack="true" CssClass="TextBox"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +103,7 @@
                                     <asp:Label ID="LablModelo" runat="server" Text="Modelo: " Width="190px"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBoxModelo" CssClass="TextBox1" runat="server" onkeypress="return numbersonly(event);"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxModelo" CssClass="TextBox1" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -111,15 +111,15 @@
                                     <asp:Label ID="LabelSerie" runat="server" Text="Serie: " Width="190px"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TextBoxSerie" CssClass="TextBox1" runat="server" onkeypress="return numbersonly(event);"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxSerie" CssClass="TextBox1" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="text-align: right;" class="auto-style6">
-                                    <asp:Label ID="LabelGeneral" runat="server" Text="Tipo de área:" Width="190px"></asp:Label>
+                                    <asp:Label ID="LabelGeneral" runat="server" Text="Tipo de área:" Width="190px" Visible="False"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="DropClasificacion" runat="server" CssClass="Drop" AutoPostBack="true" OnSelectedIndexChanged="ClasificacionSeleccionado"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropClasificacion" runat="server" CssClass="Drop" AutoPostBack="true" OnSelectedIndexChanged="ClasificacionSeleccionado" Visible="False"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -132,10 +132,10 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right;" class="auto-style6">
-                                    <asp:Label ID="LabelUniAdmin" runat="server" Text="Área de resguardo:" Width="190px"></asp:Label>
+                                    <asp:Label ID="LabelUniAdmin" runat="server" Text="Área de resguardo:" Width="190px" Visible="False"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="DropUniAdmin" runat="server" CssClass="Drop" AutoPostBack="True" OnSelectedIndexChanged="DropUniAdmin_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList ID="DropUniAdmin" runat="server" CssClass="Drop" AutoPostBack="True" OnSelectedIndexChanged="DropUniAdmin_SelectedIndexChanged" Visible="False"></asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -151,15 +151,7 @@
                                     <asp:Label ID="LblNoResguardo" runat="server" Text="Número de resguardo:" Width="190px"></asp:Label>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="TxtNoResguardo" CssClass="TextBox" runat="server" onkeypress="return Precio(event);"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;" class="auto-style6">
-                                    <asp:Label ID="LblPorAreaDeMantenimiento" runat="server" Text="Por área de mantenimiento:" Width="190px"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="DropAreaMantenimiento" runat="server" CssClass="Drop" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:TextBox ID="TxtNoResguardo" CssClass="TextBox" runat="server"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -182,70 +174,65 @@
                                 </td>
                             </tr>
                         </table>
+
+
                     </fieldset>
                 </div>
                 <div id="DivResultados" runat="server" visible="true">
-                    <br />
-                    <br />
+
+
+                    <legend style="width: auto; color: darkblue; font-size: 12px;"></legend>
+
+
+
+
                     <div runat="server" style="text-align: center; overflow: scroll;" id="divGrid" visible="false">
+                        <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
+                            <legend style="width: auto; color: darkblue; font-size: 12px;">Resultados: </legend>
+                            <div class="auto-style2">
+                            <asp:Label ID="LblTotal" runat="server" Width="166px" CssClass="auto-style6" Font-Bold="True" ></asp:Label>
+ </div>
+                            <asp:GridView HorizontalAlign="Center" ID="GridModificar" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV"
+                                DataKeyNames="NumInventario" AllowPaging="true" PageSize="25" OnPageIndexChanging="GridModificar_PageIndexChanging">
+                                <Columns>
+                                    <asp:BoundField DataField="NumInventario" HeaderText="No. Inventario" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="DescripcionBien" HeaderText="Descripción Bien" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Marca" HeaderText="Marca" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Modelo" HeaderText="Modelo" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Serie" HeaderText="Serie" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="NumDocumento" HeaderText="No. Documento" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="FechaAdquisicion" HeaderText="Fecha de Adquisición" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Propiedad" HeaderText="Propiedad" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="CostoTotal" HeaderText="Costo" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Partida" HeaderText="Partida" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Subclase" HeaderText="Subclase" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="Seccion" HeaderText="Sección" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="IdResguardo" HeaderText="No. Resguardo" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="NombrePersona" HeaderText="Nombre Persona" ItemStyle-Width="150" />
+                                    <asp:BoundField DataField="UniAdmin" HeaderText="Área" ItemStyle-Width="150" />
 
-                        <asp:GridView HorizontalAlign="Center" ID="GridModificar" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV"
-                            DataKeyNames="NumInventario" AllowPaging="true" PageSize="25" OnPageIndexChanging="GridModificar_PageIndexChanging">
-                            <Columns>
-                                <asp:BoundField DataField="NumInventario" HeaderText="No. Inventario" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="DescripcionBien" HeaderText="Descripción Bien" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Descripcion" HeaderText="Marca" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Modelo" HeaderText="Modelo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Serie" HeaderText="Serie" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="NumDocumento" HeaderText="No. Documento" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="FechaAdquisicion" HeaderText="Fecha de Adquisición" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="CostoTotal" HeaderText="Costo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="IdPartida" HeaderText="IdPartida" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Partida" HeaderText="Descripción de Partida" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="IdResguardo" HeaderText="No. Resguardo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="NombrePersona" HeaderText="Nombre Persona" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Nombre" HeaderText="Área de Ubicación del Bien" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Propiedad" HeaderText="Propiedad" ItemStyle-Width="150" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                    <div runat="server" style="text-align: center; overflow: scroll;" id="div1" visible="false">
+                                </Columns>
+                            </asp:GridView>
 
-                        <asp:GridView HorizontalAlign="Center" ID="GridPrueba" runat="server" AutoGenerateColumns="false" CssClass="StyleGridV"
-                            DataKeyNames="NumInventario">
-                            <Columns>
-                                <asp:BoundField DataField="NumInventario" HeaderText="No. Inventario" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="DescripcionBien" HeaderText="Descripción Bien" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Descripcion" HeaderText="Marca" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Modelo" HeaderText="Modelo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Serie" HeaderText="Serie" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="NumDocumento" HeaderText="No. Documento" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="FechaAdquisicion" HeaderText="Fecha de Adquisición" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="CostoTotal" HeaderText="Costo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Proveedor" HeaderText="Proveedor" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="IdPartida" HeaderText="IdPartida" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Partida" HeaderText="Descripción de Partida" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="IdResguardo" HeaderText="No. Resguardo" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="NombrePersona" HeaderText="Nombre Persona" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Nombre" HeaderText="Área de Ubicación del Bien" ItemStyle-Width="150" />
-                                <asp:BoundField DataField="Propiedad" HeaderText="Propiedad" ItemStyle-Width="150" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
-                    <div id="Botones" runat="server" visible="false">
-                        <table style="width: 50%; margin: 0 auto; text-align: center;">
-                            <tr>
-                                <td class="auto-style7">
-                                    <asp:Button ID="BtnExportar" CssClass="Boton" runat="server" Text="Exportar a Excel" OnClick="BtnExportar_Click" />
-                                </td>
-                                <td>
-                                    <asp:Button ID="BtnLimpiarBusqueda" CssClass="Boton" runat="server" Text="Limpiar" OnClick="BtnLimpiarBusqueda_Click" />
-                                </td>
-                            </tr>
-                        </table>
+                        </fieldset>
                     </div>
                 </div>
+            <div runat="server" style="text-align: center; overflow: scroll;" id="div1" visible="false">
+            </div>
+            <div id="Botones" runat="server" visible="false">
+                <table style="width: 50%; margin: 0 auto; text-align: center;">
+                    <tr>
+                        <td class="auto-style7">
+                            <asp:Button ID="BtnExportar" CssClass="Boton" runat="server" Text="Exportar a Excel" OnClick="BtnExportar_Click" />
+                        </td>
+                        <td>
+                            <asp:Button ID="BtnLimpiarBusqueda" CssClass="Boton" runat="server" Text="Limpiar" OnClick="BtnLimpiarBusqueda_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

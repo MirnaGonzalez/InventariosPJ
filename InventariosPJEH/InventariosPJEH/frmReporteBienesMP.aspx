@@ -25,10 +25,10 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="auto-style1">
         <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-            <legend style="width: auto; color: darkblue; font-size: 12px;">Intruducir parametros para realizar calculo</legend>
+            <legend style="width: auto; color: darkblue; font-size: 12px;">Introducir parametros para realizar cálculo</legend>
             <div>
                 <div class="auto-style6">
-                    <asp:Label ID="LblTitTrimestre" align="right" runat="server" Text="Trimestre a Generar" Width="190px" CssClass="auto-style6"></asp:Label>
+                    <asp:Label ID="LblTitTrimestre" align="right" runat="server" Text="Trimestre a Generar:" Width="190px" CssClass="auto-style6"></asp:Label>
                     <asp:DropDownList ID="DdlTrimestre" runat="server" CssClass="DropGeneral" AutoPostBack="True" Height="23px" Width="356px" OnSelectedIndexChanged="DdlTrimestre_SelectedIndexChanged1">
                         <asp:ListItem Value="0">---Seleccionar-----</asp:ListItem>
                         <asp:ListItem Value="1">Primer Trimestre</asp:ListItem>

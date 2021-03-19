@@ -166,101 +166,119 @@ namespace InventariosPJEH.CAccesoDatos
         /// <param name="DropEstatus"></param>
         /// <param name="DropAreaMantenimiento"></param>
         /// <returns></returns>
-        public static DataTable BuscarGrid(DropDownList DropDownListPropiedad, DropDownList DropDownListPartida, 
-            DropDownList DropDownListSubClase, TextBox TextBoxNoDocumento, DropDownList DropDownListProveedor, TextBox TxtFechaAdquisicion,
-            TextBox TxtNoInventario, DropDownList DropDownListMarca, TextBox TextBoxModelo, TextBox TextBoxSerie, DropDownList DropPersona,
-            TextBox TxtNoResguardo, DropDownList DropClasificacion, DropDownList DropUniAdmin, DropDownList DropEstatus,
-            DropDownList DropAreaMantenimiento)
+        //public static DataTable BuscarGrid(DropDownList DropDownListPropiedad, DropDownList DropDownListPartida, 
+        //    DropDownList DropDownListSubClase, TextBox TextBoxNoDocumento, DropDownList DropDownListProveedor, TextBox TxtFechaAdquisicion,
+        //    TextBox TxtNoInventario, DropDownList DropDownListMarca, TextBox TextBoxModelo, TextBox TextBoxSerie, DropDownList DropPersona,
+        //    TextBox TxtNoResguardo, DropDownList DropClasificacion, DropDownList DropUniAdmin, DropDownList DropEstatus,
+        //    DropDownList DropAreaMantenimiento)
+
+       public static DataTable BuscarGrid(string idPropiedad, string Partida, string SubClase, string NoDocumento, string Proveedor, string FechaAdquisicion, string NoInventario, string Marca, string Modelo, string Serie, string Persona, string NoResguardo, string Clasificacion, string Unidad, string Estatus)
         {
-            int idPartida = Convert.ToInt32(DropDownListPartida.SelectedValue);
-            SqlConnection con = new SqlConnection(CConexion.Obtener());
-            con.Open();
-            string sqlCad1 = @"select TipoPartida from Cat_Partidas
-                                where IdPartida = @idP";
-            SqlCommand cmdMax1 = new SqlCommand(sqlCad1, con);
-            cmdMax1.Parameters.Add("@idP", SqlDbType.Int, 30).Value = idPartida;
-            SqlDataReader leerMax1 = cmdMax1.ExecuteReader();
-            string Tipo;
-            if (leerMax1.Read() == true)
-            {
-                Tipo = leerMax1[0].ToString();
-            }
-            else
-            {
-                Tipo = "";
-            }
-            con.Close();
 
-            string NombrePer = DropPersona.SelectedItem.Text;
-            string noResguardo = TxtNoResguardo.Text;
-            int idPropiedd = Convert.ToInt32(DropDownListPropiedad.SelectedValue);
-            string numInven = TxtNoInventario.Text;
-            int SubClase = Convert.ToInt32(DropDownListSubClase.SelectedValue);
-            string numDoc = TextBoxNoDocumento.Text;
-            int idProveedor = Convert.ToInt32(DropDownListProveedor.SelectedValue);
-            string fecha = TxtFechaAdquisicion.Text;
-            int marca = Convert.ToInt32(DropDownListMarca.SelectedValue);
-            string modelo = TextBoxModelo.Text;
-            string serie = TextBoxSerie.Text;
-            int idAbrevi = Convert.ToInt32(DropClasificacion.SelectedValue);
-            int idUniAdmin = Convert.ToInt32(DropUniAdmin.SelectedValue);
-            int Estatus = Convert.ToInt32(DropEstatus.SelectedValue);
-            string areaMante = DropAreaMantenimiento.SelectedItem.Text;
+            //int idPartida = Convert.ToInt32(DropDownListPartida.SelectedValue);
+            //SqlConnection con = new SqlConnection(CConexion.Obtener());
+            //con.Open();
+            //string sqlCad1 = @"select TipoPartida from Cat_Partidas
+            //                    where IdPartida = @idP";
+            //SqlCommand cmdMax1 = new SqlCommand(sqlCad1, con);
+            //cmdMax1.Parameters.Add("@idP", SqlDbType.Int, 30).Value = idPartida;
+            //SqlDataReader leerMax1 = cmdMax1.ExecuteReader();
+            //string Tipo;
+            //if (leerMax1.Read() == true)
+            //{
+            //    Tipo = leerMax1[0].ToString();
+            //}
+            //else
+            //{
+            //    Tipo = "";
+            //}
+            //con.Close();
 
-            if (modelo == "")
-            {
-                modelo = " ";
-            }else
-            {
-                modelo = TextBoxModelo.Text;
-            }
-
-            if (serie == "")
-            {
-                serie = " ";
-            }
-            else
-            {
-                serie = TextBoxSerie.Text;
-            }
 
 
             DataTable Tabla = new DataTable("Resultado");
             SqlConnection cnn = new SqlConnection(CConexion.Obtener());
-            var query = @"select * from VistaConsultarBienes where NumInventario like @numInven or IdPropiedad like @idPropiedad 
-                        or IdPartida like @idP or IdSubClase like @SubC or NumDocumento like @numDoc or IdProveedor like @idProveedor
-                        or FechaAdquisicion like @fecha or IdMarca like @idMarca or Modelo like @modelo or Serie like @serie
-                        or NombrePersona like @NombrePer or IdResguardo like @noRes or idAbreviatura like @IdAbre 
-                        or IdUniAdmin like @idUniAdmin or IdActividad like @Estatus or Perfil like @areaMante";
+            var query = @"select NumInventario,DescripcionBien,Marca,Modelo,Serie,NumDocumento,FechaAdquisicion,Propiedad, CostoTotal,
+                         Proveedor,Partida,Subclase,Seccion,IdResguardo,NombrePersona,UniAdmin from VistaConsultarBienes where  IdPropiedad = @idPropiedad";
+
             SqlCommand cmd = new SqlCommand(query, cnn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@numInven", SqlDbType.VarChar).Value = numInven;
-            cmd.Parameters.Add("@idPropiedad", SqlDbType.Int).Value = idPropiedd;
-            cmd.Parameters.Add("@TipoP", SqlDbType.VarChar).Value = Tipo;
-            cmd.Parameters.Add("@SubC", SqlDbType.Int).Value = SubClase;
-            cmd.Parameters.Add("@numDoc", SqlDbType.VarChar).Value = numDoc;
-            cmd.Parameters.Add("@idProveedor", SqlDbType.Int).Value = idProveedor;
-            cmd.Parameters.Add("@NombrePer", SqlDbType.VarChar).Value = NombrePer;
-            cmd.Parameters.Add("@noRes", SqlDbType.VarChar).Value = noResguardo;
-            cmd.Parameters.Add("@IdAbre", SqlDbType.Int).Value = idAbrevi;
-            cmd.Parameters.Add("@idUniAdmin", SqlDbType.Int).Value = idUniAdmin;
-            cmd.Parameters.Add("@Estatus", SqlDbType.Int).Value = Estatus;
-            cmd.Parameters.Add("@areaMante", SqlDbType.VarChar).Value = areaMante;
-            cmd.Parameters.Add("@idP", SqlDbType.Int, 30).Value = idPartida;
 
-            if (fecha == "")
+            if (Partida != "0")
             {
-                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = fecha;
+                query += " AND (IdPartida = '" + Partida + "') ";
             }
-            else
+
+            if (SubClase != "0")
             {
-                cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = Convert.ToDateTime(fecha);
+                query += " AND (IdSubClase = '" + SubClase + "') ";
             }
+
+            if (NoDocumento != "")
+            {
+                query += " AND (NumDocumento = '" + NoDocumento + "') ";
+            }
+
+
+            if (Proveedor != "0")
+            {
+                query += " AND (IdProveedor = '" + Proveedor + "') ";
+            }
+
+            if (NoInventario != "")
+            {
+                query += " AND (NumInventario = '" + NoInventario + "') ";
+            }
+
+            if (Marca != "0")
+            {
+                query += " AND (IdMarca = '" + Marca + "') ";
+            }
+
+
+            if (Modelo != "")
+            {
+                query += " AND (Modelo LIKE '%" + Modelo + "%') ";
+            }
+
+
+            if (Serie != "")
+            {
+                query += " AND (Serie LIKE '%" + Serie + "%') ";
+            }
+
+            if (NoResguardo != "")
+            {
+                query += " AND (IdResguardo = '" + NoResguardo + "') ";
+            }
+
+
+            if (FechaAdquisicion != "")
+            {
+                query += " AND FechaAdquisicion = @FechaAdquisicion";
+                cmd.Parameters.Add("@FechaAdquisicion", SqlDbType.DateTime).Value = Convert.ToDateTime(FechaAdquisicion);
+
+            }
+
+            if (Estatus != "0")
+            {
+#pragma warning disable IDE0059 // Asignación innecesaria de un valor
+                query += " AND (IdActividad = '" + Estatus + "') ";
+#pragma warning restore IDE0059 // Asignación innecesaria de un valor
+            }
+
             
-            cmd.Parameters.Add("@idMarca", SqlDbType.Int).Value = marca;
-            cmd.Parameters.Add("@modelo", SqlDbType.VarChar).Value = modelo;
-            cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
+
+
+            // FechaAdquisicion = Convert.ToDateTime(FechaAdquisicion).ToString();
+
+           
+
+            cmd.Parameters.Add("@idPropiedad", SqlDbType.Int).Value = int.Parse(idPropiedad);
+            
+
+           
             cmd.Connection = cnn;
             adp.SelectCommand = cmd;
             cnn.Open();

@@ -24,7 +24,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
       <div class="auto-style1">
                     <fieldset style="border-color: black; width: 95%; margin-left: 11px;">
-                        <legend style="width: auto; color: darkblue; font-size: 12px;">Intruducir parametros para realizar calculo</legend>
+                        <legend style="width: auto; color: darkblue; font-size: 12px;">Introducir parametros para realizar calculo</legend>
                         <div>
                             <div  class="auto-style6" >
                                 <asp:Label ID="LblTitTrimestre" align="right" runat="server" Text="Trimestre a calcular:" Width="190px" CssClass="auto-style6"></asp:Label>
